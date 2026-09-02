@@ -12,47 +12,40 @@
         body {
             font-family: 'Quicksand', sans-serif;
             background: linear-gradient(135deg, #ffe6eb 0%, #ffc2d1 100%);
-            height: 100vh;
+            min-height: 100vh;
             display: flex;
             justify-content: center;
             align-items: center;
-            overflow: hidden;
+            overflow-x: hidden;
             color: #333;
+            padding: 20px;
         }
 
         .screen {
             display: none;
             text-align: center;
-            background: rgba(255, 255, 255, 0.9);
-            padding: 40px;
+            background: rgba(255, 255, 255, 0.95);
+            padding: 30px;
             border-radius: 20px;
             box-shadow: 0 10px 30px rgba(255, 77, 109, 0.15);
-            max-width: 90%;
-            width: 450px;
-            animation: popIn 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            width: 100%;
+            max-width: 480px;
+            animation: fadeIn 0.4s ease-in-out;
+            margin: auto;
         }
 
-        .screen.active { display: block; }
+        .screen.active { display: flex; flex-direction: column; align-items: center; justify-content: center; }
 
-        @keyframes popIn {
-            0% { transform: scale(0.8); opacity: 0; }
-            100% { transform: scale(1); opacity: 1; }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(15px); }
+            to { opacity: 1; transform: translateY(0); }
         }
 
         h2 {
             font-family: 'Dancing Script', cursive;
             color: #ff4d6d;
-            font-size: 2.5rem;
-            margin-bottom: 20px;
-        }
-
-        .poem {
-            font-size: 1.4rem;
-            line-height: 1.8;
-            margin-bottom: 25px;
-            color: #d6336c;
-            font-weight: bold;
-            font-family: 'Quicksand', sans-serif;
+            font-size: 2.3rem;
+            margin-bottom: 15px;
         }
 
         textarea {
@@ -65,9 +58,8 @@
             resize: none;
             outline: none;
             margin-bottom: 20px;
-            transition: 0.3s;
+            background: #fffdfd;
         }
-
         textarea:focus { border-color: #ff4d6d; }
 
         .btn {
@@ -81,63 +73,98 @@
             cursor: pointer;
             transition: transform 0.2s, background-color 0.2s;
             box-shadow: 0 4px 15px rgba(255, 77, 109, 0.3);
+            margin-top: 15px;
         }
+        .btn:hover { transform: scale(1.05); background-color: #ff2a55; }
+        .btn:disabled { background-color: #ffb3c6; cursor: not-allowed; transform: none; }
 
-        .btn:hover {
-            transform: scale(1.05);
-            background-color: #ff2a55;
-        }
-
-        /* ----- CSS CHO MINIGAME ----- */
-        .game-screen {
-            width: 90vw;
-            height: 85vh;
-            max-width: 500px;
+        /* Lá thư rụng */
+        .letters-container {
             display: flex;
-            flex-direction: column;
-            padding: 20px;
+            justify-content: center;
+            gap: 20px;
+            margin: 20px 0;
+            flex-wrap: wrap;
         }
 
-        #gameArea {
-            flex: 1;
-            position: relative;
+        .envelope {
+            background: #fff;
+            border: 2px solid #ff4d6d;
+            border-radius: 10px;
+            padding: 20px;
+            width: 130px;
+            cursor: pointer;
+            transition: 0.3s;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+        }
+        .envelope:hover { transform: translateY(-5px); background: #fff0f3; }
+        .envelope.opened { background: #ffe3e8; border-style: dashed; }
+
+        .letter-content {
+            font-size: 1.1rem;
+            line-height: 1.6;
+            color: #d6336c;
+            font-weight: bold;
+            margin: 15px 0;
+            min-height: 100px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: #fff5f7;
+            padding: 15px;
+            border-radius: 10px;
+            border: 1px solid #ffb3c6;
+            width: 100%;
+        }
+
+        /* Minigame Xe né chướng ngại vật */
+        .game-box {
+            width: 100%;
+            height: 380px;
+            background: #fff5f7;
             border: 3px dashed #ffb3c6;
             border-radius: 15px;
-            background: #fff5f7;
+            position: relative;
             overflow: hidden;
             touch-action: none;
+            margin-bottom: 10px;
         }
 
-        .target-co {
+        .car-obj {
             position: absolute;
-            background: #ff4d6d;
-            color: white;
-            padding: 10px 20px;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 3rem;
+            z-index: 10;
+            user-select: none;
+        }
+
+        .obstacle {
+            position: absolute;
+            padding: 8px 15px;
             border-radius: 20px;
             font-weight: bold;
-            font-size: 1.2rem;
-            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
-            transition: transform 0.2s;
-        }
-
-        #car {
-            position: absolute;
-            font-size: 3.5rem;
-            cursor: grab;
+            font-size: 1.1rem;
             user-select: none;
-            top: 20px;
-            left: 20px;
-            z-index: 10;
         }
-        
-        #car:active { cursor: grabbing; }
 
+        .obs-yes { background: #ff4d6d; color: white; box-shadow: 0 3px 6px rgba(255,77,109,0.3); }
+        .obs-no { background: #adb5bd; color: white; box-shadow: 0 3px 6px rgba(0,0,0,0.2); }
+
+        .game-info {
+            font-weight: bold;
+            color: #ff4d6d;
+            margin-bottom: 10px;
+            font-size: 1.1rem;
+        }
+
+        /* Trái tim cuối */
         .big-heart {
-            font-size: 8rem;
+            font-size: 7rem;
             animation: heartbeat 1s infinite;
-            margin-top: 20px;
+            margin: 20px 0;
         }
-
         @keyframes heartbeat {
             0% { transform: scale(1); }
             50% { transform: scale(1.2); }
@@ -147,142 +174,220 @@
 </head>
 <body>
 
-    <!-- Nhạc nền từ file nhac.mp3 bạn vừa up lên -->
     <audio id="bgMusic" loop>
         <source src="nhac.mp3" type="audio/mpeg">
     </audio>
 
-    <!-- Màn hình 1: Lời hỏi thăm -->
+    <!-- Màn 1: Hỏi thăm ngày hôm nay -->
     <div id="screen1" class="screen active">
         <h2>Ngày hôm nay của bé như thế nào?</h2>
-        <textarea id="answer" rows="4" placeholder="Nhập vào đây nè..."></textarea>
-        <button class="btn" onclick="startGame()">Gửi cho anh 💌</button>
+        <textarea id="answer" rows="4" placeholder="Kể cho anh nghe đi nè..."></textarea>
+        <button class="btn" onclick="startJourney()">Gửi cho anh 💌</button>
     </div>
 
-    <!-- Màn hình 2: Thơ 1 -->
+    <!-- Màn 2: Hai lá thư rơi xuống -->
     <div id="screen2" class="screen">
-        <h2>Gửi em...</h2>
-        <p class="poem">
-            Sau này nắng có tắt<br>
-            Mây kia có bạc màu<br>
-            Xin tay người nắm chặt<br>
-            Đừng để mình lạc nhau.
-        </p>
-        <button class="btn" onclick="nextScreen(3)">Đọc tiếp nha 🥰</button>
-    </div>
-
-    <!-- Màn hình 3: Thơ 2 -->
-    <div id="screen3" class="screen">
-        <p class="poem" style="margin-top: 20px;">
-            Anh như là con kiến<br>
-            Trong thủ đô vội vàng<br>
-            1000 năm Văn Hiến<br>
-            1000 năm yêu nàng ❤️
-        </p>
-        <button class="btn" onclick="nextScreen(4)">Còn một bất ngờ nữa! 🎁</button>
-    </div>
-
-    <!-- Màn hình 4: Minigame kéo xe -->
-    <div id="screen4" class="screen game-screen">
-        <h2 style="font-size: 2rem; margin-bottom: 5px;">Em có thích anh không?</h2>
-        <p style="margin-bottom: 15px; font-style: italic;">(Hãy giữ và kéo xe 🚗 chạy qua các ô "Có")</p>
+        <h2>Có 2 bức thư gửi đến em...</h2>
+        <p style="font-size: 0.95rem; color: #666; margin-bottom: 10px;">Hãy bấm mở và đọc cả 2 lá thư bên dưới nhé:</p>
         
-        <div id="gameArea">
-            <div class="target-co" style="top: 15%; left: 60%;">Có</div>
-            <div class="target-co" style="top: 35%; left: 15%;">Có</div>
-            <div class="target-co" style="top: 55%; left: 70%;">Có</div>
-            <div class="target-co" style="top: 75%; left: 10%;">Có</div>
-            <div class="target-co" style="top: 85%; left: 55%;">Có</div>
-            
-            <div id="car">🚗</div>
+        <div class="letters-container">
+            <div class="envelope" id="env1" onclick="openLetter(1)">💌 Thư số 1</div>
+            <div class="envelope" id="env2" onclick="openLetter(2)">💌 Thư số 2</div>
         </div>
+
+        <div class="letter-content" id="letterText">Chạm vào từng bức thư ở trên để mở đọc nhé! ✨</div>
+
+        <button class="btn" id="nextToGameBtn" style="display:none;" onclick="goToGame()">Tiếp tục hành trình 🚗</button>
     </div>
 
-    <!-- Màn hình 5: Kết quả trái tim -->
-    <div id="screen5" class="screen">
+    <!-- Màn 3: Trò chơi xe chạy vượt chướng ngại vật ("Có" và "Không") -->
+    <div id="screen3" class="screen">
+        <h2>Hành trình yêu thương</h2>
+        <div class="game-info">Thu thập đủ 5 chữ "Có" ❤️ (Tránh chữ "Không" nhé!) | Đã đạt: <span id="score">0</span>/5</div>
+        
+        <div class="game-box" id="gameBox">
+            <div class="car-obj" id="playerCar">🚗</div>
+        </div>
+        <p style="font-size: 0.85rem; color: #777; margin-top: 5px;">(Kéo hoặc dùng chuột/ngón tay trượt trái phải để lái xe)</p>
+    </div>
+
+    <!-- Màn 4: Kết quả cuối cùng -->
+    <div id="screen4" class="screen">
         <div class="big-heart">❤️</div>
-        <h2 style="margin-top: 30px;">Anh biết mà! Mãi yêu bé! 🥰</h2>
+        <h2>Vượt qua mọi thử thách, anh vẫn chọn em!</h2>
+        <p style="color: #666; font-size: 1.1rem; line-height: 1.6;">Mãi yêu bé! Chúc bé luôn hạnh phúc và mỉm cười thế này nhé! 🥰</p>
     </div>
 
     <script>
-        function startGame() {
-            const answer = document.getElementById('answer').value;
-            if(answer.trim() === '') {
-                alert("Bé phải kể anh nghe ngày hôm nay thế nào đã chứ! 🥺");
+        let musicStarted = false;
+
+        function playMusic() {
+            if (!musicStarted) {
+                const music = document.getElementById('bgMusic');
+                music.volume = 0.6;
+                music.play().catch(e => console.log("Trình duyệt chặn autoplay"));
+                musicStarted = true;
+            }
+        }
+
+        function startJourney() {
+            const ans = document.getElementById('answer').value.trim();
+            if (ans === '') {
+                alert("Bé phải nhập chia sẻ vào đã chứ! 🥺");
                 return;
             }
-            
-            const music = document.getElementById('bgMusic');
-            music.volume = 0.5;
-            music.play().catch(e => console.log("Trình duyệt chặn tự động phát nhạc."));
-            
-            nextScreen(2);
+            playMusic();
+            switchScreen('screen2');
         }
 
-        function nextScreen(num) {
+        function switchScreen(screenId) {
             document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
-            document.getElementById('screen' + num).classList.add('active');
+            document.getElementById(screenId).classList.add('active');
         }
 
-        // --- XỬ LÝ LOGIC GAME KÉO XE ---
-        const car = document.getElementById('car');
-        const gameArea = document.getElementById('gameArea');
-        let isDragging = false;
-        let score = 0;
+        // Xử lý đọc thư
+        let opened1 = false;
+        let opened2 = false;
 
-        function startDrag(e) { isDragging = true; }
-        function endDrag() { isDragging = false; }
+        function openLetter(num) {
+            playMusic();
+            const textEl = document.getElementById('letterText');
+            if (num === 1) {
+                opened1 = true;
+                document.getElementById('env1').classList.add('opened');
+                textEl.innerHTML = "Sau này nắng có tắt<br>Mây kia có bạc màu<br>Xin tay người nắm chặt<br>Đừng để mình lạc nhau.";
+            } else {
+                opened2 = true;
+                document.getElementById('env2').classList.add('opened');
+                textEl.innerHTML = "Anh như là con kiến<br>Trong thủ đô vội vàng<br>1000 năm Văn Hiến<br>1000 năm yêu nàng ❤️";
+            }
 
-        function drag(e) {
-            if (!isDragging) return;
+            if (opened1 && opened2) {
+                document.getElementById('nextToGameBtn').style.display = 'inline-block';
+            }
+        }
+
+        function goToGame() {
+            switchScreen('screen3');
+            initGame();
+        }
+
+        // --- LOGIC TRÒ CHƠI XE NÉ CHƯỚNG NGẠI VẬT ---
+        let gameInterval, obstacleInterval;
+        let gameScore = 0;
+        let obstacles = [];
+        let isPlaying = false;
+        let carX = 50; // phần trăm theo chiều ngang
+
+        const gameBox = document.getElementById('gameBox');
+        const playerCar = document.getElementById('playerCar');
+        const scoreSpan = document.getElementById('score');
+
+        function initGame() {
+            if (isPlaying) return;
+            isPlaying = true;
+            gameScore = 0;
+            scoreSpan.innerText = gameScore;
+            carX = 50;
+            playerCar.style.left = carX + '%';
+            obstacles.forEach(o => o.el.remove());
+            obstacles = [];
+
+            // Lắng nghe di chuyển chuột/cảm ứng
+            gameBox.onmousemove = handleMove;
+            gameBox.ontouchmove = handleMove;
+
+            // Vòng lặp chính của game (tốc độ vừa phải)
+            gameInterval = setInterval(updateGame, 30);
+            // Tạo chướng ngại vật liên tục
+            obstacleInterval = setInterval(spawnObstacle, 1500);
+        }
+
+        function handleMove(e) {
             e.preventDefault();
-
+            const rect = gameBox.getBoundingClientRect();
             let clientX = e.clientX || (e.touches && e.touches[0].clientX);
-            let clientY = e.clientY || (e.touches && e.touches[0].clientY);
-
-            const rect = gameArea.getBoundingClientRect();
-            let x = clientX - rect.left - car.offsetWidth / 2;
-            let y = clientY - rect.top - car.offsetHeight / 2;
-
-            x = Math.max(0, Math.min(x, rect.width - car.offsetWidth));
-            y = Math.max(0, Math.min(y, rect.height - car.offsetHeight));
-
-            car.style.left = x + 'px';
-            car.style.top = y + 'px';
-
-            checkCollision();
+            let x = clientX - rect.left;
+            let percent = (x / rect.width) * 100;
+            carX = Math.max(10, Math.min(90, percent));
+            playerCar.style.left = carX + '%';
         }
 
-        car.addEventListener('mousedown', startDrag);
-        car.addEventListener('touchstart', startDrag, {passive: false});
-        window.addEventListener('mouseup', endDrag);
-        window.addEventListener('touchend', endDrag);
-        document.addEventListener('mousemove', drag, {passive: false});
-        document.addEventListener('touchmove', drag, {passive: false});
+        function spawnObstacle() {
+            if (!isPlaying) return;
+            const isYes = Math.random() < 0.6; // 60% xuất hiện chữ Có, 40% chữ Không
+            const text = isYes ? "Có" : "Không";
+            const type = isYes ? "obs-yes" : "obs-no";
+            
+            const el = document.createElement('div');
+            el.className = `obstacle ${type}`;
+            el.innerText = text;
+            
+            const randomLeft = Math.floor(Math.random() * 75) + 10; // vị trí ngang ngẫu nhiên
+            el.style.left = randomLeft + '%';
+            el.style.top = '-40px';
+            
+            gameBox.appendChild(el);
+            obstacles.push({ el: el, top: -40, left: randomLeft, isYes: isYes });
+        }
 
-        function checkCollision() {
-            const carRect = car.getBoundingClientRect();
-            const targets = document.querySelectorAll('.target-co:not(.collected)');
+        function updateGame() {
+            if (!isPlaying) return;
 
-            targets.forEach(target => {
-                const targetRect = target.getBoundingClientRect();
-                
-                if (!(carRect.right < targetRect.left || 
-                      carRect.left > targetRect.right || 
-                      carRect.bottom < targetRect.top || 
-                      carRect.top > targetRect.bottom)) {
+            const carRect = playerCar.getBoundingClientRect();
+
+            for (let i = obstacles.length - 1; i >= 0; i--) {
+                let obs = obstacles[i];
+                obs.top += 2.5; // Tốc độ rơi vừa phải, không quá nhanh
+                obs.el.style.top = obs.top + 'px';
+
+                const obsRect = obs.el.getBoundingClientRect();
+
+                // Kiểm tra va chạm xe với chướng ngại vật
+                if (!(carRect.right < obsRect.left || 
+                      carRect.left > obsRect.right || 
+                      carRect.bottom < obsRect.top || 
+                      carRect.top > obsRect.bottom)) {
                     
-                    target.classList.add('collected');
-                    target.style.display = 'none';
-                    score++;
-                    
-                    if (score >= 5) {
-                        setTimeout(() => {
-                            nextScreen(5);
-                        }, 500);
+                    if (obs.isYes) {
+                        gameScore++;
+                        scoreSpan.innerText = gameScore;
+                        obs.el.remove();
+                        obstacles.splice(i, 1);
+
+                        if (gameScore >= 5) {
+                            endGame();
+                            return;
+                        }
+                    } else {
+                        // Đụng phải chữ "Không" -> Phạt nhẹ lùi điểm hoặc hiệu ứng nhấp nháy
+                        obs.el.style.background = '#000';
+                        obs.el.remove();
+                        obstacles.splice(i, 1);
+                        gameScore = Math.max(0, gameScore - 1); // Trừ 1 điểm cho thử thách
+                        scoreSpan.innerText = gameScore;
                     }
+                    continue;
                 }
-            });
+
+                // Xóa vật cản khi đi ra khỏi khung màn hình
+                if (obs.top > gameBox.clientHeight) {
+                    obs.el.remove();
+                    obstacles.splice(i, 1);
+                }
+            }
+        }
+
+        function endGame() {
+            isPlaying = false;
+            clearInterval(gameInterval);
+            clearInterval(obstacleInterval);
+            gameBox.onmousemove = null;
+            gameBox.ontouchmove = null;
+
+            setTimeout(() => {
+                switchScreen('screen4');
+            }, 600);
         }
     </script>
 </body>
