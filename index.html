@@ -16,7 +16,7 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            overflow-x: hidden;
+            overflow: hidden;
             color: #333;
             padding: 20px;
         }
@@ -29,9 +29,10 @@
             border-radius: 20px;
             box-shadow: 0 10px 30px rgba(255, 77, 109, 0.15);
             width: 100%;
-            max-width: 480px;
+            max-width: 500px;
             animation: fadeIn 0.4s ease-in-out;
             margin: auto;
+            position: relative;
         }
 
         .screen.active { display: flex; flex-direction: column; align-items: center; justify-content: center; }
@@ -76,48 +77,107 @@
             margin-top: 15px;
         }
         .btn:hover { transform: scale(1.05); background-color: #ff2a55; }
-        .btn:disabled { background-color: #ffb3c6; cursor: not-allowed; transform: none; }
+        .btn:disabled { background-color: #ffb3c6; cursor: not-allowed; transform: none; box-shadow: none; }
 
-        /* Lá thư rụng */
-        .letters-container {
-            display: flex;
-            justify-content: center;
-            gap: 20px;
-            margin: 20px 0;
-            flex-wrap: wrap;
+        /* Màn hình 5 lá thư rơi */
+        .letters-area {
+            width: 100%;
+            height: 280px;
+            background: #fff5f7;
+            border: 2px dashed #ffb3c6;
+            border-radius: 15px;
+            position: relative;
+            overflow: hidden;
+            margin-bottom: 15px;
         }
 
-        .envelope {
+        .falling-letter {
+            position: absolute;
             background: #fff;
             border: 2px solid #ff4d6d;
-            border-radius: 10px;
-            padding: 20px;
-            width: 130px;
+            border-radius: 8px;
+            padding: 10px 15px;
             cursor: pointer;
-            transition: 0.3s;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+            font-weight: bold;
+            color: #ff4d6d;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            transition: 0.2s;
+            user-select: none;
+            animation: fallAnimation linear infinite;
         }
-        .envelope:hover { transform: translateY(-5px); background: #fff0f3; }
-        .envelope.opened { background: #ffe3e8; border-style: dashed; }
 
-        .letter-content {
-            font-size: 1.1rem;
-            line-height: 1.6;
+        @keyframes fallAnimation {
+            0% { top: -50px; }
+            100% { top: 290px; }
+        }
+
+        .falling-letter.read {
+            background: #e9ecef;
+            border-color: #ced4da;
+            color: #adb5bd;
+            cursor: default;
+            animation: none !important;
+            position: relative;
+            top: auto;
+            left: auto;
+            margin: 5px;
+            display: inline-block;
+        }
+
+        .read-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            justify-content: center;
+            margin-bottom: 15px;
+            min-height: 40px;
+        }
+
+        /* Popup Đọc Thư */
+        .letter-modal {
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0,0,0,0.6);
+            display: none;
+            justify-content: center;
+            align-items: center;
+            z-index: 100;
+        }
+        .letter-modal.active { display: flex; }
+
+        .modal-box {
+            background: #fff;
+            padding: 30px;
+            border-radius: 15px;
+            width: 85%;
+            max-width: 380px;
+            position: relative;
+            border: 3px solid #ff4d6d;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+        }
+
+        .close-btn {
+            position: absolute;
+            top: 10px; right: 12px;
+            background: #ff4d6d;
+            color: white;
+            border: none;
+            width: 30px; height: 30px;
+            border-radius: 50%;
+            font-weight: bold;
+            cursor: pointer;
+            font-size: 1rem;
+        }
+
+        .modal-text {
+            font-size: 1.15rem;
+            line-height: 1.7;
             color: #d6336c;
             font-weight: bold;
-            margin: 15px 0;
-            min-height: 100px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            background: #fff5f7;
-            padding: 15px;
-            border-radius: 10px;
-            border: 1px solid #ffb3c6;
-            width: 100%;
+            margin-top: 10px;
         }
 
-        /* Minigame Xe né chướng ngại vật */
+        /* Minigame Đua xe khó hơn */
         .game-box {
             width: 100%;
             height: 380px;
@@ -150,7 +210,7 @@
         }
 
         .obs-yes { background: #ff4d6d; color: white; box-shadow: 0 3px 6px rgba(255,77,109,0.3); }
-        .obs-no { background: #adb5bd; color: white; box-shadow: 0 3px 6px rgba(0,0,0,0.2); }
+        .obs-no { background: #343a40; color: white; box-shadow: 0 3px 6px rgba(0,0,0,0.2); }
 
         .game-info {
             font-weight: bold;
@@ -159,7 +219,6 @@
             font-size: 1.1rem;
         }
 
-        /* Trái tim cuối */
         .big-heart {
             font-size: 7rem;
             animation: heartbeat 1s infinite;
@@ -185,30 +244,38 @@
         <button class="btn" onclick="startJourney()">Gửi cho anh 💌</button>
     </div>
 
-    <!-- Màn 2: Hai lá thư rơi xuống -->
+    <!-- Màn 2: 5 lá thư rơi từ trời xuống -->
     <div id="screen2" class="screen">
-        <h2>Có 2 bức thư gửi đến em...</h2>
-        <p style="font-size: 0.95rem; color: #666; margin-bottom: 10px;">Hãy bấm mở và đọc cả 2 lá thư bên dưới nhé:</p>
+        <h2>Những lá thư gửi đến em...</h2>
+        <p style="font-size: 0.9rem; color: #666; margin-bottom: 8px;">Hãy bấm vào các lá thư đang rơi để đọc nhé:</p>
         
-        <div class="letters-container">
-            <div class="envelope" id="env1" onclick="openLetter(1)">💌 Thư số 1</div>
-            <div class="envelope" id="env2" onclick="openLetter(2)">💌 Thư số 2</div>
+        <div class="letters-area" id="lettersArea">
+            <!-- 5 lá thư được tạo tự động bằng JS -->
         </div>
 
-        <div class="letter-content" id="letterText">Chạm vào từng bức thư ở trên để mở đọc nhé! ✨</div>
+        <p style="font-size: 0.9rem; color: #ff4d6d; font-weight: bold; margin: 5px 0;">Danh sách đã đọc:</p>
+        <div class="read-list" id="readList"></div>
 
-        <button class="btn" id="nextToGameBtn" style="display:none;" onclick="goToGame()">Tiếp tục hành trình 🚗</button>
+        <button class="btn" id="nextToGameBtn" disabled onclick="goToGame()">Tiếp tục hành trình 🚗</button>
+
+        <!-- Modal hiển thị nội dung thư -->
+        <div class="letter-modal" id="letterModal">
+            <div class="modal-box">
+                <button class="close-btn" onclick="closeLetter()">X</button>
+                <div class="modal-text" id="modalText">Nội dung thư...</div>
+            </div>
+        </div>
     </div>
 
-    <!-- Màn 3: Trò chơi xe chạy vượt chướng ngại vật ("Có" và "Không") -->
+    <!-- Màn 3: Minigame xe chạy khó hơn -->
     <div id="screen3" class="screen">
         <h2>Hành trình yêu thương</h2>
-        <div class="game-info">Thu thập đủ 5 chữ "Có" ❤️ (Tránh chữ "Không" nhé!) | Đã đạt: <span id="score">0</span>/5</div>
+        <div class="game-info">Thu thập đủ 5 chữ "Có" ❤️ (Né thật khéo chữ "Không"!) | Đã đạt: <span id="score">0</span>/5</div>
         
         <div class="game-box" id="gameBox">
             <div class="car-obj" id="playerCar">🚗</div>
         </div>
-        <p style="font-size: 0.85rem; color: #777; margin-top: 5px;">(Kéo hoặc dùng chuột/ngón tay trượt trái phải để lái xe)</p>
+        <p style="font-size: 0.85rem; color: #777; margin-top: 5px;">(Trượt trái phải để lái xe né chướng ngại vật)</p>
     </div>
 
     <!-- Màn 4: Kết quả cuối cùng -->
@@ -238,6 +305,7 @@
             }
             playMusic();
             switchScreen('screen2');
+            initLetters();
         }
 
         function switchScreen(screenId) {
@@ -245,25 +313,71 @@
             document.getElementById(screenId).classList.add('active');
         }
 
-        // Xử lý đọc thư
-        let opened1 = false;
-        let opened2 = false;
+        // --- HỆ THỐNG 5 LÁ THƯ RƠI ---
+        const lettersData = [
+            "Sau này nắng có tắt<br>Mây kia có bạc màu<br>Xin tay người nắm chặt<br>Đừng để mình lạc nhau.",
+            "Anh như là con kiến<br>Trong thủ đô vội vàng<br>1000 năm Văn Hiến<br>1000 năm yêu nàng ❤️",
+            "Gọi em là người tình, nàng xuân<br>Vì anh thấy cả tuần nàng xinh ✨",
+            "Nếu em là lá<br>Tôi sẽ đứng dưới tán em 🍃",
+            "Dù ngày hôm nay của em có không như mong muốn hay thế nào, em vẫn có anh ngay bên cạnh. Yên tâm, ông già này luôn tìm cách để mỗi ngày của em đều vui. Tin anh nhá! 🫂"
+        ];
 
-        function openLetter(num) {
+        let readCount = 0;
+        const lettersArea = document.getElementById('lettersArea');
+        const readList = document.getElementById('readList');
+
+        function initLetters() {
+            lettersArea.innerHTML = '';
+            readList.innerHTML = '';
+            readCount = 0;
+
+            lettersData.forEach((content, index) => {
+                const el = document.createElement('div');
+                el.className = 'falling-letter';
+                el.innerHTML = `💌 Thư ${index + 1}`;
+                
+                // Random vị trí và tốc độ rơi khác nhau
+                const randomLeft = Math.floor(Math.random() * 75) + 5;
+                const randomDuration = (Math.random() * 3 + 3).toFixed(1); // 3 đến 6 giây
+                el.style.left = randomLeft + '%';
+                el.style.animationDuration = randomDuration + 's';
+
+                el.onclick = () => openLetter(index, content, el);
+                lettersArea.appendChild(el);
+            });
+        }
+
+        let currentActiveElement = null;
+
+        function openLetter(index, content, element) {
             playMusic();
-            const textEl = document.getElementById('letterText');
-            if (num === 1) {
-                opened1 = true;
-                document.getElementById('env1').classList.add('opened');
-                textEl.innerHTML = "Sau này nắng có tắt<br>Mây kia có bạc màu<br>Xin tay người nắm chặt<br>Đừng để mình lạc nhau.";
-            } else {
-                opened2 = true;
-                document.getElementById('env2').classList.add('opened');
-                textEl.innerHTML = "Anh như là con kiến<br>Trong thủ đô vội vàng<br>1000 năm Văn Hiến<br>1000 năm yêu nàng ❤️";
-            }
+            if (element.classList.contains('read')) return;
 
-            if (opened1 && opened2) {
-                document.getElementById('nextToGameBtn').style.display = 'inline-block';
+            currentActiveElement = element;
+            document.getElementById('modalText').innerHTML = content;
+            document.getElementById('letterModal').classList.add('active');
+        }
+
+        function closeLetter() {
+            document.getElementById('letterModal').classList.remove('active');
+            
+            if (currentActiveElement && !currentActiveElement.classList.contains('read')) {
+                currentActiveElement.classList.add('read');
+                
+                // Tạo nhãn "Đã đọc" dưới đất
+                const badge = document.createElement('div');
+                badge.className = 'falling-letter read';
+                badge.innerText = currentActiveElement.innerText + ' (Đã đọc)';
+                readList.appendChild(badge);
+
+                currentActiveElement.remove();
+                readCount++;
+
+                if (readCount >= 5) {
+                    const btn = document.getElementById('nextToGameBtn');
+                    btn.disabled = false;
+                    btn.innerText = "Đi tiếp nào 🚗";
+                }
             }
         }
 
@@ -272,12 +386,12 @@
             initGame();
         }
 
-        // --- LOGIC TRÒ CHƠI XE NÉ CHƯỚNG NGẠI VẬT ---
+        // --- TRÒ CHƠI ĐUA XE KHÓ HƠN ---
         let gameInterval, obstacleInterval;
         let gameScore = 0;
         let obstacles = [];
         let isPlaying = false;
-        let carX = 50; // phần trăm theo chiều ngang
+        let carX = 50;
 
         const gameBox = document.getElementById('gameBox');
         const playerCar = document.getElementById('playerCar');
@@ -293,14 +407,13 @@
             obstacles.forEach(o => o.el.remove());
             obstacles = [];
 
-            // Lắng nghe di chuyển chuột/cảm ứng
             gameBox.onmousemove = handleMove;
             gameBox.ontouchmove = handleMove;
 
-            // Vòng lặp chính của game (tốc độ vừa phải)
-            gameInterval = setInterval(updateGame, 30);
-            // Tạo chướng ngại vật liên tục
-            obstacleInterval = setInterval(spawnObstacle, 1500);
+            // Tăng tốc độ vòng lặp game lên nhanh hơn (từ 30ms thành 20ms)
+            gameInterval = setInterval(updateGame, 20);
+            // Tần suất xuất hiện chướng ngại vật dày đặc hơn (mỗi 800ms)
+            obstacleInterval = setInterval(spawnObstacle, 800);
         }
 
         function handleMove(e) {
@@ -315,7 +428,8 @@
 
         function spawnObstacle() {
             if (!isPlaying) return;
-            const isYes = Math.random() < 0.6; // 60% xuất hiện chữ Có, 40% chữ Không
+            // Tăng tỉ lệ xuất hiện chữ "Không" nhiều hơn để game khó hơn (chỉ 40% chữ Có, 60% chữ Không)
+            const isYes = Math.random() < 0.4; 
             const text = isYes ? "Có" : "Không";
             const type = isYes ? "obs-yes" : "obs-no";
             
@@ -323,7 +437,7 @@
             el.className = `obstacle ${type}`;
             el.innerText = text;
             
-            const randomLeft = Math.floor(Math.random() * 75) + 10; // vị trí ngang ngẫu nhiên
+            const randomLeft = Math.floor(Math.random() * 75) + 10;
             el.style.left = randomLeft + '%';
             el.style.top = '-40px';
             
@@ -338,12 +452,11 @@
 
             for (let i = obstacles.length - 1; i >= 0; i--) {
                 let obs = obstacles[i];
-                obs.top += 2.5; // Tốc độ rơi vừa phải, không quá nhanh
+                obs.top += 4; // Tăng tốc độ rơi nhanh hơn đáng kể so với bản cũ
                 obs.el.style.top = obs.top + 'px';
 
                 const obsRect = obs.el.getBoundingClientRect();
 
-                // Kiểm tra va chạm xe với chướng ngại vật
                 if (!(carRect.right < obsRect.left || 
                       carRect.left > obsRect.right || 
                       carRect.bottom < obsRect.top || 
@@ -360,17 +473,16 @@
                             return;
                         }
                     } else {
-                        // Đụng phải chữ "Không" -> Phạt nhẹ lùi điểm hoặc hiệu ứng nhấp nháy
-                        obs.el.style.background = '#000';
+                        // Đụng phải chữ Không -> Phạt nặng hơn, trừ hẳn 2 điểm hoặc reset về mốc căng thẳng
+                        obs.el.style.background = '#ff0000';
                         obs.el.remove();
                         obstacles.splice(i, 1);
-                        gameScore = Math.max(0, gameScore - 1); // Trừ 1 điểm cho thử thách
+                        gameScore = Math.max(0, gameScore - 2); 
                         scoreSpan.innerText = gameScore;
                     }
                     continue;
                 }
 
-                // Xóa vật cản khi đi ra khỏi khung màn hình
                 if (obs.top > gameBox.clientHeight) {
                     obs.el.remove();
                     obstacles.splice(i, 1);
