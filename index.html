@@ -4,14 +4,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Một chút bất ngờ dành cho cậu...</title>
-    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@600&family=Quicksand:wght@500;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@600;700&family=Quicksand:wght@500;700&display=swap" rel="stylesheet">
     
     <style>
         * { box-sizing: border-box; margin: 0; padding: 0; }
         
         body {
             font-family: 'Quicksand', sans-serif;
-            /* Đổi nền thành màu hồng pastel gradient */
             background: linear-gradient(135deg, #ffe6eb 0%, #ffc2d1 100%);
             height: 100vh;
             display: flex;
@@ -21,63 +20,65 @@
             color: #333;
         }
 
-        /* Khung chứa các màn hình */
         .screen {
-            display: none; /* Ẩn đi, chỉ hiện màn hình active */
+            display: none;
             text-align: center;
-            background: rgba(255, 255, 255, 0.85);
+            background: rgba(255, 255, 255, 0.9);
             padding: 40px;
             border-radius: 20px;
             box-shadow: 0 10px 30px rgba(255, 77, 109, 0.15);
             max-width: 90%;
             width: 450px;
             animation: popIn 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            position: relative;
         }
 
-        .screen.active {
-            display: block;
-        }
+        .screen.active { display: block; }
 
         @keyframes popIn {
             0% { transform: scale(0.8); opacity: 0; }
             100% { transform: scale(1); opacity: 1; }
         }
 
-        h1, h2 {
+        h2 {
             font-family: 'Dancing Script', cursive;
             color: #ff4d6d;
+            font-size: 2.5rem;
             margin-bottom: 20px;
         }
-        
-        h1 { font-size: 3rem; }
-        h2 { font-size: 2.5rem; }
 
-        p {
-            font-size: 1.2rem;
-            line-height: 1.6;
+        .poem {
+            font-size: 1.4rem;
+            line-height: 1.8;
             margin-bottom: 25px;
-            color: #555;
+            color: #d6336c;
+            font-weight: bold;
+            font-family: 'Quicksand', sans-serif;
         }
 
-        /* Sticker động */
-        .sticker {
-            width: 150px;
+        textarea {
+            width: 100%;
+            padding: 15px;
+            border-radius: 15px;
+            border: 2px dashed #ffb3c6;
+            font-family: inherit;
+            font-size: 1.1rem;
+            resize: none;
+            outline: none;
             margin-bottom: 20px;
+            transition: 0.3s;
         }
 
-        /* Các nút bấm */
+        textarea:focus { border-color: #ff4d6d; }
+
         .btn {
             background-color: #ff4d6d;
             color: white;
             border: none;
             padding: 12px 25px;
             font-size: 1.1rem;
-            font-family: 'Quicksand', sans-serif;
             font-weight: 700;
             border-radius: 30px;
             cursor: pointer;
-            margin: 5px;
             transition: transform 0.2s, background-color 0.2s;
             box-shadow: 0 4px 15px rgba(255, 77, 109, 0.3);
         }
@@ -87,118 +88,202 @@
             background-color: #ff2a55;
         }
 
-        .btn-outline {
-            background-color: transparent;
-            color: #ff4d6d;
-            border: 2px solid #ff4d6d;
+        /* ----- CSS CHO MINIGAME ----- */
+        .game-screen {
+            width: 90vw;
+            height: 85vh;
+            max-width: 500px;
+            display: flex;
+            flex-direction: column;
+            padding: 20px;
         }
 
-        .btn-outline:hover {
-            background-color: #ffe6eb;
-            color: #ff2a55;
-        }
-
-        /* Nút Không chạy trốn */
-        #btnNo {
+        #gameArea {
+            flex: 1;
             position: relative;
-            transition: 0.3s ease-out;
+            border: 3px dashed #ffb3c6;
+            border-radius: 15px;
+            background: #fff5f7;
+            overflow: hidden;
+            touch-action: none;
         }
 
-        /* Cành hoa trang trí góc */
-        .decor {
+        .target-co {
             position: absolute;
-            font-size: 1.5rem;
+            background: #ff4d6d;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 20px;
+            font-weight: bold;
+            font-size: 1.2rem;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+            transition: transform 0.2s;
         }
-        .top-left { top: 15px; left: 15px; }
-        .bottom-right { bottom: 15px; right: 15px; }
+
+        #car {
+            position: absolute;
+            font-size: 3.5rem;
+            cursor: grab;
+            user-select: none;
+            top: 20px;
+            left: 20px;
+            z-index: 10;
+        }
+        
+        #car:active { cursor: grabbing; }
+
+        .big-heart {
+            font-size: 8rem;
+            animation: heartbeat 1s infinite;
+            margin-top: 20px;
+        }
+
+        @keyframes heartbeat {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.2); }
+            100% { transform: scale(1); }
+        }
     </style>
 </head>
 <body>
 
-    <!-- Nhạc nền (Đã chèn sẵn một bài nhạc lofi nhẹ nhàng không bản quyền) -->
+    <!-- Nhạc nền từ file nhac.mp3 bạn vừa up lên -->
     <audio id="bgMusic" loop>
-        <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" type="audio/mpeg">
+        <source src="nhac.mp3" type="audio/mpeg">
     </audio>
 
-    <!-- Màn hình 1: Lời chào -->
+    <!-- Màn hình 1: Lời hỏi thăm -->
     <div id="screen1" class="screen active">
-        <!-- Ảnh động chú gấu vẫy tay -->
-        <img src="https://media.tenor.com/tHqgU6-oJQsAAAAi/milk-and-mocha-bear.gif" alt="cute bear" class="sticker">
-        <h1>Hi cậu! 👋</h1>
-        <p>Cậu đang rảnh chứ? Chơi một trò chơi nho nhỏ với tớ nhé?</p>
-        <button class="btn" onclick="startGame()">Bắt đầu luôn! ✨</button>
+        <h2>Ngày hôm nay của bé như thế nào?</h2>
+        <textarea id="answer" rows="4" placeholder="Nhập vào đây nè..."></textarea>
+        <button class="btn" onclick="startGame()">Gửi cho anh 💌</button>
     </div>
 
-    <!-- Màn hình 2: Câu hỏi 1 -->
+    <!-- Màn hình 2: Thơ 1 -->
     <div id="screen2" class="screen">
-        <img src="https://media.tenor.com/E8R8q-6y2iMAAAAi/tkthao219-bubududu.gif" alt="thinking bear" class="sticker">
-        <h2>Câu hỏi số 1:</h2>
-        <p>Dạo này cậu có thấy tớ hay lượn lờ trong tâm trí cậu không? 🤔</p>
-        <button class="btn" onclick="nextScreen(3)">Cũng có xíu xiu 😎</button>
-        <button class="btn btn-outline" onclick="nextScreen(3)">Mới nhận ra luôn 😲</button>
+        <h2>Gửi em...</h2>
+        <p class="poem">
+            Sau này nắng có tắt<br>
+            Mây kia có bạc màu<br>
+            Xin tay người nắm chặt<br>
+            Đừng để mình lạc nhau.
+        </p>
+        <button class="btn" onclick="nextScreen(3)">Đọc tiếp nha 🥰</button>
     </div>
 
-    <!-- Màn hình 3: Câu hỏi quyết định (Nút lẩn tránh) -->
+    <!-- Màn hình 3: Thơ 2 -->
     <div id="screen3" class="screen">
-        <img src="https://media.tenor.com/5V3Xq_hLwBQAAAAi/tkthao219-bubududu.gif" alt="asking bear" class="sticker">
-        <h2>Câu hỏi cuối:</h2>
-        <p>Vậy cậu có muốn nhận một điều bất ngờ từ tớ không?</p>
-        <div style="position: relative; height: 100px;">
-            <!-- Nút Có -->
-            <button class="btn" onclick="nextScreen(4)" style="position: absolute; left: 50%; transform: translateX(-50%); z-index: 10;">Chắc chắn rồi! 🎁</button>
-            <!-- Nút Không -->
-            <button class="btn btn-outline" id="btnNo" onmouseover="dodge()">Hong thèm 😝</button>
+        <p class="poem" style="margin-top: 20px;">
+            Anh như là con kiến<br>
+            Trong thủ đô vội vàng<br>
+            1000 năm Văn Hiến<br>
+            1000 năm yêu nàng ❤️
+        </p>
+        <button class="btn" onclick="nextScreen(4)">Còn một bất ngờ nữa! 🎁</button>
+    </div>
+
+    <!-- Màn hình 4: Minigame kéo xe -->
+    <div id="screen4" class="screen game-screen">
+        <h2 style="font-size: 2rem; margin-bottom: 5px;">Em có thích anh không?</h2>
+        <p style="margin-bottom: 15px; font-style: italic;">(Hãy giữ và kéo xe 🚗 chạy qua các ô "Có")</p>
+        
+        <div id="gameArea">
+            <div class="target-co" style="top: 15%; left: 60%;">Có</div>
+            <div class="target-co" style="top: 35%; left: 15%;">Có</div>
+            <div class="target-co" style="top: 55%; left: 70%;">Có</div>
+            <div class="target-co" style="top: 75%; left: 10%;">Có</div>
+            <div class="target-co" style="top: 85%; left: 55%;">Có</div>
+            
+            <div id="car">🚗</div>
         </div>
     </div>
 
-    <!-- Màn hình 4: Kết quả (Popup Tỏ Tình) -->
-    <div id="screen4" class="screen">
-        <div class="decor top-left">🌸</div>
-        <div class="decor bottom-right">🐈</div>
-        <img src="https://media.tenor.com/k2e4u6tPZ8wAAAAi/bubu-dudu-kiss.gif" alt="love bear" class="sticker">
-        <h2>Gửi cậu!</h2>
-        <p style="font-style: italic; font-size: 1.1rem;">
-            "1 tuần có 7 ngày.<br>
-            1 ngày có 24 giờ.<br>
-            Nhưng lúc nào tớ cũng muốn cậu được vui vẻ và hạnh phúc."<br><br>
-            Cảm ơn vì cậu đã luôn tuyệt vời như thế nhé! ❤️
-        </p>
+    <!-- Màn hình 5: Kết quả trái tim -->
+    <div id="screen5" class="screen">
+        <div class="big-heart">❤️</div>
+        <h2 style="margin-top: 30px;">Anh biết mà! Mãi yêu bé! 🥰</h2>
     </div>
 
     <script>
-        // Hàm chuyển màn hình và phát nhạc
         function startGame() {
-            document.getElementById('bgMusic').play(); // Bật nhạc
+            const answer = document.getElementById('answer').value;
+            if(answer.trim() === '') {
+                alert("Bé phải kể anh nghe ngày hôm nay thế nào đã chứ! 🥺");
+                return;
+            }
+            
+            const music = document.getElementById('bgMusic');
+            music.volume = 0.5;
+            music.play().catch(e => console.log("Trình duyệt chặn tự động phát nhạc."));
+            
             nextScreen(2);
         }
 
-        // Hàm chuyển sang màn hình tiếp theo
         function nextScreen(num) {
-            // Ẩn tất cả các màn hình
-            const screens = document.querySelectorAll('.screen');
-            screens.forEach(s => s.classList.remove('active'));
-            
-            // Hiện màn hình được gọi
+            document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
             document.getElementById('screen' + num).classList.add('active');
         }
 
-        // Hàm làm cho nút "Không" chạy trốn
-        function dodge() {
-            const btnNo = document.getElementById('btnNo');
-            
-            // Tính toán vị trí ngẫu nhiên mới
-            const containerWidth = btnNo.parentElement.offsetWidth;
-            const containerHeight = btnNo.parentElement.offsetHeight;
-            
-            // Random toạ độ X và Y
-            const randomX = Math.floor(Math.random() * (containerWidth - btnNo.offsetWidth));
-            const randomY = Math.floor(Math.random() * (containerHeight + 100) - 50); // Cho chạy lung tung một chút
-            
-            btnNo.style.position = 'absolute';
-            btnNo.style.left = randomX + 'px';
-            btnNo.style.top = randomY + 'px';
+        // --- XỬ LÝ LOGIC GAME KÉO XE ---
+        const car = document.getElementById('car');
+        const gameArea = document.getElementById('gameArea');
+        let isDragging = false;
+        let score = 0;
+
+        function startDrag(e) { isDragging = true; }
+        function endDrag() { isDragging = false; }
+
+        function drag(e) {
+            if (!isDragging) return;
+            e.preventDefault();
+
+            let clientX = e.clientX || (e.touches && e.touches[0].clientX);
+            let clientY = e.clientY || (e.touches && e.touches[0].clientY);
+
+            const rect = gameArea.getBoundingClientRect();
+            let x = clientX - rect.left - car.offsetWidth / 2;
+            let y = clientY - rect.top - car.offsetHeight / 2;
+
+            x = Math.max(0, Math.min(x, rect.width - car.offsetWidth));
+            y = Math.max(0, Math.min(y, rect.height - car.offsetHeight));
+
+            car.style.left = x + 'px';
+            car.style.top = y + 'px';
+
+            checkCollision();
+        }
+
+        car.addEventListener('mousedown', startDrag);
+        car.addEventListener('touchstart', startDrag, {passive: false});
+        window.addEventListener('mouseup', endDrag);
+        window.addEventListener('touchend', endDrag);
+        document.addEventListener('mousemove', drag, {passive: false});
+        document.addEventListener('touchmove', drag, {passive: false});
+
+        function checkCollision() {
+            const carRect = car.getBoundingClientRect();
+            const targets = document.querySelectorAll('.target-co:not(.collected)');
+
+            targets.forEach(target => {
+                const targetRect = target.getBoundingClientRect();
+                
+                if (!(carRect.right < targetRect.left || 
+                      carRect.left > targetRect.right || 
+                      carRect.bottom < targetRect.top || 
+                      carRect.top > targetRect.bottom)) {
+                    
+                    target.classList.add('collected');
+                    target.style.display = 'none';
+                    score++;
+                    
+                    if (score >= 5) {
+                        setTimeout(() => {
+                            nextScreen(5);
+                        }, 500);
+                    }
+                }
+            });
         }
     </script>
-
 </body>
 </html>
