@@ -234,7 +234,7 @@
             border-radius: 12px;
             box-shadow: 0 4px 12px rgba(0,0,0,0.15);
             cursor: pointer;
-            margin: 10px 0;
+            margin: 8px 0;
         }
     </style>
 </head>
@@ -293,13 +293,17 @@
         </div>
     </div>
 
-    <!-- Màn 5: Minigame Flappy Bird -->
+    <!-- Màn 5: Minigame Flappy Bird (Có nút bấm điều khiển riêng) -->
     <div id="screen5" class="screen">
         <h2>Flappy Love 🐥</h2>
-        <p style="font-size: 0.85rem; color: #666; margin-bottom: 5px;">Chạm nhẹ màn hình để chim bay qua ống nước nhé!</p>
-        <canvas id="flappyCanvas" width="320" height="400"></canvas>
-        <p style="font-weight: bold; color: #ff4d6d; margin-top: 5px;">Điểm: <span id="flappyScore">0</span></p>
-        <button class="btn" id="restartFlappy" style="display:none; padding: 6px 15px; font-size: 0.9rem;" onclick="initFlappy()">Chơi lại 🔄</button>
+        <p style="font-size: 0.82rem; color: #666; margin-bottom: 4px;">Chạm vào màn hình hoặc bấm nút bên dưới để bay:</p>
+        <canvas id="flappyCanvas" width="300" height="320"></canvas>
+        
+        <!-- Nút bấm dự phòng giúp dễ điều khiển hơn trên điện thoại -->
+        <button class="btn" id="flyBtn" style="padding: 8px 25px; margin-top: 5px; font-size: 1.1rem; background-color: #3b5bdb;">🚀 Bay lên!</button>
+        
+        <p style="font-weight: bold; color: #ff4d6d; margin-top: 5px; font-size: 0.95rem;">Điểm: <span id="flappyScore">0</span></p>
+        <button class="btn" id="restartFlappy" style="display:none; padding: 5px 12px; font-size: 0.85rem;" onclick="initFlappy()">Chơi lại 🔄</button>
     </div>
 
     <script>
@@ -335,7 +339,7 @@
             "Sau này nắng có tắt<br>Mây kia có bạc màu<br>Xin tay người nắm chặt<br>Đừng để mình lạc nhau.",
             "Anh như là con kiến<br>Trong thủ đô vội vàng<br>1000 năm Văn Hiến<br>1000 năm yêu nàng ❤️",
             "Gọi em là người tình, nàng xuân<br>Vì anh thấy cả tuần nàng xinh ✨",
-            "Nếu em là lá<br>Tôi sẽ đứng dưới tán em 🍃",
+            "Если (Nếu) em là lá<br>Tôi sẽ đứng dưới tán em 🍃",
             "Dù ngày hôm nay của em có không như mong muốn hay thế nào, em vẫn có anh ngay bên cạnh. Yên tâm, ông già này luôn tìm cách để mỗi ngày của em đều vui. Tin anh nhá! 🫂"
         ];
 
@@ -512,7 +516,7 @@
             }, 600);
         }
 
-        // --- MINIGAME FLAPPY BIRD ---
+        // --- MINIGAME FLAPPY BIRD CẢI TIẾN DỄ BẤM ---
         function startFlappyGame() {
             switchScreen('screen5');
             initFlappy();
@@ -523,7 +527,8 @@
         let bird, pipes, flappyScore, flappyIsOver, flappyLoopId;
 
         function initFlappy() {
-            bird = { x: 50, y: 150, radius: 12, gravity: 0.45, lift: -7.5, velocity: 0 };
+            // Giảm tốc độ rơi và lực nhảy nhẹ nhàng hơn nữa để dễ điều khiển
+            bird = { x: 50, y: 150, radius: 12, gravity: 0.35, lift: -6.5, velocity: 0 };
             pipes = [];
             flappyScore = 0;
             flappyIsOver = false;
@@ -532,13 +537,18 @@
 
             if (flappyLoopId) cancelAnimationFrame(flappyLoopId);
             
-            canvas.onclick = () => {
+            // Xử lý thao tác chạm canvas hoặc bấm nút "Bay lên"
+            const makeBirdFly = (e) => {
+                if (e) e.preventDefault();
                 if (!flappyIsOver) bird.velocity = bird.lift;
             };
-            canvas.ontouchstart = (e) => {
-                e.preventDefault();
-                if (!flappyIsOver) bird.velocity = bird.lift;
-            };
+
+            canvas.onclick = makeBirdFly;
+            canvas.ontouchstart = makeBirdFly;
+            
+            const flyBtn = document.getElementById('flyBtn');
+            flyBtn.onclick = makeBirdFly;
+            flyBtn.ontouchstart = (e) => { e.preventDefault(); makeBirdFly(); };
 
             flappyLoop();
         }
@@ -549,36 +559,39 @@
             bird.velocity += bird.gravity;
             bird.y += bird.velocity;
 
+            // Vẽ chú chim (trái tim)
             ctx.fillStyle = '#ff4d6d';
             ctx.font = '24px sans-serif';
             ctx.fillText('❤️', bird.x - 12, bird.y + 8);
 
+            // Chạm đất hoặc bay quá cao
             if (bird.y + bird.radius > canvas.height - 20 || bird.y - bird.radius < 0) {
                 flappyIsOver = true;
             }
 
+            // Khoảng trống ống cực kỳ rộng (gap = 145) giúp bay siêu mượt
             if (Math.random() < 0.02) {
-                let gap = 130;
-                let topHeight = Math.floor(Math.random() * (canvas.height - gap - 100)) + 40;
+                let gap = 145;
+                let topHeight = Math.floor(Math.random() * (canvas.height - gap - 80)) + 30;
                 pipes.push({ x: canvas.width, top: topHeight, bottom: canvas.height - topHeight - gap, passed: false });
             }
 
             ctx.fillStyle = '#2b8a3e';
             for (let i = pipes.length - 1; i >= 0; i--) {
-                pipes[i].x -= 2;
+                pipes[i].x -= 1.8; // Tốc độ dịch chuyển ống chậm rãi
 
-                ctx.fillRect(pipes[i].x, 0, 45, pipes[i].top);
-                ctx.fillRect(pipes[i].x, canvas.height - pipes[i].bottom, 45, pipes[i].bottom);
+                ctx.fillRect(pipes[i].x, 0, 40, pipes[i].top);
+                ctx.fillRect(pipes[i].x, canvas.height - pipes[i].bottom, 40, pipes[i].bottom);
 
                 if (
                     bird.x + bird.radius > pipes[i].x && 
-                    bird.x - bird.radius < pipes[i].x + 45 &&
+                    bird.x - bird.radius < pipes[i].x + 40 &&
                     (bird.y - bird.radius < pipes[i].top || bird.y + bird.radius > canvas.height - pipes[i].bottom)
                 ) {
                     flappyIsOver = true;
                 }
 
-                if (!pipes[i].passed && pipes[i].x + 45 < bird.x) {
+                if (!pipes[i].passed && pipes[i].x + 40 < bird.x) {
                     flappyScore++;
                     document.getElementById('flappyScore').innerText = flappyScore;
                     pipes[i].passed = true;
@@ -589,6 +602,7 @@
                 }
             }
 
+            // Vẽ nền đất
             ctx.fillStyle = '#d2b48c';
             ctx.fillRect(0, canvas.height - 20, canvas.width, 20);
 
@@ -598,7 +612,7 @@
                 ctx.fillStyle = 'rgba(0, 0, 0, 0.5)';
                 ctx.fillRect(0, 0, canvas.width, canvas.height);
                 ctx.fillStyle = '#fff';
-                ctx.font = 'bold 24px Quicksand';
+                ctx.font = 'bold 22px Quicksand';
                 ctx.textAlign = 'center';
                 ctx.fillText('Game Over! Ạ ❤️', canvas.width / 2, canvas.height / 2 - 10);
                 document.getElementById('restartFlappy').style.display = 'inline-block';
