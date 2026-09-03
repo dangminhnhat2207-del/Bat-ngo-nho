@@ -18,7 +18,6 @@
             align-items: center;
             color: #333;
             padding: 20px;
-            /* Cho phép cuộn trang trên điện thoại */
             overflow-y: auto; 
         }
 
@@ -111,7 +110,6 @@
             100% { top: 230px; }
         }
 
-        /* Danh sách thu gọn để không bị tràn trên điện thoại */
         .read-list {
             display: flex;
             flex-wrap: wrap;
@@ -273,10 +271,10 @@
         </div>
     </div>
 
-    <!-- Màn 3: Minigame xe chạy khó hơn -->
+    <!-- Màn 3: Minigame xe chạy -->
     <div id="screen3" class="screen">
         <h2>Hành trình yêu thương</h2>
-        <div class="game-info">Thu thập đủ 5 chữ "Có" ❤️ (Né chữ "Không"!) | Đã đạt: <span id="score">0</span>/5</div>
+        <div class="game-info">Thu thập đủ 5 chữ "Iu" ❤️ (Né chữ "Hổng") | Đã đạt: <span id="score">0</span>/5</div>
         
         <div class="game-box" id="gameBox">
             <div class="car-obj" id="playerCar">🚗</div>
@@ -295,10 +293,10 @@
         </div>
     </div>
 
-    <!-- Màn 5: Minigame Flappy Bird -->
+    <!-- Màn 5: Minigame Flappy Bird (Đã giảm tốc độ) -->
     <div id="screen5" class="screen">
         <h2>Flappy Love 🐥</h2>
-        <p style="font-size: 0.85rem; color: #666; margin-bottom: 5px;">Chạm vào màn hình để chim bay qua ống nước nhé!</p>
+        <p style="font-size: 0.85rem; color: #666; margin-bottom: 5px;">Chạm nhẹ màn hình để chim bay qua ống nước nhé!</p>
         <canvas id="flappyCanvas" width="320" height="400"></canvas>
         <p style="font-weight: bold; color: #ff4d6d; margin-top: 5px;">Điểm: <span id="flappyScore">0</span></p>
         <button class="btn" id="restartFlappy" style="display:none; padding: 6px 15px; font-size: 0.9rem;" onclick="initFlappy()">Chơi lại 🔄</button>
@@ -403,7 +401,7 @@
             initGame();
         }
 
-        // --- MINIGAME ĐUA XE ---
+        // --- MINIGAME ĐUA XE ("Em có iu anh khom") ---
         let gameInterval, obstacleInterval;
         let gameScore = 0;
         let obstacles = [];
@@ -443,15 +441,16 @@
 
         function spawnObstacle() {
             if (!isPlaying) return;
+            // Thay đổi từ "Có/Không" sang "Em có iu anh khom" (Thu thập chữ "Iu", né chữ "Hổng")
             const isYes = Math.random() < 0.4; 
-            const text = isYes ? "Có" : "Không";
+            const text = isYes ? "Em có iu anh khom" : "Hổng iu";
             const type = isYes ? "obs-yes" : "obs-no";
             
             const el = document.createElement('div');
             el.className = `obstacle ${type}`;
             el.innerText = text;
             
-            const randomLeft = Math.floor(Math.random() * 75) + 10;
+            const randomLeft = Math.floor(Math.random() * 50) + 10; // Giới hạn vị trí để không bị tràn chữ dài
             el.style.left = randomLeft + '%';
             el.style.top = '-40px';
             
@@ -465,7 +464,7 @@
 
             for (let i = obstacles.length - 1; i >= 0; i--) {
                 let obs = obstacles[i];
-                obs.top += 4.5; 
+                obs.top += 4; 
                 obs.el.style.top = obs.top + 'px';
 
                 const obsRect = obs.el.getBoundingClientRect();
@@ -514,7 +513,7 @@
             }, 600);
         }
 
-        // --- MINIGAME FLAPPY BIRD ---
+        // --- MINIGAME FLAPPY BIRD (Đã giảm độ khó & tốc độ) ---
         function startFlappyGame() {
             switchScreen('screen5');
             initFlappy();
@@ -525,7 +524,7 @@
         let bird, pipes, flappyScore, flappyIsOver, flappyLoopId;
 
         function initFlappy() {
-            bird = { x: 50, y: 150, radius: 12, gravity: 0.6, lift: -9, velocity: 0 };
+            bird = { x: 50, y: 150, radius: 12, gravity: 0.45, lift: -7.5, velocity: 0 }; // Giảm trọng lực và lực nhảy để mượt hơn
             pipes = [];
             flappyScore = 0;
             flappyIsOver = false;
@@ -534,7 +533,6 @@
 
             if (flappyLoopId) cancelAnimationFrame(flappyLoopId);
             
-            // Lắng nghe sự kiện click/chạm để chú chim bay lên
             canvas.onclick = () => {
                 if (!flappyIsOver) bird.velocity = bird.lift;
             };
@@ -549,36 +547,31 @@
         function flappyLoop() {
             ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-            // Cập nhật vị trí chim
             bird.velocity += bird.gravity;
             bird.y += bird.velocity;
 
-            // Vẽ chú chim (hình trái tim nhỏ xinh xắn)
             ctx.fillStyle = '#ff4d6d';
             ctx.font = '24px sans-serif';
             ctx.fillText('❤️', bird.x - 12, bird.y + 8);
 
-            // Kiểm tra chạm đất hoặc bay quá cao
             if (bird.y + bird.radius > canvas.height - 20 || bird.y - bird.radius < 0) {
                 flappyIsOver = true;
             }
 
-            // Tạo và vẽ ống nước
-            if (Math.random() < 0.025) {
-                let gap = 110;
+            // Giảm tần suất xuất hiện ống và nới rộng khoảng trống (gap = 130) giúp dễ bay hơn
+            if (Math.random() < 0.02) {
+                let gap = 130;
                 let topHeight = Math.floor(Math.random() * (canvas.height - gap - 100)) + 40;
                 pipes.push({ x: canvas.width, top: topHeight, bottom: canvas.height - topHeight - gap, passed: false });
             }
 
             ctx.fillStyle = '#2b8a3e';
             for (let i = pipes.length - 1; i >= 0; i--) {
-                pipes[i].x -= 2.5;
+                pipes[i].x -= 2; // Giảm tốc độ di chuyển ống nước chậm lại
 
-                // Vẽ ống trên và ống dưới
                 ctx.fillRect(pipes[i].x, 0, 45, pipes[i].top);
                 ctx.fillRect(pipes[i].x, canvas.height - pipes[i].bottom, 45, pipes[i].bottom);
 
-                // Va chạm ống nước
                 if (
                     bird.x + bird.radius > pipes[i].x && 
                     bird.x - bird.radius < pipes[i].x + 45 &&
@@ -587,20 +580,17 @@
                     flappyIsOver = true;
                 }
 
-                // Tính điểm khi qua ống
                 if (!pipes[i].passed && pipes[i].x + 45 < bird.x) {
                     flappyScore++;
                     document.getElementById('flappyScore').innerText = flappyScore;
                     pipes[i].passed = true;
                 }
 
-                // Xóa ống khi ra khỏi màn hình
                 if (pipes[i].x < -50) {
                     pipes.splice(i, 1);
                 }
             }
 
-            // Vẽ mặt đất nền
             ctx.fillStyle = '#d2b48c';
             ctx.fillRect(0, canvas.height - 20, canvas.width, 20);
 
