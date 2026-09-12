@@ -217,6 +217,39 @@
             font-size: 0.95rem;
         }
 
+        /* ----- GAME CỜ CARO ----- */
+        .caro-wrapper {
+            width: 100%;
+            height: 320px;
+            background: #fff5f7;
+            border: 3px dashed #ffb3c6;
+            border-radius: 15px;
+            overflow: auto; /* Cho phép scroll */
+            position: relative;
+            margin-bottom: 15px;
+        }
+        
+        .caro-board {
+            display: grid;
+            gap: 1px;
+            background: #ffb3c6; /* Màu viền ô cờ */
+            padding: 1px;
+            width: fit-content;
+        }
+
+        .caro-cell {
+            width: 32px;
+            height: 32px;
+            background: white;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 1.2rem;
+            cursor: pointer;
+            user-select: none;
+        }
+        .caro-cell:hover { background: #fff0f3; }
+
         /* ----- MÀN HÌNH TƯỜNG ẢNH & NHẠC RANDOM ----- */
         #screen4 {
             background: #0b0b0b;
@@ -392,6 +425,23 @@
         <p style="font-size: 0.8rem; color: #777;">(Trượt trái phải để lái xe)</p>
     </div>
 
+    <!-- Màn GAME MỚI: Cờ Caro -->
+    <div id="screen-caro" class="screen">
+        <h2>Cờ Caro Tình Yêu 💖</h2>
+        <p style="font-size: 0.85rem; color: #666; margin-bottom: 10px;">Thắng được máy (⭐) để xem quà nè! (Vuốt để xem toàn bộ bàn cờ)</p>
+        
+        <div class="caro-wrapper" id="caroWrapper">
+            <div class="caro-board" id="caroBoard"></div>
+        </div>
+        <p id="caroMessage" style="font-size: 0.95rem; font-weight: bold; color: #ff4d6d; height: 20px;"></p>
+        
+        <div style="display: flex; gap: 10px; justify-content: center; margin-top: 5px;">
+            <button class="btn" id="btnRetryCaro" onclick="initCaro()" style="display: none; padding: 8px 15px; font-size: 0.9rem;">Chơi lại 🔄</button>
+            <button class="btn" id="btnNextCaro" onclick="goToMemoryWall()" style="display: none;">Đến phần thưởng 🎁</button>
+            <button class="btn" id="btnSkipCaro" onclick="goToMemoryWall()" style="background-color: #6c757d; padding: 8px 15px; font-size: 0.9rem;">Bỏ qua bước này</button>
+        </div>
+    </div>
+
     <!-- Màn 4: Tường ảnh kỷ niệm (Bấm vào ảnh phát nhạc random) -->
     <div id="screen4" class="screen">
         <div class="memory-wall" id="memoryWall"></div>
@@ -472,7 +522,7 @@
             if(screenId === 'screen4') {
                 initMemoryWall();
             } else {
-                photoAudio.pause(); // Tắt nhạc ảnh khi chuyển màn chơi khác
+                photoAudio.pause(); 
             }
         }
 
@@ -545,65 +595,6 @@
         function goToGame() {
             switchScreen('screen3');
             initGame();
-        }
-
-        // --- HIỆU ỨNG TƯỜNG ẢNH & RANDOM NHẠC CHO TỪNG ẢNH ---
-        function initMemoryWall() {
-            const wall = document.getElementById('memoryWall');
-            wall.innerHTML = '';
-
-            // Danh sách 5 file nhạc và 5 file ảnh gốc
-            let musicList = ['nhac1.mp3', 'nhac2.mp3', 'nhac3.mp3', 'nhac4.mp3', 'nhac5.mp3'];
-            let photoList = ['anh1.jpg', 'anh2.jpg', 'anh3.jpg', 'anh4.jpg', 'anh5.jpg'];
-            let captions = ['Kỷ niệm ❤️', 'Bên nhau ✨', 'Mãi yêu 🥰', 'Nhớ cậu 🥰', 'Cục cưng 🌸'];
-
-            // THUẬT TOÁN XÁO TRỘN NGẪU NHIÊN (RANDOM) MỖI LẦN VÀO WEB
-            musicList.sort(() => Math.random() - 0.5);
-
-            for (let i = 0; i < 5; i++) {
-                const photoDiv = document.createElement('div');
-                photoDiv.className = 'floating-photo';
-                photoDiv.style.left = Math.random() * 75 + 'vw';
-                photoDiv.style.animationDuration = (Math.random() * 5 + 6) + 's';
-                photoDiv.style.animationDelay = (Math.random() * 3) + 's';
-
-                const img = document.createElement('img');
-                img.src = photoList[i];
-                img.onerror = function() { this.src = 'https://images.unsplash.com/photo-1518199266791-5375a83190b7?w=300'; };
-
-                const caption = document.createElement('div');
-                caption.className = 'photo-caption';
-                caption.innerText = captions[i];
-
-                photoDiv.appendChild(img);
-                photoDiv.appendChild(caption);
-
-                // Gán sự kiện khi bấm vào ảnh: Tạm dừng nhạc nền, phát bài nhạc random tương ứng
-                let assignedMusic = musicList[i];
-                photoDiv.onclick = () => {
-                    bgMusic.pause(); // Tạm dừng nhạc nền
-                    photoAudio.src = assignedMusic;
-                    photoAudio.volume = 0.8;
-                    photoAudio.play().catch(e => console.log("Không phát được nhạc ảnh"));
-                    
-                    // Hiệu ứng rung nhẹ khi bấm vào ảnh
-                    photoDiv.style.transform = 'scale(1.2) rotate(0deg)';
-                    setTimeout(() => { photoDiv.style.transform = 'none'; }, 300);
-                };
-
-                wall.appendChild(photoDiv);
-            }
-
-            // Tạo các trái tim lấp lánh bay lên
-            for (let j = 0; j < 15; j++) {
-                const heart = document.createElement('div');
-                heart.className = 'floating-heart';
-                heart.innerHTML = '❤️';
-                heart.style.left = Math.random() * 90 + 'vw';
-                heart.style.animationDuration = (Math.random() * 4 + 4) + 's';
-                heart.style.animationDelay = (Math.random() * 4) + 's';
-                wall.appendChild(heart);
-            }
         }
 
         // --- MINIGAME ĐUA XE ---
@@ -713,8 +704,222 @@
             gameBox.ontouchmove = null;
 
             setTimeout(() => {
-                switchScreen('screen4');
+                switchScreen('screen-caro');
+                initCaro();
             }, 600);
+        }
+
+        // --- GAME CỜ CARO (MỚI) ---
+        const caroSize = 40; // Bàn cờ 40x40 (đủ lớn để có cảm giác không giới hạn)
+        let caroState = [];
+        let caroGameOver = false;
+        let isBotThinking = false;
+        const caroBoard = document.getElementById('caroBoard');
+        const caroWrapper = document.getElementById('caroWrapper');
+
+        function initCaro() {
+            caroBoard.innerHTML = '';
+            caroBoard.style.gridTemplateColumns = `repeat(${caroSize}, 32px)`;
+            caroState = Array.from({length: caroSize}, () => Array(caroSize).fill(0));
+            caroGameOver = false;
+            isBotThinking = false;
+            
+            document.getElementById('caroMessage').innerText = "Tới lượt bé yêu đi đó!";
+            document.getElementById('btnNextCaro').style.display = "none";
+            document.getElementById('btnRetryCaro').style.display = "none";
+
+            for (let r = 0; r < caroSize; r++) {
+                for (let c = 0; c < caroSize; c++) {
+                    const cell = document.createElement('div');
+                    cell.className = 'caro-cell';
+                    cell.id = `cell-${r}-${c}`;
+                    cell.onclick = () => handleCaroClick(r, c);
+                    caroBoard.appendChild(cell);
+                }
+            }
+
+            // Tự động cuộn ra giữa bàn cờ
+            setTimeout(() => {
+                caroWrapper.scrollTop = (caroWrapper.scrollHeight - caroWrapper.clientHeight) / 2;
+                caroWrapper.scrollLeft = (caroWrapper.scrollWidth - caroWrapper.clientWidth) / 2;
+            }, 50);
+        }
+
+        function handleCaroClick(r, c) {
+            if (caroGameOver || isBotThinking || caroState[r][c] !== 0) return;
+
+            // Người chơi đi (❤️)
+            caroState[r][c] = 1;
+            document.getElementById(`cell-${r}-${c}`).innerText = '❤️';
+            
+            if (checkWinCaro(r, c, 1)) {
+                endCaroGame("Chúc mừng cục cưng đã chiến thắng! 🎉", true);
+                return;
+            }
+
+            isBotThinking = true;
+            document.getElementById('caroMessage').innerText = "Đợi máy suy nghĩ tí nha...";
+            
+            setTimeout(botCaroMove, 400); // Tạo độ trễ giả để giống máy đang nghĩ
+        }
+
+        function botCaroMove() {
+            if (caroGameOver) return;
+            
+            let bestScore = -Infinity;
+            let bestMoves = [];
+
+            // Thuật toán Minimax siêu cơ bản (đánh giá điểm cho từng ô trống)
+            for (let r = 0; r < caroSize; r++) {
+                for (let c = 0; c < caroSize; c++) {
+                    if (caroState[r][c] === 0) {
+                        let score = evaluateCaroCell(r, c);
+                        if (score > bestScore) {
+                            bestScore = score;
+                            bestMoves = [{r, c}];
+                        } else if (score === bestScore) {
+                            bestMoves.push({r, c});
+                        }
+                    }
+                }
+            }
+
+            // Nếu bàn cờ trống không, đánh ngẫu nhiên gần trung tâm
+            let move = bestMoves[Math.floor(Math.random() * bestMoves.length)];
+            if (bestScore === 0) {
+                move = {r: caroSize/2, c: caroSize/2}; 
+            }
+
+            caroState[move.r][move.c] = 2;
+            document.getElementById(`cell-${move.r}-${move.c}`).innerText = '⭐';
+
+            if (checkWinCaro(move.r, move.c, 2)) {
+                endCaroGame("Máy tính đã thắng mất rồi! Huhu 😭", false);
+                return;
+            }
+
+            isBotThinking = false;
+            document.getElementById('caroMessage').innerText = "Tới lượt bé đi tiếp kìa!";
+        }
+
+        // Đánh giá điểm của 1 ô cờ dựa trên hàng ngang, dọc, chéo
+        function evaluateCaroCell(r, c) {
+            let score = 0;
+            const directions = [[1,0], [0,1], [1,1], [1,-1]];
+            for (let [dr, dc] of directions) {
+                score += evaluateCaroLine(r, c, dr, dc, 2); // Điểm tấn công (Bot)
+                score += evaluateCaroLine(r, c, dr, dc, 1) * 1.5; // Điểm phòng thủ (chặn người chơi được ưu tiên hơn)
+            }
+            return score + Math.random(); // Cộng ngẫu nhiên nhỏ để bot không đi y hệt nhau
+        }
+
+        function evaluateCaroLine(r, c, dr, dc, player) {
+            let count = 1;
+            let open = 2;
+            
+            let nr = r + dr, nc = c + dc;
+            while (nr >= 0 && nr < caroSize && nc >= 0 && nc < caroSize && caroState[nr][nc] === player) {
+                count++; nr += dr; nc += dc;
+            }
+            if (nr < 0 || nr >= caroSize || nc < 0 || nc >= caroSize || caroState[nr][nc] !== 0) open--;
+
+            nr = r - dr; nc = c - dc;
+            while (nr >= 0 && nr < caroSize && nc >= 0 && nc < caroSize && caroState[nr][nc] === player) {
+                count++; nr -= dr; nc -= dc;
+            }
+            if (nr < 0 || nr >= caroSize || nc < 0 || nc >= caroSize || caroState[nr][nc] !== 0) open--;
+
+            if (count >= 5) return 100000;
+            if (count === 4) return open === 2 ? 10000 : (open === 1 ? 1000 : 0);
+            if (count === 3) return open === 2 ? 1000 : (open === 1 ? 100 : 0);
+            if (count === 2) return open === 2 ? 100 : (open === 1 ? 10 : 0);
+            return open === 2 ? 10 : 0;
+        }
+
+        function checkWinCaro(r, c, player) {
+            const directions = [[1,0], [0,1], [1,1], [1,-1]];
+            for (let [dr, dc] of directions) {
+                let count = 1;
+                let nr = r + dr, nc = c + dc;
+                while (nr >= 0 && nr < caroSize && nc >= 0 && nc < caroSize && caroState[nr][nc] === player) {
+                    count++; nr += dr; nc += dc;
+                }
+                nr = r - dr; nc = c - dc;
+                while (nr >= 0 && nr < caroSize && nc >= 0 && nc < caroSize && caroState[nr][nc] === player) {
+                    count++; nr -= dr; nc -= dc;
+                }
+                if (count >= 5) return true;
+            }
+            return false;
+        }
+
+        function endCaroGame(msg, isWin) {
+            caroGameOver = true;
+            document.getElementById('caroMessage').innerText = msg;
+            if (isWin) {
+                document.getElementById('btnNextCaro').style.display = "inline-block";
+                document.getElementById('btnSkipCaro').style.display = "none";
+            } else {
+                document.getElementById('btnRetryCaro').style.display = "inline-block";
+            }
+        }
+
+        function goToMemoryWall() {
+            switchScreen('screen4');
+        }
+
+        // --- HIỆU ỨNG TƯỜNG ẢNH & RANDOM NHẠC CHO TỪNG ẢNH ---
+        function initMemoryWall() {
+            const wall = document.getElementById('memoryWall');
+            wall.innerHTML = '';
+
+            let musicList = ['nhac1.mp3', 'nhac2.mp3', 'nhac3.mp3', 'nhac4.mp3', 'nhac5.mp3'];
+            let photoList = ['anh1.jpg', 'anh2.jpg', 'anh3.jpg', 'anh4.jpg', 'anh5.jpg'];
+            let captions = ['Kỷ niệm ❤️', 'Bên nhau ✨', 'Mãi yêu 🥰', 'Nhớ cậu 🥰', 'Cục cưng 🌸'];
+
+            musicList.sort(() => Math.random() - 0.5);
+
+            for (let i = 0; i < 5; i++) {
+                const photoDiv = document.createElement('div');
+                photoDiv.className = 'floating-photo';
+                photoDiv.style.left = Math.random() * 75 + 'vw';
+                photoDiv.style.animationDuration = (Math.random() * 5 + 6) + 's';
+                photoDiv.style.animationDelay = (Math.random() * 3) + 's';
+
+                const img = document.createElement('img');
+                img.src = photoList[i];
+                img.onerror = function() { this.src = 'https://images.unsplash.com/photo-1518199266791-5375a83190b7?w=300'; };
+
+                const caption = document.createElement('div');
+                caption.className = 'photo-caption';
+                caption.innerText = captions[i];
+
+                photoDiv.appendChild(img);
+                photoDiv.appendChild(caption);
+
+                let assignedMusic = musicList[i];
+                photoDiv.onclick = () => {
+                    bgMusic.pause(); 
+                    photoAudio.src = assignedMusic;
+                    photoAudio.volume = 0.8;
+                    photoAudio.play().catch(e => console.log("Không phát được nhạc ảnh"));
+                    
+                    photoDiv.style.transform = 'scale(1.2) rotate(0deg)';
+                    setTimeout(() => { photoDiv.style.transform = 'none'; }, 300);
+                };
+
+                wall.appendChild(photoDiv);
+            }
+
+            for (let j = 0; j < 15; j++) {
+                const heart = document.createElement('div');
+                heart.className = 'floating-heart';
+                heart.innerHTML = '❤️';
+                heart.style.left = Math.random() * 90 + 'vw';
+                heart.style.animationDuration = (Math.random() * 4 + 4) + 's';
+                heart.style.animationDelay = (Math.random() * 4) + 's';
+                wall.appendChild(heart);
+            }
         }
 
         // --- MINIGAME FLAPPY BIRD ---
