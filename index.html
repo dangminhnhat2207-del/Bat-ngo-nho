@@ -208,7 +208,7 @@
         .btn:hover { transform: scale(1.05) translateY(-2px); box-shadow: 0 12px 25px rgba(255, 77, 109, 0.5); }
         .btn:disabled { background: #ffb3c6; cursor: not-allowed; transform: none; box-shadow: none; }
 
-        /* MÀN 2: THƯ RƠI (Bỏ khung xấu, thay bằng vùng bay tự do) */
+        /* MÀN 2: THƯ RƠI */
         .letters-area {
             width: 100%;
             height: 250px;
@@ -716,11 +716,16 @@
                         isBotThinking = true; document.getElementById('caroMessage').innerText = "Đợi tí chồng nghĩ coi...";
                         setTimeout(() => {
                             if (caroGameOver) return;
-                            let best = [], maxScore = -1;
-                            for (let i = 0; i < caroSize; i++) for (let j = 0; j < caroSize; j++) {
-                                if (caroState[i][j] === 0) {
-                                    let s = evaluate(i,j);
-                                    if(s > maxScore) { maxScore = s; best = [{r:i,c:j}]; } else if(s === maxScore) best.push({r:i,c:j});
+                            let best = [], maxScore = -Infinity;
+                            
+                            // BOT QUYẾT TÂM ĐÁNH CHẶN (GOD MODE)
+                            for (let i = 0; i < caroSize; i++) {
+                                for (let j = 0; j < caroSize; j++) {
+                                    if (caroState[i][j] === 0) {
+                                        let s = evaluate(i, j);
+                                        if (s > maxScore) { maxScore = s; best = [{r: i, c: j}]; } 
+                                        else if (s === maxScore) best.push({r: i, c: j});
+                                    }
                                 }
                             }
                             let move = best[Math.floor(Math.random()*best.length)] || {r:15,c:15};
@@ -737,7 +742,43 @@
                 w.scrollTop = (w.scrollHeight - w.clientHeight)/2; w.scrollLeft = (w.scrollWidth - w.clientWidth)/2;
             }, 50);
         }
-        function evaluate(r,c){ return Math.random(); } /* Làm ngu bot đi 1 tí cho Ny dễ thắng :)) */
+
+        // THUẬT TOÁN ĐÁNH GIÁ (GOD MODE - SIÊU KHÓ)
+        function evaluate(r, c) {
+            let score = 0;
+            const directions = [[1, 0], [0, 1], [1, 1], [1, -1]];
+            for (let [dr, dc] of directions) {
+                let attackScore = evaluateCaroLine(r, c, dr, dc, 2);
+                let defenseScore = evaluateCaroLine(r, c, dr, dc, 1);
+                
+                score += attackScore + defenseScore * 1.5; 
+            }
+            return score + Math.random(); 
+        }
+
+        function evaluateCaroLine(r, c, dr, dc, player) {
+            let count = 1;
+            let open = 2;
+
+            let nr = r + dr, nc = c + dc;
+            while (nr >= 0 && nr < caroSize && nc >= 0 && nc < caroSize && caroState[nr][nc] === player) {
+                count++; nr += dr; nc += dc;
+            }
+            if (nr < 0 || nr >= caroSize || nc < 0 || nc >= caroSize || caroState[nr][nc] !== 0) open--;
+
+            nr = r - dr; nc = c - dc;
+            while (nr >= 0 && nr < caroSize && nc >= 0 && nc < caroSize && caroState[nr][nc] === player) {
+                count++; nr -= dr; nc -= dc;
+            }
+            if (nr < 0 || nr >= caroSize || nc < 0 || nc >= caroSize || caroState[nr][nc] !== 0) open--;
+
+            if (count >= 5) return 20000000;
+            if (count === 4) return open === 2 ? 5000000 : (open === 1 ? 1000000 : 0);
+            if (count === 3) return open === 2 ? 500000 : (open === 1 ? 10000 : 0);
+            if (count === 2) return open === 2 ? 5000 : (open === 1 ? 500 : 0);
+            return open === 2 ? 100 : 0;
+        }
+
         function checkWinCaro(r,c,p){
             const dirs = [[1,0],[0,1],[1,1],[1,-1]];
             for(let [dr,dc] of dirs){
