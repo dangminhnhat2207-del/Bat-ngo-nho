@@ -47,7 +47,62 @@
             color: #ff4d6d;
             font-size: 2.2rem;
             margin-bottom: 12px;
+            margin-top: 20px; /* Nhường chỗ cho nút Back */
         }
+
+        /* ----- GIAO DIỆN MENU CHÍNH ----- */
+        .menu-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
+            width: 100%;
+            margin-top: 10px;
+        }
+
+        .menu-btn {
+            background: #fff;
+            border: 2px solid #ffb3c6;
+            border-radius: 15px;
+            padding: 15px 10px;
+            font-size: 1rem;
+            font-weight: 700;
+            color: #ff4d6d;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 10px rgba(255,77,109,0.1);
+            font-family: 'Quicksand', sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 8px;
+        }
+        .menu-btn span { font-size: 2rem; }
+        .menu-btn:hover {
+            background: #ff4d6d;
+            color: #fff;
+            border-color: #ff4d6d;
+            transform: translateY(-4px);
+            box-shadow: 0 8px 15px rgba(255,77,109,0.3);
+        }
+
+        .back-btn {
+            position: absolute;
+            top: 15px;
+            left: 15px;
+            background: #fff;
+            border: 2px solid #ffb3c6;
+            color: #ff4d6d;
+            padding: 6px 12px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: bold;
+            cursor: pointer;
+            z-index: 100;
+            transition: 0.2s;
+            font-family: 'Quicksand', sans-serif;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+        }
+        .back-btn:hover { background: #ff4d6d; color: white; border-color: #ff4d6d; }
 
         textarea {
             width: 100%;
@@ -140,6 +195,7 @@
             justify-content: center;
             align-items: center;
             z-index: 100;
+            border-radius: 20px;
         }
         .letter-modal.active { display: flex; }
 
@@ -224,7 +280,7 @@
             background: #fff5f7;
             border: 3px dashed #ffb3c6;
             border-radius: 15px;
-            overflow: auto; /* Cho phép scroll */
+            overflow: auto; 
             position: relative;
             margin-bottom: 15px;
         }
@@ -232,7 +288,7 @@
         .caro-board {
             display: grid;
             gap: 1px;
-            background: #ffb3c6; /* Màu viền ô cờ */
+            background: #ffb3c6; 
             padding: 1px;
             width: fit-content;
         }
@@ -262,6 +318,7 @@
             border-radius: 0;
             box-shadow: none;
             z-index: 50;
+            padding: 0;
         }
 
         .memory-wall {
@@ -271,7 +328,6 @@
             pointer-events: none;
         }
 
-        /* Khung ảnh có thể bấm được */
         .floating-photo {
             position: absolute;
             background: #fff;
@@ -281,7 +337,7 @@
             width: 100px;
             animation: floatPhoto linear infinite;
             opacity: 0.9;
-            pointer-events: auto; /* Cho phép bắt sự kiện click */
+            pointer-events: auto; 
             cursor: pointer;
             transition: transform 0.2s, box-shadow 0.2s;
         }
@@ -326,28 +382,25 @@
         }
 
         .wall-content {
-            position: relative;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
             z-index: 10;
             background: rgba(0, 0, 0, 0.7);
             padding: 25px;
             border-radius: 20px;
             border: 2px solid rgba(255, 77, 109, 0.4);
             backdrop-filter: blur(5px);
-            max-width: 380px;
+            max-width: 90%;
+            width: 350px;
+            text-align: center;
         }
 
-        .wall-content h2 {
-            color: #ff4d6d;
-            font-size: 2.2rem;
-            margin-bottom: 8px;
-        }
-
-        .wall-content p {
-            color: #f1f1f1;
-            font-size: 0.95rem;
-            line-height: 1.4;
-            margin-bottom: 15px;
-        }
+        .wall-content h2 { margin-top: 0; }
+        
+        /* Cập nhật lại Z-index cho nút back trên màn 4 */
+        #screen4 .back-btn { top: 20px; left: 20px; background: rgba(0,0,0,0.5); border-color: #ff4d6d; color: #ff4d6d; }
 
         /* Canvas Games */
         canvas {
@@ -387,8 +440,36 @@
     <!-- Audio phát riêng cho từng ảnh khi bấm vào -->
     <audio id="photoAudio"></audio>
 
+    <!-- GIAO DIỆN MENU CHÍNH -->
+    <div id="menuScreen" class="screen active">
+        <h2 style="margin-top: 0;">Trạm Tình Yêu 💖</h2>
+        <p style="font-size: 0.95rem; color: #666; margin-bottom: 20px;">Hôm nay cục cưng muốn chơi gì nào?</p>
+        
+        <div class="menu-grid">
+            <button class="menu-btn" onclick="openScreen('screen1')">
+                <span>💌</span> Nhắn gửi
+            </button>
+            <button class="menu-btn" onclick="openScreen('screen3'); initGame();">
+                <span>🚗</span> Đua Xe
+            </button>
+            <button class="menu-btn" onclick="openScreen('screen-caro'); initCaro();">
+                <span>⭕</span> Cờ Caro
+            </button>
+            <button class="menu-btn" onclick="openScreen('screen4')">
+                <span>🖼️</span> Tường Ảnh
+            </button>
+            <button class="menu-btn" onclick="openScreen('screen5'); initFlappy();">
+                <span>🐥</span> Flappy
+            </button>
+            <button class="menu-btn" onclick="openScreen('screen6'); initSnake();">
+                <span>🐍</span> Rắn Săn Mồi
+            </button>
+        </div>
+    </div>
+
     <!-- Màn 1: Hỏi thăm ngày hôm nay -->
-    <div id="screen1" class="screen active">
+    <div id="screen1" class="screen">
+        <button class="back-btn" onclick="returnToMenu()">🏠 Về</button>
         <h2>Ngày hôm nay của bé như thế nào?</h2>
         <textarea id="answer" rows="3" placeholder="Kể cho anh nghe đi nè..."></textarea>
         <button class="btn" onclick="startJourney()">Gửi cho anh 💌</button>
@@ -396,6 +477,7 @@
 
     <!-- Màn 2: 5 lá thư rơi từ trời xuống -->
     <div id="screen2" class="screen">
+        <button class="back-btn" onclick="returnToMenu()">🏠 Về</button>
         <h2>Những lá thư gửi đến em...</h2>
         <p style="font-size: 0.85rem; color: #666; margin-bottom: 6px;">Bấm vào các lá thư đang rơi để đọc nhé:</p>
         
@@ -404,7 +486,7 @@
         <p style="font-size: 0.85rem; color: #ff4d6d; font-weight: bold; margin: 4px 0;">Đã đọc:</p>
         <div class="read-list" id="readList"></div>
 
-        <button class="btn" id="nextToGameBtn" disabled onclick="goToGame()">Tiếp tục hành trình 🚗</button>
+        <button class="btn" id="nextToGameBtn" disabled onclick="returnToMenu()">Về trang chủ 🏠</button>
 
         <div class="letter-modal" id="letterModal">
             <div class="modal-box">
@@ -416,6 +498,7 @@
 
     <!-- Màn 3: Minigame xe chạy -->
     <div id="screen3" class="screen">
+        <button class="back-btn" onclick="returnToMenu()">🏠 Về</button>
         <h2>Em có iu anh khom</h2>
         <div class="game-info">Thu thập đủ 5 chữ "Cóa" ❤️ (Né chữ "Hổng") | Đã đạt: <span id="score">0</span>/5</div>
         
@@ -423,12 +506,17 @@
             <div class="car-obj" id="playerCar">🚗</div>
         </div>
         <p style="font-size: 0.8rem; color: #777;">(Trượt trái phải để lái xe)</p>
+        
+        <div style="display: flex; gap: 8px; justify-content: center; margin-top: 10px;">
+            <button class="btn" id="restartCar" style="display:none; padding: 6px 15px; font-size: 0.9rem;" onclick="initGame()">Chơi lại 🔄</button>
+        </div>
     </div>
 
     <!-- Màn GAME MỚI: Cờ Caro -->
     <div id="screen-caro" class="screen">
+        <button class="back-btn" onclick="returnToMenu()">🏠 Về</button>
         <h2>Cờ Caro Tình Yêu 💖</h2>
-        <p style="font-size: 0.85rem; color: #666; margin-bottom: 10px;">Thắng được máy (⭐) để xem quà nè! (Vuốt để xem toàn bộ bàn cờ)</p>
+        <p style="font-size: 0.85rem; color: #666; margin-bottom: 10px;">Thắng được máy (⭐) để xem quà nè! (Vuốt để xem bàn cờ)</p>
         
         <div class="caro-wrapper" id="caroWrapper">
             <div class="caro-board" id="caroBoard"></div>
@@ -437,40 +525,35 @@
         
         <div style="display: flex; gap: 10px; justify-content: center; margin-top: 5px;">
             <button class="btn" id="btnRetryCaro" onclick="initCaro()" style="display: none; padding: 8px 15px; font-size: 0.9rem;">Chơi lại 🔄</button>
-            <button class="btn" id="btnNextCaro" onclick="goToMemoryWall()" style="display: none;">Đến phần thưởng 🎁</button>
-            <button class="btn" id="btnSkipCaro" onclick="goToMemoryWall()" style="background-color: #6c757d; padding: 8px 15px; font-size: 0.9rem;">Bỏ qua bước này</button>
         </div>
     </div>
 
-    <!-- Màn 4: Tường ảnh kỷ niệm (Bấm vào ảnh phát nhạc random) -->
+    <!-- Màn 4: Tường ảnh kỷ niệm -->
     <div id="screen4" class="screen">
+        <button class="back-btn" onclick="returnToMenu()">🏠 Về</button>
         <div class="memory-wall" id="memoryWall"></div>
 
         <div class="wall-content">
             <h2>Khoảnh khắc của chúng ta</h2>
             <p>🎵 <em>(Bấm vào các bức ảnh đang bay để nghe nhạc kỷ niệm nhé!)</em> ✨</p>
-            
-            <div style="display: flex; flex-direction: column; gap: 8px; width: 100%;">
-                <button class="btn" onclick="startFlappyGame()" style="margin: 0;">🐥 Chơi Flappy Love</button>
-                <button class="btn" onclick="startSnakeGame()" style="margin: 0; background-color: #f72585;">🐍 Rắn Săn Mồi ❤️</button>
-            </div>
         </div>
     </div>
 
     <!-- Màn 5: Minigame Flappy Bird -->
     <div id="screen5" class="screen">
+        <button class="back-btn" onclick="returnToMenu()">🏠 Về</button>
         <h2>Flappy Love 🐥</h2>
         <p style="font-size: 0.85rem; color: #666; margin-bottom: 5px;">Chạm nhẹ vào khung để chim bay nhé!</p>
         <canvas id="flappyCanvas" width="280" height="300"></canvas>
         <p style="font-weight: bold; color: #ff4d6d; margin-top: 4px; font-size: 0.95rem;">Điểm: <span id="flappyScore">0</span></p>
         <div style="display: flex; gap: 8px; justify-content: center;">
             <button class="btn" id="restartFlappy" style="display:none; padding: 5px 12px; font-size: 0.85rem;" onclick="initFlappy()">Chơi lại 🔄</button>
-            <button class="btn" style="padding: 5px 12px; font-size: 0.85rem; background-color: #6c757d;" onclick="switchScreen('screen4')">Quay lại tường ảnh 🖼️</button>
         </div>
     </div>
 
     <!-- Màn 6: Minigame Rắn Săn Mồi -->
     <div id="screen6" class="screen">
+        <button class="back-btn" onclick="returnToMenu()">🏠 Về</button>
         <h2>Rắn Săn Mồi ❤️</h2>
         <p style="font-size: 0.82rem; color: #666; margin-bottom: 4px;">Dùng phím mũi tên hoặc nút bên dưới để ăn trái tim!</p>
         <canvas id="snakeCanvas" width="280" height="250" style="background: #111;"></canvas>
@@ -487,7 +570,6 @@
 
         <div style="display: flex; gap: 8px; justify-content: center; margin-top: 8px;">
             <button class="btn" id="restartSnake" style="display:none; padding: 5px 12px; font-size: 0.85rem;" onclick="initSnake()">Chơi lại 🔄</button>
-            <button class="btn" style="padding: 5px 12px; font-size: 0.85rem; background-color: #6c757d;" onclick="switchScreen('screen4')">Quay lại tường ảnh 🖼️</button>
         </div>
     </div>
 
@@ -504,18 +586,9 @@
             }
         }
 
-        function startJourney() {
-            const ans = document.getElementById('answer').value.trim();
-            if (ans === '') {
-                alert("Bé phải nhập chia sẻ vào đã chứ! 🥺");
-                return;
-            }
+        // --- ĐIỀU HƯỚNG DASHBOARD ---
+        function openScreen(screenId) {
             playMusic();
-            switchScreen('screen2');
-            initLetters();
-        }
-
-        function switchScreen(screenId) {
             document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
             document.getElementById(screenId).classList.add('active');
             
@@ -524,6 +597,39 @@
             } else {
                 photoAudio.pause(); 
             }
+        }
+
+        function stopAllGames() {
+            // Xóa bộ nhớ Car
+            isPlaying = false;
+            clearInterval(gameInterval);
+            clearInterval(obstacleInterval);
+            
+            // Xóa bộ nhớ Flappy
+            flappyIsOver = true;
+            if (flappyLoopId) cancelAnimationFrame(flappyLoopId);
+            
+            // Xóa bộ nhớ Snake
+            clearInterval(snakeInterval);
+            
+            // Dừng nhạc ảnh
+            photoAudio.pause();
+        }
+
+        function returnToMenu() {
+            stopAllGames();
+            openScreen('menuScreen');
+        }
+
+        // --- GỬI TIN NHẮN ---
+        function startJourney() {
+            const ans = document.getElementById('answer').value.trim();
+            if (ans === '') {
+                alert("Bé phải nhập chia sẻ vào đã chứ! 🥺");
+                return;
+            }
+            openScreen('screen2');
+            initLetters();
         }
 
         // --- HỆ THỐNG 5 LÁ THƯ ---
@@ -543,6 +649,8 @@
             lettersArea.innerHTML = '';
             readList.innerHTML = '';
             readCount = 0;
+            document.getElementById('nextToGameBtn').disabled = true;
+            document.getElementById('nextToGameBtn').innerText = "Về trang chủ 🏠";
 
             lettersData.forEach((content, index) => {
                 const el = document.createElement('div');
@@ -562,9 +670,7 @@
         let currentActiveElement = null;
 
         function openLetter(index, content, element) {
-            playMusic();
             if (element.classList.contains('read')) return;
-
             currentActiveElement = element;
             document.getElementById('modalText').innerHTML = content;
             document.getElementById('letterModal').classList.add('active');
@@ -587,14 +693,8 @@
                 if (readCount >= 5) {
                     const btn = document.getElementById('nextToGameBtn');
                     btn.disabled = false;
-                    btn.innerText = "Đi tiếp nào 🚗";
                 }
             }
-        }
-
-        function goToGame() {
-            switchScreen('screen3');
-            initGame();
         }
 
         // --- MINIGAME ĐUA XE ---
@@ -610,6 +710,7 @@
 
         function initGame() {
             if (isPlaying) return;
+            document.getElementById('restartCar').style.display = 'none';
             isPlaying = true;
             gameScore = 0;
             scoreSpan.innerText = gameScore;
@@ -620,6 +721,9 @@
 
             gameBox.onmousemove = handleMove;
             gameBox.ontouchmove = handleMove;
+
+            if (gameInterval) clearInterval(gameInterval);
+            if (obstacleInterval) clearInterval(obstacleInterval);
 
             gameInterval = setInterval(updateGame, 20);
             obstacleInterval = setInterval(spawnObstacle, 750);
@@ -676,7 +780,7 @@
                         obstacles.splice(i, 1);
 
                         if (gameScore >= 5) {
-                            endGame();
+                            endGame(true);
                             return;
                         }
                     } else {
@@ -696,21 +800,21 @@
             }
         }
 
-        function endGame() {
+        function endGame(won) {
             isPlaying = false;
             clearInterval(gameInterval);
             clearInterval(obstacleInterval);
             gameBox.onmousemove = null;
             gameBox.ontouchmove = null;
 
-            setTimeout(() => {
-                switchScreen('screen-caro');
-                initCaro();
-            }, 600);
+            if (won) {
+                alert("Yeahhh! Bé yêu anh quá trời quá đất luôn nè 😍");
+            }
+            document.getElementById('restartCar').style.display = 'inline-block';
         }
 
         // --- GAME CỜ CARO (MỚI) ---
-        const caroSize = 40; // Bàn cờ 40x40 (đủ lớn để có cảm giác không giới hạn)
+        const caroSize = 40; 
         let caroState = [];
         let caroGameOver = false;
         let isBotThinking = false;
@@ -725,7 +829,6 @@
             isBotThinking = false;
             
             document.getElementById('caroMessage').innerText = "Tới lượt bé yêu đi đó!";
-            document.getElementById('btnNextCaro').style.display = "none";
             document.getElementById('btnRetryCaro').style.display = "none";
 
             for (let r = 0; r < caroSize; r++) {
@@ -738,7 +841,6 @@
                 }
             }
 
-            // Tự động cuộn ra giữa bàn cờ
             setTimeout(() => {
                 caroWrapper.scrollTop = (caroWrapper.scrollHeight - caroWrapper.clientHeight) / 2;
                 caroWrapper.scrollLeft = (caroWrapper.scrollWidth - caroWrapper.clientWidth) / 2;
@@ -748,19 +850,18 @@
         function handleCaroClick(r, c) {
             if (caroGameOver || isBotThinking || caroState[r][c] !== 0) return;
 
-            // Người chơi đi (❤️)
             caroState[r][c] = 1;
             document.getElementById(`cell-${r}-${c}`).innerText = '❤️';
             
             if (checkWinCaro(r, c, 1)) {
-                endCaroGame("Chúc mừng cục cưng đã chiến thắng! 🎉", true);
+                endCaroGame("Chúc mừng cục cưng đã chiến thắng! 🎉");
                 return;
             }
 
             isBotThinking = true;
             document.getElementById('caroMessage').innerText = "Đợi máy suy nghĩ tí nha...";
             
-            setTimeout(botCaroMove, 400); // Tạo độ trễ giả để giống máy đang nghĩ
+            setTimeout(botCaroMove, 400); 
         }
 
         function botCaroMove() {
@@ -769,7 +870,6 @@
             let bestScore = -Infinity;
             let bestMoves = [];
 
-            // Thuật toán Minimax siêu cơ bản (đánh giá điểm cho từng ô trống)
             for (let r = 0; r < caroSize; r++) {
                 for (let c = 0; c < caroSize; c++) {
                     if (caroState[r][c] === 0) {
@@ -784,7 +884,6 @@
                 }
             }
 
-            // Nếu bàn cờ trống không, đánh ngẫu nhiên gần trung tâm
             let move = bestMoves[Math.floor(Math.random() * bestMoves.length)];
             if (bestScore === 0) {
                 move = {r: caroSize/2, c: caroSize/2}; 
@@ -794,7 +893,7 @@
             document.getElementById(`cell-${move.r}-${move.c}`).innerText = '⭐';
 
             if (checkWinCaro(move.r, move.c, 2)) {
-                endCaroGame("Máy tính đã thắng mất rồi! Huhu 😭", false);
+                endCaroGame("Máy tính đã thắng mất rồi! Huhu 😭");
                 return;
             }
 
@@ -802,15 +901,14 @@
             document.getElementById('caroMessage').innerText = "Tới lượt bé đi tiếp kìa!";
         }
 
-        // Đánh giá điểm của 1 ô cờ dựa trên hàng ngang, dọc, chéo
         function evaluateCaroCell(r, c) {
             let score = 0;
             const directions = [[1,0], [0,1], [1,1], [1,-1]];
             for (let [dr, dc] of directions) {
-                score += evaluateCaroLine(r, c, dr, dc, 2); // Điểm tấn công (Bot)
-                score += evaluateCaroLine(r, c, dr, dc, 1) * 1.5; // Điểm phòng thủ (chặn người chơi được ưu tiên hơn)
+                score += evaluateCaroLine(r, c, dr, dc, 2);
+                score += evaluateCaroLine(r, c, dr, dc, 1) * 1.5; 
             }
-            return score + Math.random(); // Cộng ngẫu nhiên nhỏ để bot không đi y hệt nhau
+            return score + Math.random(); 
         }
 
         function evaluateCaroLine(r, c, dr, dc, player) {
@@ -853,25 +951,16 @@
             return false;
         }
 
-        function endCaroGame(msg, isWin) {
+        function endCaroGame(msg) {
             caroGameOver = true;
             document.getElementById('caroMessage').innerText = msg;
-            if (isWin) {
-                document.getElementById('btnNextCaro').style.display = "inline-block";
-                document.getElementById('btnSkipCaro').style.display = "none";
-            } else {
-                document.getElementById('btnRetryCaro').style.display = "inline-block";
-            }
-        }
-
-        function goToMemoryWall() {
-            switchScreen('screen4');
+            document.getElementById('btnRetryCaro').style.display = "inline-block";
         }
 
         // --- HIỆU ỨNG TƯỜNG ẢNH & RANDOM NHẠC CHO TỪNG ẢNH ---
         function initMemoryWall() {
             const wall = document.getElementById('memoryWall');
-            wall.innerHTML = '';
+            if(wall.innerHTML !== '') return; // Chỉ load 1 lần
 
             let musicList = ['nhac1.mp3', 'nhac2.mp3', 'nhac3.mp3', 'nhac4.mp3', 'nhac5.mp3'];
             let photoList = ['anh1.jpg', 'anh2.jpg', 'anh3.jpg', 'anh4.jpg', 'anh5.jpg'];
@@ -923,11 +1012,6 @@
         }
 
         // --- MINIGAME FLAPPY BIRD ---
-        function startFlappyGame() {
-            switchScreen('screen5');
-            initFlappy();
-        }
-
         const canvas = document.getElementById('flappyCanvas');
         const ctx = canvas.getContext('2d');
         let bird, pipes, flappyScore, flappyIsOver, flappyLoopId;
@@ -1016,11 +1100,6 @@
         }
 
         // --- MINIGAME RẮN SĂN MỒI (SNAKE) ---
-        function startSnakeGame() {
-            switchScreen('screen6');
-            initSnake();
-        }
-
         const snakeCanvas = document.getElementById('snakeCanvas');
         const snakeCtx = snakeCanvas.getContext('2d');
         const grid = 15;
