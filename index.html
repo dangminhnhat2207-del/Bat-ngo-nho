@@ -86,50 +86,30 @@
             text-align: center;
         }
 
-        /* 🎛️ MENU 3D TIỆM BÁNH NGỌT */
-        .menu-grid {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 14px;
-            width: 100%;
-            margin-top: 15px;
-        }
+        /* 🎛️ MENU 3D */
+        .menu-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 14px; width: 100%; margin-top: 15px; }
         .menu-btn {
             background: linear-gradient(to bottom, #ffffff, #fff0f3);
-            border: 2px solid #ffccd5;
-            border-radius: 20px;
-            padding: 16px 10px;
-            font-size: 1.05rem;
-            font-weight: 900;
-            color: #ff4d6d;
-            cursor: pointer;
+            border: 2px solid #ffccd5; border-radius: 20px; padding: 16px 10px;
+            font-size: 1.05rem; font-weight: 900; color: #ff4d6d; cursor: pointer;
             box-shadow: 0 6px 0 #ff8fa3, 0 12px 18px rgba(255, 77, 109, 0.15);
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 6px;
-            transition: all 0.15s ease;
+            display: flex; flex-direction: column; align-items: center; gap: 6px; transition: all 0.15s ease;
         }
         .menu-btn span { font-size: 2.3rem; filter: drop-shadow(0 4px 4px rgba(0,0,0,0.12)); }
         .menu-btn:active { transform: translateY(6px); box-shadow: 0 0 0 #ff8fa3, 0 4px 8px rgba(255, 77, 109, 0.2); }
 
         .back-btn {
             position: absolute; top: 15px; left: 15px;
-            background: rgba(255, 255, 255, 0.95);
-            border: 2px solid #ff4d6d; color: #ff4d6d;
-            padding: 7px 16px; border-radius: 30px;
-            font-size: 0.9rem; font-weight: 900; cursor: pointer;
+            background: rgba(255, 255, 255, 0.95); border: 2px solid #ff4d6d; color: #ff4d6d;
+            padding: 7px 16px; border-radius: 30px; font-size: 0.9rem; font-weight: 900; cursor: pointer;
             z-index: 100; box-shadow: 0 4px 0 #ff4d6d; transition: 0.15s;
         }
         .back-btn:active { transform: translateY(4px); box-shadow: none; }
 
         .btn {
-            background: linear-gradient(135deg, #ff4d6d, #ff2a55);
-            color: white; border: 2px solid #fff;
-            padding: 12px 30px; font-size: 1.1rem; font-weight: 900;
-            border-radius: 30px; cursor: pointer; transition: 0.15s;
-            box-shadow: 0 6px 0 #c9184a, 0 15px 25px rgba(255, 77, 109, 0.4);
-            margin-top: 15px;
+            background: linear-gradient(135deg, #ff4d6d, #ff2a55); color: white; border: 2px solid #fff;
+            padding: 12px 30px; font-size: 1.1rem; font-weight: 900; border-radius: 30px; cursor: pointer; transition: 0.15s;
+            box-shadow: 0 6px 0 #c9184a, 0 15px 25px rgba(255, 77, 109, 0.4); margin-top: 15px;
         }
         .btn:active { transform: translateY(6px); box-shadow: none; }
         .btn:disabled { background: #ffb3c6; box-shadow: 0 6px 0 #ff8fa3; cursor: not-allowed; }
@@ -148,26 +128,12 @@
         }
 
         /* ⭕ BÀN CỜ CARO TÌNH YÊU */
-        .caro-board {
-            display: grid;
-            grid-template-columns: repeat(10, 31px);
-            gap: 3px;
-            background: rgba(255, 77, 109, 0.2);
-            padding: 6px;
-            border-radius: 15px;
-            margin: 0 auto;
-            width: fit-content;
-            border: 2px solid #fff;
-        }
-        .caro-cell {
-            width: 31px; height: 31px;
-            background: rgba(255, 255, 255, 0.95);
-            display: flex; justify-content: center; align-items: center;
-            font-size: 1.3rem; cursor: pointer; border-radius: 6px;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.08); transition: 0.15s;
-        }
+        .caro-board { display: grid; grid-template-columns: repeat(10, 31px); gap: 3px; background: rgba(255, 77, 109, 0.2); padding: 6px; border-radius: 15px; margin: 0 auto; width: fit-content; border: 2px solid #fff; }
+        .caro-cell { width: 31px; height: 31px; background: rgba(255, 255, 255, 0.95); display: flex; justify-content: center; align-items: center; font-size: 1.3rem; cursor: pointer; border-radius: 6px; box-shadow: 0 2px 4px rgba(0,0,0,0.08); transition: 0.15s; }
         .caro-cell:active { transform: scale(0.85); }
         .caro-cell.filled { background: #fff0f3; transform: scale(0.95); box-shadow: inset 0 0 5px rgba(0,0,0,0.1); }
+        .caro-cell.highlight { background: #ff4d6d; color: white; border: 2px solid #fff; animation: blink 0.5s infinite alternate; }
+        @keyframes blink { from { opacity: 1; } to { opacity: 0.6; } }
 
         /* FLAPPY & SNAKE CANVASES */
         canvas { border-radius: 15px; box-shadow: 0 6px 20px rgba(0,0,0,0.15); margin: 5px 0; border: 2px solid #fff; }
@@ -221,13 +187,12 @@
     <audio id="bgMusic" loop><source src="nhac.mp3" type="audio/mpeg"></audio>
     <audio id="photoAudio"></audio>
 
-    <!-- 💖 TRANG CHỦ: ĐÃ CÓ NÚT CARO NỔI BẬT NHẤT 💖 -->
     <div id="menuScreen" class="screen active">
         <h2 style="font-size: 3rem;">Trạm Tình Yêu 💖</h2>
         <p style="font-size: 1rem; color: #ff2a55; margin-bottom: 5px; font-weight: 900; background: #fff; padding: 4px 14px; border-radius: 20px;">Hôm nay cục cưng muốn chơi gì nào?</p>
         
         <div class="menu-grid">
-            <button class="menu-btn" onclick="openScreen('screen8'); initCaro();"><span>⭕</span> Cờ Caro</button>
+            <button class="menu-btn" onclick="openScreen('screen8'); initCaro();"><span>⭕</span> Cờ Caro AI</button>
             <button class="menu-btn" onclick="openScreen('screen1')"><span>💌</span> Lời nhắn</button>
             <button class="menu-btn" onclick="openScreen('screen7'); initBlockBlast();"><span>🧩</span> Xếp Hình</button>
             <button class="menu-btn" onclick="openScreen('screen3'); initGame();"><span>🚗</span> Đua Xe</button>
@@ -237,16 +202,16 @@
         <button class="menu-btn" style="width: 100%; margin-top: 14px; flex-direction: row; justify-content: center; font-size: 1.2rem;" onclick="openScreen('screen4')"><span style="margin-right: 10px; font-size: 1.6rem;">🌌</span> Vũ Trụ Kỷ Niệm</button>
     </div>
 
-    <!-- MÀN 8: CỜ CARO TÌNH YÊU -->
+    <!-- MÀN 8: CỜ CARO TÌNH YÊU VS AI -->
     <div id="screen8" class="screen">
         <button class="back-btn" onclick="returnToMenu()">🏠 Trở về</button>
-        <h2 style="font-size: 2.5rem;">Cờ Caro 💖</h2>
-        <p style="font-weight: 900; color: #ff4d6d; background: #fff; padding: 4px 12px; border-radius: 20px; font-size: 0.9rem;">❌ đi trước | 💖 đi sau | 5 ô là thắng!</p>
+        <h2 style="font-size: 2.5rem;">Cờ Caro VS AI 🤖</h2>
+        <p style="font-weight: 900; color: #ff4d6d; background: #fff; padding: 4px 12px; border-radius: 20px; font-size: 0.9rem;">Em (💖) đi trước | Máy (🤖) đi sau</p>
         <div class="game-container" style="padding: 8px;">
             <div class="caro-board" id="caroBoard"></div>
         </div>
-        <p id="caroMessage" style="font-size: 1.1rem; color: #ff2a55; font-weight: 900; background: #fff; padding: 4px 14px; border-radius: 20px;"></p>
-        <button class="btn" id="restartCaro" style="display:none;" onclick="initCaro()">Ván mới 🔄</button>
+        <p id="caroMessage" style="font-size: 1.1rem; color: #ff2a55; font-weight: 900; background: #fff; padding: 4px 14px; border-radius: 20px; text-align: center; width: 100%;"></p>
+        <button class="btn" id="restartCaro" style="display:none;" onclick="initCaro()">Quyết chiến lại 🔄</button>
     </div>
 
     <!-- MÀN 1: LỜI NHẮN -->
@@ -351,44 +316,144 @@
         }
         function returnToMenu() { stopAllGames(); openScreen('menuScreen'); }
 
-        // ================= LOGIC GAME CARO TÌNH YÊU =================
-        let caroGrid = [], caroTurn = 'X', caroIsOver = false;
+        // ================= LOGIC GAME CARO AI (HEURISTIC ALGORITHM) =================
+        let caroGrid = [], caroTurn = 'O', caroIsOver = false;
+        const HUMAN = 'O', AI = 'X'; // O là 💖, X là 🤖
+        
+        // Bảng điểm trọng số Heuristic cho Công (AI) và Thủ (Chặn người chơi)
+        const attackScores = [0, 3, 24, 192, 1536, 12288];
+        const defenseScores = [0, 1, 9, 81, 729, 6561];
+
         function initCaro() {
-            caroGrid = Array.from({length: 10}, () => Array(10).fill('')); caroTurn = 'X'; caroIsOver = false;
-            document.getElementById('caroMessage').innerText = "Đến lượt của ❌";
+            caroGrid = Array.from({length: 10}, () => Array(10).fill('')); caroTurn = HUMAN; caroIsOver = false;
+            document.getElementById('caroMessage').innerText = "Đến lượt của Bé 💖";
             document.getElementById('restartCaro').style.display = 'none';
             renderCaro();
         }
+
         function renderCaro() {
             const board = document.getElementById('caroBoard'); board.innerHTML = '';
             for (let r = 0; r < 10; r++) {
                 for (let c = 0; c < 10; c++) {
                     let cell = document.createElement('div'); cell.className = 'caro-cell';
-                    if (caroGrid[r][c] === 'X') { cell.innerText = '❌'; cell.classList.add('filled'); }
-                    else if (caroGrid[r][c] === 'O') { cell.innerText = '💖'; cell.classList.add('filled'); }
+                    if (caroGrid[r][c] === HUMAN) { cell.innerText = '💖'; cell.classList.add('filled'); }
+                    else if (caroGrid[r][c] === AI) { cell.innerText = '🤖'; cell.classList.add('filled'); }
                     cell.onclick = () => playCaro(r, c); board.appendChild(cell);
                 }
             }
         }
+
         function playCaro(r, c) {
-            if (caroIsOver || caroGrid[r][c] !== '') return;
-            caroGrid[r][c] = caroTurn; renderCaro();
-            if (checkCaroWin(r, c, caroTurn)) {
-                document.getElementById('caroMessage').innerText = (caroTurn === 'X' ? '❌' : '💖') + " THẮNG RỒI ĐÓ BÉ ƠI 🎉";
-                document.getElementById('restartCaro').style.display = 'inline-block'; caroIsOver = true; return;
+            if (caroIsOver || caroGrid[r][c] !== '' || caroTurn !== HUMAN) return;
+            
+            // Người chơi đi
+            caroGrid[r][c] = HUMAN; renderCaro();
+            if (checkCaroWin(r, c, HUMAN)) {
+                endCaroGame("BÉ 💖 ĐÃ CHIẾN THẮNG MÁY! 🎉", r, c, HUMAN); return;
             }
-            caroTurn = caroTurn === 'X' ? 'O' : 'X';
-            document.getElementById('caroMessage').innerText = "Đến lượt của " + (caroTurn === 'X' ? '❌' : '💖');
+            
+            caroTurn = AI;
+            document.getElementById('caroMessage').innerText = "Máy 🤖 đang suy nghĩ...";
+            
+            // AI đi (Thêm một chút delay để có cảm giác máy đang "suy nghĩ")
+            setTimeout(aiMove, 400);
         }
+
+        function aiMove() {
+            if(caroIsOver) return;
+            let bestScore = -1, move = {r: 5, c: 5};
+            let isBoardEmpty = true;
+            
+            for (let r = 0; r < 10; r++) {
+                for (let c = 0; c < 10; c++) {
+                    if (caroGrid[r][c] !== '') {
+                        isBoardEmpty = false;
+                        continue;
+                    }
+                    // Tính điểm cho ô trống này
+                    let attack = evaluateCell(r, c, AI);
+                    let defense = evaluateCell(r, c, HUMAN);
+                    // Tổng điểm = Công + Thủ (Ưu tiên công nếu điểm bằng nhau)
+                    let score = attack + defense;
+                    
+                    if (score > bestScore) {
+                        bestScore = score;
+                        move = {r, c};
+                    }
+                }
+            }
+            
+            // Nếu bàn cờ trống, đánh vào giữa
+            if(isBoardEmpty) move = {r: 4, c: 4};
+
+            caroGrid[move.r][move.c] = AI;
+            renderCaro();
+
+            if (checkCaroWin(move.r, move.c, AI)) {
+                endCaroGame("MÁY 🤖 ĐÃ THẮNG RỒI 🥺", move.r, move.c, AI); return;
+            }
+            
+            caroTurn = HUMAN;
+            document.getElementById('caroMessage').innerText = "Đến lượt của Bé 💖";
+        }
+
+        // Đánh giá trọng số tại 1 ô (Heuristic function)
+        function evaluateCell(r, c, player) {
+            let score = 0;
+            const dirs = [[0, 1], [1, 0], [1, 1], [1, -1]]; // Ngang, dọc, chéo 1, chéo 2
+            
+            for (let [dr, dc] of dirs) {
+                let count = 0, blocks = 0;
+                
+                // Đếm về một phía
+                let nr = r + dr, nc = c + dc;
+                while (nr>=0 && nr<10 && nc>=0 && nc<10 && caroGrid[nr][nc] === player) { count++; nr+=dr; nc+=dc; }
+                if (nr<0 || nr>=10 || nc<0 || nc>=10 || (caroGrid[nr][nc] !== '' && caroGrid[nr][nc] !== player)) blocks++;
+                
+                // Đếm về phía ngược lại
+                nr = r - dr; nc = c - dc;
+                while (nr>=0 && nr<10 && nc>=0 && nc<10 && caroGrid[nr][nc] === player) { count++; nr-=dr; nc-=dc; }
+                if (nr<0 || nr>=10 || nc<0 || nc>=10 || (caroGrid[nr][nc] !== '' && caroGrid[nr][nc] !== player)) blocks++;
+                
+                // Cộng điểm dựa trên chuỗi và số đầu bị chặn
+                if (blocks === 2) score += 0; // Bị chặn 2 đầu thì vô giá trị
+                else {
+                    let scoreArray = player === AI ? attackScores : defenseScores;
+                    score += scoreArray[Math.min(count, 5)]; 
+                    if (blocks === 0 && count > 0) score += scoreArray[Math.min(count, 5)] / 2; // Không bị chặn đầu nào thì thưởng thêm điểm
+                }
+            }
+            return score;
+        }
+
         function checkCaroWin(r, c, player) {
             const dirs = [[0, 1], [1, 0], [1, 1], [1, -1]];
             for (let [dr, dc] of dirs) {
                 let count = 1, nr = r + dr, nc = c + dc;
-                while (nr>=0 && nr<10 && nc>=0 && nc<10 && caroGrid[nr][nc]===player) { count++; nr+=dr; nc+=dc; }
+                let winCells = [[r, c]];
+                while (nr>=0 && nr<10 && nc>=0 && nc<10 && caroGrid[nr][nc]===player) { winCells.push([nr, nc]); count++; nr+=dr; nc+=dc; }
                 nr = r - dr; nc = c - dc;
-                while (nr>=0 && nr<10 && nc>=0 && nc<10 && caroGrid[nr][nc]===player) { count++; nr-=dr; nc-=dc; }
-                if (count >= 5) return true;
+                while (nr>=0 && nr<10 && nc>=0 && nc<10 && caroGrid[nr][nc]===player) { winCells.push([nr, nc]); count++; nr-=dr; nc-=dc; }
+                
+                if (count >= 5) {
+                    highlightWin(winCells);
+                    return true;
+                }
             } return false;
+        }
+        
+        function highlightWin(cells) {
+            const board = document.getElementById('caroBoard');
+            cells.forEach(([r, c]) => {
+                let index = r * 10 + c;
+                board.children[index].classList.add('highlight');
+            });
+        }
+
+        function endCaroGame(msg, r, c, player) {
+            document.getElementById('caroMessage').innerHTML = `<span style="font-size:1.4rem">${msg}</span>`;
+            document.getElementById('restartCaro').style.display = 'inline-block'; 
+            caroIsOver = true;
         }
 
         // ================= CÁC GAME CÒN LẠI =================
@@ -559,7 +624,6 @@
                 if(canPlace) {
                     for (let sr = 0; sr < s.length; sr++) for (let sc = 0; sc < s[0].length; sc++) if (s[sr][sc]) { bGrid[r + sr][c + sc] = 1; blockScore++; }
                     dragData.originEl.style.display = 'none'; bShapes[dragData.idx].used = true;
-                    // Xóa hàng cột full
                     for(let i=0; i<8; i++) { if(bGrid[i].every(v=>v===1)) { for(let j=0;j<8;j++) bGrid[i][j]=0; blockScore+=10; } }
                     renderBlockGrid(); document.getElementById('blockScore').innerText = blockScore;
                     if (bShapes.every(s => s.used)) setTimeout(spawnShapes, 300);
