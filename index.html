@@ -4,127 +4,212 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Trạm Tình Yêu Của Bọn Mình ✨</title>
-    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@600;700&family=Quicksand:wght@500;700;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@600;700&family=Quicksand:wght@600;700;900&display=swap" rel="stylesheet">
     
     <style>
         * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Quicksand', sans-serif; }
         
-        /* 🌌 BACKGROUND CHUYỂN MÀU & HIỆU ỨNG MƯỢT MÀ */
+        /* 🌌 BACKGROUND CHUYỂN MÀU & HIỆU ỨNG */
         body {
             background: linear-gradient(-45deg, #ff9a9e, #fecfef, #ffc3a0, #ffafbd);
-            background-size: 400% 400%; animation: gradientBG 15s ease infinite;
-            min-height: 100vh; display: flex; justify-content: center; align-items: center;
-            color: #333; padding: 15px; overflow-x: hidden; position: relative; touch-action: none;
+            background-size: 400% 400%;
+            animation: gradientBG 15s ease infinite;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: #333;
+            padding: 15px;
+            overflow-x: hidden;
+            position: relative;
+            touch-action: none;
         }
-        @keyframes gradientBG { 0% { background-position: 0% 50%; } 50% { background-position: 100% 50%; } 100% { background-position: 0% 50%; } }
+        @keyframes gradientBG {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
 
-        /* BONG BÓNG MỜ ẢO */
         .bg-bubbles { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: 0; overflow: hidden; pointer-events: none; }
         .bubble { position: absolute; background: rgba(255, 255, 255, 0.4); border-radius: 50%; filter: blur(6px); animation: floatUp 10s infinite ease-in; bottom: -100px; box-shadow: 0 0 10px rgba(255,255,255,0.5); }
-        @keyframes floatUp { 0% { transform: translateY(0) scale(1); opacity: 0; } 50% { opacity: 1; } 100% { transform: translateY(-100vh) scale(1.5); opacity: 0; } }
+        @keyframes floatUp {
+            0% { transform: translateY(0) scale(1); opacity: 0; }
+            50% { opacity: 1; }
+            100% { transform: translateY(-100vh) scale(1.5); opacity: 0; }
+        }
 
-        /* ✨ KHUNG GIAO DIỆN "CẦU KỲ & LẤP LÁNH" HƠN */
+        /* 👑 KHUNG GIAO DIỆN SIÊU CẦU KỲ & VIỀN LED */
         .screen {
-            display: none; flex-direction: column; align-items: center; justify-content: center;
-            background: linear-gradient(135deg, rgba(255,255,255,0.85), rgba(255,255,255,0.55));
-            backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
-            padding: 35px 25px; border-radius: 30px;
-            width: 100%; max-width: 420px; margin: auto; position: relative; z-index: 10;
-            /* Viền phát sáng & bóng đổ sâu */
-            border: 2px solid rgba(255, 255, 255, 0.9);
-            box-shadow: 0 25px 50px rgba(255, 77, 109, 0.25), 
-                        0 0 20px rgba(255, 179, 198, 0.5), 
-                        inset 0 0 25px rgba(255, 255, 255, 0.8);
-            animation: pulseGlow 4s infinite alternate;
+            display: none;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, rgba(255,255,255,0.92), rgba(255,240,245,0.85));
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            padding: 35px 22px;
+            border-radius: 35px;
+            width: 100%;
+            max-width: 420px;
+            margin: auto;
+            position: relative;
+            z-index: 10;
+            border: 3px solid #ffffff;
+            box-shadow: 0 25px 50px rgba(255, 77, 109, 0.3),
+                        0 0 30px rgba(255, 179, 198, 0.7),
+                        inset 0 0 25px rgba(255, 255, 255, 0.9);
+            animation: borderPulse 3s infinite alternate;
         }
-        @keyframes pulseGlow { from { box-shadow: 0 25px 50px rgba(255,77,109,0.25), 0 0 15px rgba(255,179,198,0.4), inset 0 0 25px rgba(255,255,255,0.8); } to { box-shadow: 0 25px 50px rgba(255,77,109,0.25), 0 0 35px rgba(255,179,198,0.8), inset 0 0 35px rgba(255,255,255,1); } }
+        @keyframes borderPulse {
+            from { box-shadow: 0 20px 40px rgba(255,77,109,0.25), 0 0 15px rgba(255,143,163,0.5), inset 0 0 15px rgba(255,255,255,0.8); }
+            to { box-shadow: 0 25px 60px rgba(255,77,109,0.35), 0 0 35px rgba(255,110,140,0.8), inset 0 0 25px rgba(255,255,255,1); }
+        }
 
-        /* Nẹp trang trí 4 góc máy ma thuật */
-        .screen::before, .screen::after { content: ''; position: absolute; width: 50px; height: 50px; border: 4px solid #ff4d6d; pointer-events: none; border-radius: 15px; opacity: 0.7; }
-        .screen::before { top: -10px; left: -10px; border-right: none; border-bottom: none; box-shadow: -5px -5px 15px rgba(255,77,109,0.3); }
-        .screen::after { bottom: -10px; right: -10px; border-left: none; border-top: none; box-shadow: 5px 5px 15px rgba(255,77,109,0.3); }
+        /* 4 Góc nẹp kim loại bo tròn ma thuật */
+        .screen::before, .screen::after { content: ''; position: absolute; width: 45px; height: 45px; border: 4px solid #ff4d6d; pointer-events: none; border-radius: 18px; }
+        .screen::before { top: -8px; left: -8px; border-right: none; border-bottom: none; }
+        .screen::after { bottom: -8px; right: -8px; border-left: none; border-top: none; }
 
-        .screen.active { display: flex; animation: popIn 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275); }
-        @keyframes popIn { from { opacity: 0; transform: scale(0.8) translateY(30px); } to { opacity: 1; transform: scale(1) translateY(0); } }
+        .screen.active { display: flex; animation: popIn 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275); }
+        @keyframes popIn {
+            from { opacity: 0; transform: scale(0.85) translateY(25px); }
+            to { opacity: 1; transform: scale(1) translateY(0); }
+        }
 
-        h2 { font-family: 'Dancing Script', cursive; color: #ff2a55; font-size: 2.8rem; margin-bottom: 8px; margin-top: 15px; text-shadow: 2px 2px 0px #fff, 0 0 15px rgba(255, 77, 109, 0.5); text-align: center; line-height: 1.1; }
+        h2 {
+            font-family: 'Dancing Script', cursive;
+            color: #ff2a55;
+            font-size: 2.7rem;
+            margin-bottom: 6px;
+            margin-top: 10px;
+            text-shadow: 2px 2px 0px #fff, 0 0 15px rgba(255, 77, 109, 0.4);
+            text-align: center;
+        }
 
-        /* 🎀 NÚT MENU DẠNG 3D POP-UP */
-        .menu-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 15px; width: 100%; margin-top: 20px; }
+        /* 🎛️ MENU 3D TIỆM BÁNH NGỌT */
+        .menu-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 14px;
+            width: 100%;
+            margin-top: 15px;
+        }
         .menu-btn {
-            background: linear-gradient(to bottom, #ffffff, #ffe6eb);
-            border: 2px solid #ffb3c6; border-radius: 20px; padding: 18px 10px;
-            font-size: 1.1rem; font-weight: 900; color: #ff4d6d; cursor: pointer;
-            box-shadow: 0 6px 0 #ff8fa3, 0 15px 20px rgba(255, 77, 109, 0.2);
-            display: flex; flex-direction: column; align-items: center; gap: 8px;
-            transition: all 0.15s ease; position: relative;
+            background: linear-gradient(to bottom, #ffffff, #fff0f3);
+            border: 2px solid #ffccd5;
+            border-radius: 20px;
+            padding: 16px 10px;
+            font-size: 1.05rem;
+            font-weight: 900;
+            color: #ff4d6d;
+            cursor: pointer;
+            box-shadow: 0 6px 0 #ff8fa3, 0 12px 18px rgba(255, 77, 109, 0.15);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 6px;
+            transition: all 0.15s ease;
         }
-        .menu-btn span { font-size: 2.5rem; filter: drop-shadow(0 4px 4px rgba(0,0,0,0.15)); }
-        .menu-btn:active { transform: translateY(6px); box-shadow: 0 0px 0 #ff8fa3, 0 5px 10px rgba(255, 77, 109, 0.2); }
+        .menu-btn span { font-size: 2.3rem; filter: drop-shadow(0 4px 4px rgba(0,0,0,0.12)); }
+        .menu-btn:active { transform: translateY(6px); box-shadow: 0 0 0 #ff8fa3, 0 4px 8px rgba(255, 77, 109, 0.2); }
 
-        /* 🔙 NÚT BACK */
-        .back-btn { position: absolute; top: 15px; left: 15px; background: rgba(255, 255, 255, 0.9); border: 2px solid #ff4d6d; color: #ff4d6d; padding: 8px 18px; border-radius: 30px; font-size: 0.95rem; font-weight: 900; cursor: pointer; z-index: 100; box-shadow: 0 4px 0 #ff4d6d; transition: 0.15s; }
-        .back-btn:active { transform: translateY(4px); box-shadow: 0 0 0 #ff4d6d; }
+        .back-btn {
+            position: absolute; top: 15px; left: 15px;
+            background: rgba(255, 255, 255, 0.95);
+            border: 2px solid #ff4d6d; color: #ff4d6d;
+            padding: 7px 16px; border-radius: 30px;
+            font-size: 0.9rem; font-weight: 900; cursor: pointer;
+            z-index: 100; box-shadow: 0 4px 0 #ff4d6d; transition: 0.15s;
+        }
+        .back-btn:active { transform: translateY(4px); box-shadow: none; }
 
-        /* CHUNG CHO NÚT BẤM DƯỚI */
-        .btn { background: linear-gradient(135deg, #ff4d6d, #ff2a55); color: white; border: 2px solid #fff; padding: 12px 30px; font-size: 1.15rem; font-weight: 900; border-radius: 30px; cursor: pointer; transition: 0.15s; box-shadow: 0 6px 0 #c9184a, 0 15px 25px rgba(255, 77, 109, 0.4); margin-top: 15px; }
-        .btn:active { transform: translateY(6px); box-shadow: 0 0px 0 #c9184a, 0 5px 10px rgba(255, 77, 109, 0.4); }
+        .btn {
+            background: linear-gradient(135deg, #ff4d6d, #ff2a55);
+            color: white; border: 2px solid #fff;
+            padding: 12px 30px; font-size: 1.1rem; font-weight: 900;
+            border-radius: 30px; cursor: pointer; transition: 0.15s;
+            box-shadow: 0 6px 0 #c9184a, 0 15px 25px rgba(255, 77, 109, 0.4);
+            margin-top: 15px;
+        }
+        .btn:active { transform: translateY(6px); box-shadow: none; }
         .btn:disabled { background: #ffb3c6; box-shadow: 0 6px 0 #ff8fa3; cursor: not-allowed; }
 
-        textarea { width: 100%; padding: 15px; border-radius: 20px; border: 3px dashed #ff8fa3; font-size: 1.1rem; resize: none; outline: none; margin-bottom: 20px; background: rgba(255, 255, 255, 0.9); box-shadow: inset 0 4px 8px rgba(0,0,0,0.05); font-weight: 700; color: #ff2a55; }
-        textarea:focus { border-color: #ff4d6d; border-style: solid; box-shadow: 0 0 20px rgba(255,77,109,0.3); }
+        textarea {
+            width: 100%; padding: 15px; border-radius: 20px;
+            border: 3px dashed #ff8fa3; font-size: 1.05rem; resize: none;
+            outline: none; margin-bottom: 15px; background: rgba(255, 255, 255, 0.95);
+            font-weight: 700; color: #ff2a55;
+        }
 
-        /* KHUNG CHỨA GAME CẦU KỲ */
-        .game-container { background: rgba(255,255,255,0.8); border-radius: 25px; padding: 15px; box-shadow: inset 0 0 20px rgba(0,0,0,0.1), 0 10px 20px rgba(255,77,109,0.15); margin-bottom: 15px; width: 100%; border: 2px solid #fff; position: relative; }
-        canvas { border-radius: 15px; box-shadow: 0 8px 25px rgba(0,0,0,0.2); margin: 5px 0; border: 3px solid #fff; }
+        .game-container {
+            background: rgba(255,255,255,0.85); border-radius: 22px; padding: 12px;
+            box-shadow: inset 0 0 15px rgba(0,0,0,0.06), 0 10px 20px rgba(255,77,109,0.15);
+            margin-bottom: 10px; width: 100%; border: 2px solid #fff;
+        }
 
-        /* MÀN 2: THƯ RƠI */
-        .letters-area { width: 100%; height: 260px; background: rgba(255,255,255,0.4); border-radius: 20px; position: relative; overflow: hidden; margin-bottom: 15px; border: 2px solid rgba(255,255,255,0.8); box-shadow: inset 0 0 15px rgba(255,77,109,0.1); }
-        .falling-letter { position: absolute; background: linear-gradient(135deg, #fff, #ffe6eb); border: 2px solid #ff4d6d; border-radius: 12px; padding: 12px 18px; cursor: pointer; font-weight: 900; color: #ff4d6d; font-size: 1rem; box-shadow: 0 8px 15px rgba(255,77,109,0.2); animation: fallAnimation linear infinite; transition: 0.2s; }
-        .falling-letter:active { transform: scale(0.9); }
-        @keyframes fallAnimation { 0% { top: -50px; opacity: 0; } 10% { opacity: 1; } 90% { opacity: 1; } 100% { top: 270px; opacity: 0; } }
-        .letter-modal { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.6); backdrop-filter: blur(8px); display: none; justify-content: center; align-items: center; z-index: 999; }
-        .letter-modal.active { display: flex; }
-        .modal-box { background: linear-gradient(135deg, #fff, #ffe6eb); padding: 35px 25px; border-radius: 25px; width: 85%; max-width: 350px; border: 4px solid #ff4d6d; position: relative; box-shadow: 0 20px 40px rgba(0,0,0,0.3); text-align: center; }
-        .close-btn { position: absolute; top: -15px; right: -15px; background: #ff4d6d; color: white; border: 3px solid white; width: 40px; height: 40px; border-radius: 50%; font-weight: bold; font-size: 1.2rem; cursor: pointer; box-shadow: 0 4px 10px rgba(0,0,0,0.3); }
+        /* ⭕ BÀN CỜ CARO TÌNH YÊU */
+        .caro-board {
+            display: grid;
+            grid-template-columns: repeat(10, 31px);
+            gap: 3px;
+            background: rgba(255, 77, 109, 0.2);
+            padding: 6px;
+            border-radius: 15px;
+            margin: 0 auto;
+            width: fit-content;
+            border: 2px solid #fff;
+        }
+        .caro-cell {
+            width: 31px; height: 31px;
+            background: rgba(255, 255, 255, 0.95);
+            display: flex; justify-content: center; align-items: center;
+            font-size: 1.3rem; cursor: pointer; border-radius: 6px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.08); transition: 0.15s;
+        }
+        .caro-cell:active { transform: scale(0.85); }
+        .caro-cell.filled { background: #fff0f3; transform: scale(0.95); box-shadow: inset 0 0 5px rgba(0,0,0,0.1); }
+
+        /* FLAPPY & SNAKE CANVASES */
+        canvas { border-radius: 15px; box-shadow: 0 6px 20px rgba(0,0,0,0.15); margin: 5px 0; border: 2px solid #fff; }
+        .snake-controls { display: grid; grid-template-columns: repeat(3, 50px); gap: 8px; justify-content: center; margin-top: 10px; }
+        .ctrl-btn { background: linear-gradient(135deg, #ff4d6d, #ff2a55); border: 2px solid white; color: white; border-radius: 14px; font-size: 1.3rem; padding: 12px; cursor: pointer; box-shadow: 0 5px 0 #c9184a; }
+        .ctrl-btn:active { transform: translateY(5px); box-shadow: none; }
 
         /* ĐUA XE */
-        .game-box { width: 100%; height: 320px; background: url('https://www.transparenttextures.com/patterns/asfalt-light.png'), #3d405b; border: 4px solid #fff; border-radius: 15px; position: relative; overflow: hidden; box-shadow: inset 0 20px 40px rgba(0,0,0,0.5); }
-        .game-box::after { content: ''; position: absolute; left: 50%; top: -100%; width: 8px; height: 300%; background: repeating-linear-gradient(to bottom, #fff 0, #fff 40px, transparent 40px, transparent 80px); transform: translateX(-50%); animation: moveRoad 0.8s linear infinite; opacity: 0.7; }
+        .game-box { width: 100%; height: 310px; background: url('https://www.transparenttextures.com/patterns/asfalt-light.png'), #3d405b; border: 3px solid #fff; border-radius: 15px; position: relative; overflow: hidden; }
+        .game-box::after { content: ''; position: absolute; left: 50%; top: -100%; width: 6px; height: 300%; background: repeating-linear-gradient(to bottom, #fff 0, #fff 40px, transparent 40px, transparent 80px); transform: translateX(-50%); animation: moveRoad 0.8s linear infinite; opacity: 0.7; }
         @keyframes moveRoad { from { top: -100%; } to { top: 0; } }
-        .car-obj { position: absolute; bottom: 15px; transform: translateX(-50%); font-size: 3.5rem; z-index: 10; filter: drop-shadow(0 15px 10px rgba(0,0,0,0.5)); transition: left 0.05s ease-out; }
-        .obstacle { position: absolute; padding: 8px 15px; border-radius: 20px; font-weight: 900; font-size: 1.1rem; z-index: 5; text-shadow: 1px 1px 2px rgba(0,0,0,0.3); }
-        .obs-yes { background: linear-gradient(45deg, #ff4d6d, #ff8fa3); color: white; border: 2px solid white; box-shadow: 0 8px 15px rgba(255,77,109,0.5); }
-        .obs-no { background: linear-gradient(45deg, #2b2d42, #8d99ae); color: white; border: 2px solid white; box-shadow: 0 8px 15px rgba(0,0,0,0.5); }
-
-        /* TƯỜNG ẢNH */
-        #screen4 { background: rgba(15, 15, 15, 0.9); color: white; max-width: 100vw; width: 100vw; height: 100vh; position: fixed; top: 0; left: 0; border-radius: 0; border: none; z-index: 50; padding: 0; backdrop-filter: blur(15px); }
-        .memory-wall { position: absolute; top: 0; left: 0; width: 100%; height: 100%; overflow: hidden; }
-        .floating-photo { position: absolute; background: #fff; padding: 12px 12px 30px 12px; border-radius: 8px; width: 130px; animation: floatPhoto linear infinite; opacity: 0.95; cursor: pointer; transition: 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275); box-shadow: 0 15px 30px rgba(0,0,0,0.5); }
-        .floating-photo img { width: 100%; height: 110px; object-fit: cover; border-radius: 5px; border: 1px solid #eee; }
-        .photo-caption { color: #ff2a55; font-size: 1.4rem; text-align: center; margin-top: 10px; font-weight: bold; font-family: 'Dancing Script', cursive; }
-        .floating-photo:hover { transform: scale(1.4) !important; z-index: 99; opacity: 1; box-shadow: 0 0 40px rgba(255, 77, 109, 1); border: 2px solid #ff4d6d; }
-        @keyframes floatPhoto { 0% { transform: translateY(110vh) rotate(-15deg); } 100% { transform: translateY(-120vh) rotate(20deg); } }
-
-        /* CARO (Bàn cờ siêu cute) */
-        .caro-board { display: grid; grid-template-columns: repeat(10, 32px); gap: 3px; background: rgba(255, 77, 109, 0.2); padding: 8px; border-radius: 15px; margin: 5px auto; width: fit-content; border: 2px solid #fff; box-shadow: inset 0 0 10px rgba(255,77,109,0.3); }
-        .caro-cell { width: 32px; height: 32px; background: rgba(255, 255, 255, 0.9); display: flex; justify-content: center; align-items: center; font-size: 1.4rem; cursor: pointer; border-radius: 6px; transition: 0.2s; box-shadow: 0 3px 5px rgba(0,0,0,0.1); }
-        .caro-cell:active { transform: scale(0.85); }
-        .caro-cell.filled { transform: scale(0.95); box-shadow: inset 0 0 8px rgba(0,0,0,0.15); background: #fff0f3; }
+        .car-obj { position: absolute; bottom: 12px; transform: translateX(-50%); font-size: 3.2rem; z-index: 10; filter: drop-shadow(0 10px 8px rgba(0,0,0,0.4)); }
+        .obstacle { position: absolute; padding: 6px 14px; border-radius: 20px; font-weight: 900; font-size: 1rem; z-index: 5; }
+        .obs-yes { background: linear-gradient(45deg, #ff4d6d, #ff8fa3); color: white; border: 2px solid white; }
+        .obs-no { background: linear-gradient(45deg, #2b2d42, #8d99ae); color: white; border: 2px solid white; }
 
         /* XẾP HÌNH */
-        .block-grid { display: grid; grid-template-columns: repeat(8, 32px); gap: 3px; background: rgba(255, 77, 109, 0.15); padding: 8px; border-radius: 12px; margin: 0 auto; width: fit-content; border: 2px solid #fff; }
-        .block-cell { width: 32px; height: 32px; background: rgba(255, 255, 255, 0.9); border-radius: 5px; transition: 0.2s; box-shadow: inset 0 2px 4px rgba(0,0,0,0.05); }
-        .block-cell.filled { background: linear-gradient(135deg, #ff4d6d, #ff8fa3); transform: scale(0.92); border: 2px solid #ff2a55; box-shadow: 0 0 10px rgba(255,77,109,0.5); }
-        .shape-dock { display: flex; justify-content: center; gap: 20px; margin-top: 15px; height: 95px; align-items: center; background: rgba(255,255,255,0.5); border-radius: 20px; padding: 10px; border: 1px solid #fff; }
-        .shape-container { display: grid; gap: 2px; cursor: grab; padding: 8px; border-radius: 10px; background: rgba(255,255,255,0.8); box-shadow: 0 5px 10px rgba(0,0,0,0.1); }
-        .shape-mini-cell { width: 16px; height: 16px; background: linear-gradient(135deg, #ff4d6d, #ff8fa3); border-radius: 4px; border: 1px solid #ff2a55; }
+        .block-grid { display: grid; grid-template-columns: repeat(8, 30px); gap: 2px; background: rgba(255, 77, 109, 0.15); padding: 6px; border-radius: 12px; margin: 0 auto; width: fit-content; border: 2px solid #fff; }
+        .block-cell { width: 30px; height: 30px; background: rgba(255, 255, 255, 0.9); border-radius: 4px; }
+        .block-cell.filled { background: linear-gradient(135deg, #ff4d6d, #ff8fa3); transform: scale(0.92); border: 1px solid #ff2a55; }
+        .shape-dock { display: flex; justify-content: center; gap: 15px; margin-top: 10px; height: 90px; align-items: center; background: rgba(255,255,255,0.6); border-radius: 18px; padding: 8px; border: 1px solid #fff; }
+        .shape-container { display: grid; gap: 2px; cursor: grab; padding: 6px; border-radius: 8px; background: rgba(255,255,255,0.85); }
+        .shape-mini-cell { width: 15px; height: 15px; background: linear-gradient(135deg, #ff4d6d, #ff8fa3); border-radius: 3px; border: 1px solid #ff2a55; }
         .shape-mini-cell.empty { background: transparent; border: none; }
-        .drag-clone { position: fixed !important; z-index: 9999; pointer-events: none; transform: scale(1.4); filter: drop-shadow(0 20px 20px rgba(255,77,109,0.6)); }
+        .drag-clone { position: fixed !important; z-index: 9999; pointer-events: none; transform: scale(1.3); }
 
-        .snake-controls { display: grid; grid-template-columns: repeat(3, 55px); gap: 10px; justify-content: center; margin-top: 15px; }
-        .ctrl-btn { background: linear-gradient(135deg, #ff4d6d, #ff2a55); border: 2px solid white; color: white; border-radius: 15px; font-size: 1.5rem; padding: 15px; cursor: pointer; box-shadow: 0 6px 0 #c9184a; transition: 0.1s; }
-        .ctrl-btn:active { transform: translateY(6px); box-shadow: 0 0px 0 #c9184a; }
+        /* MÀN 4: KỶ NIỆM */
+        #screen4 { background: rgba(15, 15, 15, 0.92); color: white; max-width: 100vw; width: 100vw; height: 100vh; position: fixed; top: 0; left: 0; border-radius: 0; border: none; z-index: 50; padding: 0; }
+        .memory-wall { position: absolute; top: 0; left: 0; width: 100%; height: 100%; overflow: hidden; }
+        .floating-photo { position: absolute; background: #fff; padding: 10px 10px 25px 10px; border-radius: 6px; width: 120px; animation: floatPhoto linear infinite; opacity: 0.95; cursor: pointer; transition: 0.4s; }
+        .floating-photo img { width: 100%; height: 100px; object-fit: cover; border-radius: 4px; }
+        .photo-caption { color: #ff2a55; font-size: 1.3rem; text-align: center; margin-top: 6px; font-weight: bold; font-family: 'Dancing Script', cursive; }
+        @keyframes floatPhoto { 0% { transform: translateY(110vh) rotate(-15deg); } 100% { transform: translateY(-120vh) rotate(15deg); } }
+
+        /* THƯ RƠI */
+        .letters-area { width: 100%; height: 250px; background: rgba(255,255,255,0.4); border-radius: 20px; position: relative; overflow: hidden; margin-bottom: 15px; border: 2px solid rgba(255,255,255,0.8); }
+        .falling-letter { position: absolute; background: linear-gradient(135deg, #fff, #ffe6eb); border: 2px solid #ff4d6d; border-radius: 12px; padding: 10px 15px; cursor: pointer; font-weight: 900; color: #ff4d6d; animation: fallAnimation linear infinite; }
+        @keyframes fallAnimation { 0% { top: -50px; opacity: 0; } 10% { opacity: 1; } 90% { opacity: 1; } 100% { top: 260px; opacity: 0; } }
+        .letter-modal { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); backdrop-filter: blur(6px); display: none; justify-content: center; align-items: center; z-index: 999; }
+        .letter-modal.active { display: flex; }
+        .modal-box { background: #fff; padding: 30px 20px; border-radius: 25px; width: 85%; max-width: 340px; border: 4px solid #ff4d6d; position: relative; text-align: center; }
+        .close-btn { position: absolute; top: -15px; right: -15px; background: #ff4d6d; color: white; border: 2px solid white; width: 38px; height: 38px; border-radius: 50%; font-weight: bold; cursor: pointer; }
 
         .screen, .game-box, .falling-letter, .block-cell, .caro-cell { will-change: transform, opacity; -webkit-backface-visibility: hidden; backface-visibility: hidden; }
         ::-webkit-scrollbar { width: 0px; background: transparent; }
@@ -136,20 +221,32 @@
     <audio id="bgMusic" loop><source src="nhac.mp3" type="audio/mpeg"></audio>
     <audio id="photoAudio"></audio>
 
-    <!-- MÀN HÌNH CHÍNH QUYỀN LỰC -->
+    <!-- 💖 TRANG CHỦ: ĐÃ CÓ NÚT CARO NỔI BẬT NHẤT 💖 -->
     <div id="menuScreen" class="screen active">
-        <h2 style="font-size: 3.2rem;">Trạm Tình Yêu 💖</h2>
-        <p style="font-size: 1.1rem; color: #ff2a55; margin-bottom: 5px; font-weight: 900; background: #fff; padding: 5px 15px; border-radius: 20px; box-shadow: 0 4px 10px rgba(255,77,109,0.2);">Hôm nay cục cưng muốn chơi gì?</p>
+        <h2 style="font-size: 3rem;">Trạm Tình Yêu 💖</h2>
+        <p style="font-size: 1rem; color: #ff2a55; margin-bottom: 5px; font-weight: 900; background: #fff; padding: 4px 14px; border-radius: 20px;">Hôm nay cục cưng muốn chơi gì nào?</p>
         
         <div class="menu-grid">
-            <button class="menu-btn" onclick="openScreen('screen1')"><span>💌</span> Lời nhắn</button>
             <button class="menu-btn" onclick="openScreen('screen8'); initCaro();"><span>⭕</span> Cờ Caro</button>
+            <button class="menu-btn" onclick="openScreen('screen1')"><span>💌</span> Lời nhắn</button>
             <button class="menu-btn" onclick="openScreen('screen7'); initBlockBlast();"><span>🧩</span> Xếp Hình</button>
             <button class="menu-btn" onclick="openScreen('screen3'); initGame();"><span>🚗</span> Đua Xe</button>
             <button class="menu-btn" onclick="openScreen('screen5'); initFlappy();"><span>🐥</span> Flappy</button>
             <button class="menu-btn" onclick="openScreen('screen6'); initSnake();"><span>🐍</span> Săn Mồi</button>
         </div>
-        <button class="menu-btn" style="width: 100%; margin-top: 15px; flex-direction: row; justify-content: center; font-size: 1.3rem;" onclick="openScreen('screen4')"><span style="margin-right: 10px; font-size: 1.8rem;">🌌</span> Vũ Trụ Kỷ Niệm</button>
+        <button class="menu-btn" style="width: 100%; margin-top: 14px; flex-direction: row; justify-content: center; font-size: 1.2rem;" onclick="openScreen('screen4')"><span style="margin-right: 10px; font-size: 1.6rem;">🌌</span> Vũ Trụ Kỷ Niệm</button>
+    </div>
+
+    <!-- MÀN 8: CỜ CARO TÌNH YÊU -->
+    <div id="screen8" class="screen">
+        <button class="back-btn" onclick="returnToMenu()">🏠 Trở về</button>
+        <h2 style="font-size: 2.5rem;">Cờ Caro 💖</h2>
+        <p style="font-weight: 900; color: #ff4d6d; background: #fff; padding: 4px 12px; border-radius: 20px; font-size: 0.9rem;">❌ đi trước | 💖 đi sau | 5 ô là thắng!</p>
+        <div class="game-container" style="padding: 8px;">
+            <div class="caro-board" id="caroBoard"></div>
+        </div>
+        <p id="caroMessage" style="font-size: 1.1rem; color: #ff2a55; font-weight: 900; background: #fff; padding: 4px 14px; border-radius: 20px;"></p>
+        <button class="btn" id="restartCaro" style="display:none;" onclick="initCaro()">Ván mới 🔄</button>
     </div>
 
     <!-- MÀN 1: LỜI NHẮN -->
@@ -164,44 +261,31 @@
     <div id="screen2" class="screen">
         <button class="back-btn" onclick="returnToMenu()">🏠 Trở về</button>
         <h2>Lời nhắn từ mây ☁️</h2>
-        <p style="font-weight: 900; color: #ff4d6d; margin-bottom: 10px;">Chạm để đọc bí mật nè!</p>
         <div class="letters-area" id="lettersArea"></div>
         <div class="letter-modal" id="letterModal">
             <div class="modal-box">
                 <button class="close-btn" onclick="closeLetter()">✖</button>
-                <div class="modal-text" id="modalText" style="font-size: 1.3rem; line-height: 1.6; color: #d6336c; font-weight: 900;"></div>
+                <div class="modal-text" id="modalText" style="font-size: 1.25rem; line-height: 1.6; color: #d6336c; font-weight: 900;"></div>
             </div>
         </div>
-    </div>
-
-    <!-- MÀN 8: CARO -->
-    <div id="screen8" class="screen">
-        <button class="back-btn" onclick="returnToMenu()">🏠 Trở về</button>
-        <h2 style="font-size: 2.5rem;">Cờ Caro 💖</h2>
-        <p style="font-weight: 900; color: #ff4d6d; background: #fff; padding: 5px 15px; border-radius: 20px;">❌ đi trước | 💖 đi sau | 5 ô là thắng!</p>
-        <div class="game-container" style="padding: 10px;">
-            <div class="caro-board" id="caroBoard"></div>
-        </div>
-        <p id="caroMessage" style="font-size: 1.2rem; color: #ff2a55; font-weight: 900; background: #fff; padding: 5px 15px; border-radius: 20px;"></p>
-        <button class="btn" id="restartCaro" style="display:none;" onclick="initCaro()">Làm ván nữa 🔄</button>
     </div>
 
     <!-- MÀN 3: ĐUA XE -->
     <div id="screen3" class="screen">
         <button class="back-btn" onclick="returnToMenu()">🏠 Trở về</button>
         <h2 style="font-size: 2.5rem;">Lái Xe Tình Yêu 🚗</h2>
-        <p style="font-weight: 900; color: #ff4d6d; margin-bottom: 10px; background:#fff; padding:5px 15px; border-radius:20px;">Lấy 10 "Cóa" ❤️ | Tránh "Hổng" | Điểm: <span id="score" style="color:#ff2a55; font-size:1.2rem;">0</span></p>
+        <p style="font-weight: 900; color: #ff4d6d; background:#fff; padding:4px 12px; border-radius:20px; font-size: 0.9rem;">Lấy 10 "Cóa" ❤️ | Né "Hổng" | Điểm: <span id="score" style="color:#ff2a55;">0</span></p>
         <div class="game-container"><div class="game-box" id="gameBox"><div class="car-obj" id="playerCar">🏎️</div></div></div>
         <button class="btn" id="restartCar" style="display:none;" onclick="initGame()">Chơi lại 🔄</button>
     </div>
 
-    <!-- MÀN 4: KỶ NIỆM (TƯỜNG ẢNH) -->
+    <!-- MÀN 4: KỶ NIỆM -->
     <div id="screen4" class="screen">
         <button class="back-btn" style="background: rgba(255,255,255,0.2); border-color:#fff; color:#fff;" onclick="returnToMenu()">🏠 Trở về</button>
         <div class="memory-wall" id="memoryWall"></div>
-        <div style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); z-index: 10; background: rgba(0, 0, 0, 0.7); padding: 30px; border-radius: 25px; border: 2px solid rgba(255, 255, 255, 0.4); backdrop-filter: blur(10px); max-width: 90%; width: 350px; text-align: center; box-shadow: 0 20px 50px rgba(0,0,0,0.8);">
-            <h2 style="color: #ffb3c6; font-size: 2.8rem; margin-top:0;">Vũ Trụ Của Chúng Mình 🌌</h2>
-            <p style="color: #ddd; font-size: 1.1rem; font-weight: 700;">🎵 <em>Chạm vào ảnh trôi nổi để nghe thanh âm kỷ niệm...</em> ✨</p>
+        <div style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); z-index: 10; background: rgba(0, 0, 0, 0.7); padding: 30px; border-radius: 25px; border: 2px solid rgba(255, 255, 255, 0.3); max-width: 90%; width: 340px; text-align: center;">
+            <h2 style="color: #ffb3c6; margin-top:0;">Vũ Trụ Của Mình 🌌</h2>
+            <p style="color: #ddd; font-weight: 700;">🎵 <em>Chạm vào các bức ảnh trôi nổi để lắng nghe kỷ niệm...</em></p>
         </div>
     </div>
 
@@ -209,8 +293,8 @@
     <div id="screen5" class="screen">
         <button class="back-btn" onclick="returnToMenu()">🏠 Trở về</button>
         <h2 style="font-size: 2.5rem;">Chim Cút Bay 🐥</h2>
-        <p style="font-weight: 900; color: #ff4d6d; background:#fff; padding:5px 15px; border-radius:20px;">Chạm để nhảy | Điểm: <span id="flappyScore">0</span></p>
-        <div class="game-container" style="background: #70c5ce; padding:5px;"><canvas id="flappyCanvas" width="280" height="350" style="background: transparent; box-shadow:none; border:none;"></canvas></div>
+        <p style="font-weight: 900; color: #ff4d6d; background:#fff; padding:4px 12px; border-radius:20px;">Chạm để bay | Điểm: <span id="flappyScore">0</span></p>
+        <div class="game-container" style="background: #70c5ce; padding: 4px;"><canvas id="flappyCanvas" width="280" height="340" style="background: transparent; border:none;"></canvas></div>
         <button class="btn" id="restartFlappy" style="display:none;" onclick="initFlappy()">Bay lại 🔄</button>
     </div>
 
@@ -218,30 +302,30 @@
     <div id="screen6" class="screen">
         <button class="back-btn" onclick="returnToMenu()">🏠 Trở về</button>
         <h2 style="font-size: 2.5rem;">Rắn Săn Tim ❤️</h2>
-        <p style="font-weight: 900; color: #ff4d6d; background:#fff; padding:5px 15px; border-radius:20px;">Vuốt màn hình hoặc bấm nút | Điểm: <span id="snakeScore">0</span></p>
-        <div class="game-container" style="background: #2b2d42; padding:5px;"><canvas id="snakeCanvas" width="280" height="280" style="background: transparent; box-shadow:none; border:none;"></canvas></div>
+        <p style="font-weight: 900; color: #ff4d6d; background:#fff; padding:4px 12px; border-radius:20px;">Điểm: <span id="snakeScore">0</span></p>
+        <div class="game-container" style="background: #2b2d42; padding: 4px;"><canvas id="snakeCanvas" width="280" height="280" style="background: transparent; border:none;"></canvas></div>
         <div class="snake-controls">
             <div></div><button class="ctrl-btn" onclick="changeSnakeDir('UP')">⬆️</button><div></div>
             <button class="ctrl-btn" onclick="changeSnakeDir('LEFT')">⬅️</button>
             <button class="ctrl-btn" onclick="changeSnakeDir('DOWN')">⬇️</button>
             <button class="ctrl-btn" onclick="changeSnakeDir('RIGHT')">➡️</button>
         </div>
-        <button class="btn" id="restartSnake" style="display:none;" onclick="initSnake()">Bắt đầu lại 🔄</button>
+        <button class="btn" id="restartSnake" style="display:none;" onclick="initSnake()">Chơi lại 🔄</button>
     </div>
 
-    <!-- MÀN 7: BLOCK BLAST -->
+    <!-- MÀN 7: XẾP HÌNH -->
     <div id="screen7" class="screen">
         <button class="back-btn" onclick="returnToMenu()">🏠 Trở về</button>
-        <h2 style="font-size: 2.8rem;">Xếp Hình 🧩</h2>
-        <p style="font-weight: 900; color: #ff4d6d; background:#fff; padding:5px 15px; border-radius:20px;">Kéo & Thả | Điểm: <span id="blockScore">0</span> 💖</p>
+        <h2 style="font-size: 2.6rem;">Xếp Hình 🧩</h2>
+        <p style="font-weight: 900; color: #ff4d6d; background:#fff; padding:4px 12px; border-radius:20px;">Kéo & Thả | Điểm: <span id="blockScore">0</span></p>
         <div class="game-container"><div class="block-grid" id="blockGrid"></div></div>
         <div class="shape-dock" id="shapeDock"></div>
-        <p id="blockMessage" style="font-size: 1.1rem; color: #ff2a55; font-weight: 900; height: 25px; margin-top: 10px;"></p>
+        <p id="blockMessage" style="font-size: 1rem; color: #ff2a55; font-weight: 900; height: 25px; margin-top: 5px;"></p>
         <button class="btn" id="restartBlock" style="display:none;" onclick="initBlockBlast()">Chơi lại 🔄</button>
     </div>
 
     <script>
-        // --- 1. SETUP CHUNG ---
+        // BONG BÓNG TRANG TRÍ
         const bgContainer = document.getElementById('bgBubbles');
         for(let i=0; i<15; i++){
             let b = document.createElement('div'); b.className = 'bubble';
@@ -249,7 +333,7 @@
             b.style.left = Math.random()*100 + 'vw'; b.style.animationDuration = Math.random()*8 + 6 + 's';
             bgContainer.appendChild(b);
         }
-        
+
         let musicStarted = false; const bgMusic = document.getElementById('bgMusic'), photoAudio = document.getElementById('photoAudio');
         function playMusic() { if (!musicStarted) { bgMusic.volume = 0.4; bgMusic.play().catch(()=>{}); musicStarted = true; } }
 
@@ -267,24 +351,7 @@
         }
         function returnToMenu() { stopAllGames(); openScreen('menuScreen'); }
 
-        // --- 2. LỜI NHẮN & THƯ RƠI ---
-        function startJourney() {
-            if (document.getElementById('answer').value.trim() === '') { alert("Viết cho anh vài dòng đi mà 🥺"); return; }
-            openScreen('screen2'); initLetters();
-        }
-        const lettersData = ["Anh nhớ em bé của anh 💖", "Cố gắng lên công chúa nhé! ✨", "Sau này nắng có tắt, xin tay người nắm chặt... 🌤️", "Mỗi ngày đều yêu em hơn hôm qua 🥰", "Luôn mỉm cười nhé đồ ngốc! 🌸"];
-        function initLetters() {
-            const area = document.getElementById('lettersArea'); area.innerHTML = ''; 
-            lettersData.forEach((content, i) => {
-                const el = document.createElement('div'); el.className = 'falling-letter'; el.innerHTML = `💌 Thư ${i + 1}`;
-                el.style.left = Math.floor(Math.random() * 60) + 10 + '%'; el.style.animationDuration = (Math.random() * 2 + 2.5).toFixed(1) + 's';
-                el.onclick = () => { document.getElementById('modalText').innerHTML = content; document.getElementById('letterModal').classList.add('active'); }; 
-                area.appendChild(el);
-            });
-        }
-        function closeLetter() { document.getElementById('letterModal').classList.remove('active'); }
-
-        // --- 3. CARO TÌNH YÊU ---
+        // ================= LOGIC GAME CARO TÌNH YÊU =================
         let caroGrid = [], caroTurn = 'X', caroIsOver = false;
         function initCaro() {
             caroGrid = Array.from({length: 10}, () => Array(10).fill('')); caroTurn = 'X'; caroIsOver = false;
@@ -307,7 +374,7 @@
             if (caroIsOver || caroGrid[r][c] !== '') return;
             caroGrid[r][c] = caroTurn; renderCaro();
             if (checkCaroWin(r, c, caroTurn)) {
-                document.getElementById('caroMessage').innerHTML = `<span style="font-size:1.5rem">${caroTurn === 'X' ? '❌' : '💖'}</span> ĐÃ THẮNG RỒI!!! 🎉`;
+                document.getElementById('caroMessage').innerText = (caroTurn === 'X' ? '❌' : '💖') + " THẮNG RỒI ĐÓ BÉ ƠI 🎉";
                 document.getElementById('restartCaro').style.display = 'inline-block'; caroIsOver = true; return;
             }
             caroTurn = caroTurn === 'X' ? 'O' : 'X';
@@ -324,7 +391,24 @@
             } return false;
         }
 
-        // --- 4. ĐUA XE CÓA / HỔNG ---
+        // ================= CÁC GAME CÒN LẠI =================
+        function startJourney() {
+            if (!document.getElementById('answer').value.trim()) { alert("Kể gì cho anh nghe đi mà 🥺"); return; }
+            openScreen('screen2'); initLetters();
+        }
+        const lettersData = ["Anh yêu em 💖", "Luôn vui vẻ nhé! ✨", "Sau này nắng có tắt, tay vẫn nắm chặt... 🌤️", "Mỗi ngày đều thương em hơn hôm qua 🥰", "Luôn mỉm cười nhé đồ ngốc! 🌸"];
+        function initLetters() {
+            const area = document.getElementById('lettersArea'); area.innerHTML = ''; 
+            lettersData.forEach((content, i) => {
+                const el = document.createElement('div'); el.className = 'falling-letter'; el.innerHTML = `💌 Thư ${i + 1}`;
+                el.style.left = Math.floor(Math.random() * 60) + 10 + '%'; el.style.animationDuration = (Math.random() * 2 + 2.5).toFixed(1) + 's';
+                el.onclick = () => { document.getElementById('modalText').innerHTML = content; document.getElementById('letterModal').classList.add('active'); }; 
+                area.appendChild(el);
+            });
+        }
+        function closeLetter() { document.getElementById('letterModal').classList.remove('active'); }
+
+        // ĐUA XE
         let gameScore = 0, obstacles = [], carX = 50, fallSpeed = 5;
         function initGame() {
             if (isPlaying) return; document.getElementById('restartCar').style.display = 'none';
@@ -344,7 +428,7 @@
                 el.className = `obstacle ${isYes ? 'obs-yes' : 'obs-no'}`; el.innerText = isYes ? "Cóa" : "Hổng";
                 el.style.left = Math.floor(Math.random() * 60) + 10 + '%'; el.style.top = '-40px';
                 gameBox.appendChild(el); obstacles.push({ el, top: -40, isYes });
-            }, 500); // Rơi nhanh hơn chút cho vui
+            }, 600);
         }
         function updateGame() {
             if (!isPlaying) return; const carRect = document.getElementById('playerCar').getBoundingClientRect();
@@ -355,31 +439,32 @@
                 if (!(carRect.right - 10 < obsRect.left || carRect.left + 10 > obsRect.right || carRect.bottom < obsRect.top || carRect.top + 10 > obsRect.bottom)) {
                     if (obs.isYes) { 
                         gameScore++; document.getElementById('score').innerText = gameScore; 
-                        if(gameScore >= 10) { isPlaying = false; setTimeout(() => { alert("Xe đua lụa quá! Thưởng thơm cái nè 💋"); document.getElementById('restartCar').style.display='inline-block'; }, 100); }
-                    } 
-                    else { gameScore = Math.max(0, gameScore - 2); document.getElementById('score').innerText = gameScore; document.getElementById('playerCar').innerText = '💥'; setTimeout(()=>document.getElementById('playerCar').innerText='🏎️', 300); }
+                        if(gameScore >= 10) { isPlaying = false; setTimeout(() => { alert("Chạy xe lụa quá! Thưởng thơm cái nè 💋"); document.getElementById('restartCar').style.display='inline-block'; }, 100); }
+                    } else { 
+                        gameScore = Math.max(0, gameScore - 2); document.getElementById('score').innerText = gameScore; 
+                    }
                     obs.el.remove(); obstacles.splice(i, 1); continue;
                 }
                 if (obs.top > document.getElementById('gameBox').clientHeight) { obs.el.remove(); obstacles.splice(i, 1); }
             }
         }
 
-        // --- 5. TƯỜNG ẢNH KỶ NIỆM ---
+        // TƯỜNG ẢNH
         function initMemoryWall() {
             const wall = document.getElementById('memoryWall'); if(wall.innerHTML) return;
-            let mList = ['nhac1.mp3','nhac2.mp3','nhac3.mp3','nhac4.mp3','nhac5.mp3'].sort(()=>Math.random()-0.5);
-            let pList = ['anh1.jpg','anh2.jpg','anh3.jpg','anh4.jpg','anh5.jpg'];
-            let caps = ['Vô giá ❤️','My Everything ✨','Xinh xỉu 🥰','Nhớ em 🥰','Công chúa 🌸'];
-            for(let i=0; i<5; i++){
+            let mList = ['nhac1.mp3','nhac2.mp3','nhac3.mp3'].sort(()=>Math.random()-0.5);
+            let pList = ['anh1.jpg','anh2.jpg','anh3.jpg'];
+            let caps = ['Vô giá ❤️','Xinh xỉu 🥰','Công chúa 🌸'];
+            for(let i=0; i<3; i++){
                 const div = document.createElement('div'); div.className = 'floating-photo';
-                div.style.left = Math.random()*70 + 5 + 'vw'; div.style.animationDuration = Math.random()*6+8+'s'; div.style.animationDelay = Math.random()*4+'s';
+                div.style.left = Math.random()*70 + 5 + 'vw'; div.style.animationDuration = Math.random()*6+8+'s';
                 div.innerHTML = `<img src="${pList[i]}" onerror="this.src='https://images.unsplash.com/photo-1518199266791-5375a83190b7?w=300'"><div class="photo-caption">${caps[i]}</div>`;
                 div.onclick = () => { bgMusic.pause(); photoAudio.src = mList[i]; photoAudio.volume = 1; photoAudio.play().catch(()=>{}); };
                 wall.appendChild(div);
             }
         }
 
-        // --- 6. FLAPPY BIRD ---
+        // FLAPPY BIRD
         let flappyCtx = document.getElementById('flappyCanvas').getContext('2d'), bird, pipes, flappyScore, flappyIsOver;
         function initFlappy() {
             bird = { y: 150, v: 0, g: 0.35, jump: -6 }; pipes = []; flappyScore = 0; flappyIsOver = false;
@@ -388,87 +473,70 @@
             const cvs = document.getElementById('flappyCanvas'); const fly = (e) => { if(e) e.preventDefault(); if(!flappyIsOver) bird.v = bird.jump; };
             cvs.onclick = fly; cvs.ontouchstart = fly;
             function loop() {
-                flappyCtx.clearRect(0,0,280,350); 
+                flappyCtx.clearRect(0,0,280,340); 
                 bird.v += bird.g; bird.y += bird.v; if (bird.y < 20) { bird.y = 20; bird.v = 0; }
-                flappyCtx.font = '30px sans-serif'; flappyCtx.fillText('🐥', 50, bird.y);
-                if(bird.y > 330) flappyIsOver = true;
+                flappyCtx.font = '28px sans-serif'; flappyCtx.fillText('🐥', 50, bird.y);
+                if(bird.y > 320) flappyIsOver = true;
                 
                 let gapSize = flappyScore >= 5 ? 100 : 130; let pipeSpeed = flappyScore >= 10 ? 3.5 : 2;
-                if(Math.random() < 0.02) { let top = Math.random()*150 + 40; pipes.push({x:280, w:45, t:top, b:350-top-gapSize, pass:false}); }
+                if(Math.random() < 0.02) { let top = Math.random()*150 + 30; pipes.push({x:280, w:45, t:top, b:340-top-gapSize, pass:false}); }
                 
                 for(let i=pipes.length-1; i>=0; i--) {
                     let p = pipes[i]; p.x -= pipeSpeed; 
-                    flappyCtx.fillStyle = '#fff'; flappyCtx.fillRect(p.x, 0, p.w, p.t); flappyCtx.fillRect(p.x, 350-p.b, p.w, p.b); // Ống màu trắng nổi bật
-                    if(50+15 > p.x && 50 < p.x+p.w && (bird.y-15 < p.t || bird.y+10 > 350-p.b)) flappyIsOver = true;
+                    flappyCtx.fillStyle = '#fff'; flappyCtx.fillRect(p.x, 0, p.w, p.t); flappyCtx.fillRect(p.x, 340-p.b, p.w, p.b);
+                    if(50+15 > p.x && 50 < p.x+p.w && (bird.y-15 < p.t || bird.y+10 > 340-p.b)) flappyIsOver = true;
                     if(!p.pass && p.x+p.w < 50) { flappyScore++; document.getElementById('flappyScore').innerText = flappyScore; p.pass = true; }
                     if(p.x < -50) pipes.splice(i,1);
                 }
                 if(!flappyIsOver) flappyLoopId = requestAnimationFrame(loop);
-                else { flappyCtx.fillStyle = 'rgba(0,0,0,0.5)'; flappyCtx.fillRect(0,0,280,350); flappyCtx.fillStyle = '#fff'; flappyCtx.font = 'bold 26px Quicksand'; flappyCtx.fillText('Rơi mất xíu gòi 💔', 30, 170); document.getElementById('restartFlappy').style.display='inline-block'; }
+                else { flappyCtx.fillStyle = 'rgba(0,0,0,0.5)'; flappyCtx.fillRect(0,0,280,340); flappyCtx.fillStyle = '#fff'; flappyCtx.font = 'bold 24px Quicksand'; flappyCtx.fillText('Rơi mất rùi 💔', 40, 160); document.getElementById('restartFlappy').style.display='inline-block'; }
             } loop();
         }
 
-        // --- 7. RẮN SĂN MỒI ---
-        let snakeCtx = document.getElementById('snakeCanvas').getContext('2d'), snake, food, dx, dy, snakeScore, snakeSpeed = 120;
+        // RẮN SĂN MỒI
+        let snakeCtx = document.getElementById('snakeCanvas').getContext('2d'), snake, food, dx, dy, snakeScore;
         function initSnake() {
-            snake = [{x:60,y:60}, {x:45,y:60}, {x:30,y:60}]; dx=15; dy=0; snakeScore=0; snakeSpeed = 120;
+            snake = [{x:60,y:60}, {x:45,y:60}, {x:30,y:60}]; dx=15; dy=0; snakeScore=0;
             document.getElementById('snakeScore').innerText=0; document.getElementById('restartSnake').style.display='none';
-            food = {x:Math.floor(Math.random()*18)*15, y:Math.floor(Math.random()*18)*15}; runSnakeLoop();
-        }
-        function runSnakeLoop() {
+            food = {x:Math.floor(Math.random()*18)*15, y:Math.floor(Math.random()*18)*15};
             clearInterval(snakeInterval);
             snakeInterval = setInterval(() => {
                 let h = {x:snake[0].x+dx, y:snake[0].y+dy};
                 if(h.x<0||h.x>=280||h.y<0||h.y>=280||snake.some(p=>p.x===h.x&&p.y===h.y)) { clearInterval(snakeInterval); document.getElementById('restartSnake').style.display='inline-block'; return; }
                 snake.unshift(h);
-                if(h.x===food.x && h.y===food.y) { 
-                    snakeScore++; document.getElementById('snakeScore').innerText=snakeScore; 
-                    food={x:Math.floor(Math.random()*18)*15, y:Math.floor(Math.random()*18)*15}; 
-                    if(snakeSpeed > 40) { snakeSpeed -= 5; runSnakeLoop(); } 
-                } else snake.pop();
-                
+                if(h.x===food.x && h.y===food.y) { snakeScore++; document.getElementById('snakeScore').innerText=snakeScore; food={x:Math.floor(Math.random()*18)*15, y:Math.floor(Math.random()*18)*15}; } else snake.pop();
                 snakeCtx.clearRect(0,0,280,280); snakeCtx.font='18px sans-serif'; snakeCtx.fillText('❤️', food.x, food.y+14);
                 snake.forEach((p,i) => { snakeCtx.fillStyle = i===0?'#ff2a55':'#ffb3c6'; snakeCtx.beginPath(); snakeCtx.arc(p.x+7.5, p.y+7.5, 7.5, 0, Math.PI*2); snakeCtx.fill(); });
-            }, snakeSpeed);
+            }, 120);
         }
         function changeSnakeDir(dir) { if(dir==='UP'&&dy===0){dx=0;dy=-15;} else if(dir==='DOWN'&&dy===0){dx=0;dy=15;} else if(dir==='LEFT'&&dx===0){dx=-15;dy=0;} else if(dir==='RIGHT'&&dx===0){dx=15;dy=0;} }
-        
-        let touchStartX = 0, touchStartY = 0; const sCanvas = document.getElementById('snakeCanvas');
-        sCanvas.addEventListener('touchstart', e => { touchStartX = e.changedTouches[0].screenX; touchStartY = e.changedTouches[0].screenY; }, {passive: true});
-        sCanvas.addEventListener('touchend', e => {
-            let diffX = e.changedTouches[0].screenX - touchStartX, diffY = e.changedTouches[0].screenY - touchStartY;
-            if(Math.abs(diffX) > Math.abs(diffY) && Math.abs(diffX) > 30) { if(diffX > 0) changeSnakeDir('RIGHT'); else changeSnakeDir('LEFT'); } 
-            else if (Math.abs(diffY) > 30) { if(diffY > 0) changeSnakeDir('DOWN'); else changeSnakeDir('UP'); }
-        }, {passive: true});
 
-        // --- 8. BLOCK BLAST ---
-        let bGrid = [], bShapes = [], blockScore = 0, dragData = null; 
-        const SHAPES = [ [[1]], [[1,1]], [[1],[1]], [[1,1,1]], [[1],[1],[1]], [[1,1,1,1]], [[1],[1],[1],[1]], [[1,1],[1,1]], [[1,1,1],[1,1,1],[1,1,1]], [[1,0],[1,1]], [[0,1],[1,1]], [[1,1],[1,0]], [[1,1],[0,1]], [[1,0,0],[1,0,0],[1,1,1]], [[0,0,1],[0,0,1],[1,1,1]] ];
-
+        // XẾP HÌNH BLOCK BLAST
+        let bGrid = [], bShapes = [], blockScore = 0, dragData = null;
+        const SHAPES = [ [[1]], [[1,1]], [[1],[1]], [[1,1,1]], [[1],[1],[1]], [[1,1],[1,1]], [[1,0],[1,1]], [[0,1],[1,1]], [[1,1],[1,0]], [[1,1],[0,1]] ];
         function initBlockBlast() {
             bGrid = Array.from({length: 8}, () => Array(8).fill(0)); blockScore = 0;
-            document.getElementById('blockScore').innerText = blockScore; document.getElementById('restartBlock').style.display = 'none'; document.getElementById('blockMessage').innerText = "";
+            document.getElementById('blockScore').innerText = blockScore; document.getElementById('restartBlock').style.display = 'none';
             renderBlockGrid(); spawnShapes();
         }
         function renderBlockGrid() {
             const gridEl = document.getElementById('blockGrid'); gridEl.innerHTML = '';
-            for (let r = 0; r < 8; r++) {
-                for (let c = 0; c < 8; c++) {
-                    const cell = document.createElement('div'); cell.className = 'block-cell' + (bGrid[r][c] ? ' filled' : ''); gridEl.appendChild(cell);
-                }
+            for (let r = 0; r < 8; r++) for (let c = 0; c < 8; c++) {
+                const cell = document.createElement('div'); cell.className = 'block-cell' + (bGrid[r][c] ? ' filled' : ''); gridEl.appendChild(cell);
             }
         }
         function spawnShapes() {
             bShapes = []; const dock = document.getElementById('shapeDock'); dock.innerHTML = '';
             for (let i = 0; i < 3; i++) {
                 const mat = SHAPES[Math.floor(Math.random() * SHAPES.length)]; bShapes.push({ matrix: mat, used: false });
-                const el = document.createElement('div'); el.className = 'shape-container'; el.style.gridTemplateColumns = `repeat(${mat[0].length}, 16px)`;
+                const el = document.createElement('div'); el.className = 'shape-container'; el.style.gridTemplateColumns = `repeat(${mat[0].length}, 15px)`;
                 for (let r = 0; r < mat.length; r++) for (let c = 0; c < mat[0].length; c++) {
                     const mini = document.createElement('div'); mini.className = 'shape-mini-cell' + (mat[r][c] ? '' : ' empty'); el.appendChild(mini);
                 }
-                el.addEventListener('touchstart', (e) => handleDragStart(e, i, el), {passive: false}); el.addEventListener('mousedown', (e) => handleDragStart(e, i, el));
+                el.addEventListener('touchstart', (e) => handleDragStart(e, i, el), {passive: false});
+                el.addEventListener('mousedown', (e) => handleDragStart(e, i, el));
                 dock.appendChild(el);
-            } checkBlockGameOver();
+            }
         }
         function handleDragStart(e, idx, originEl) {
             if(bShapes[idx].used) return;
@@ -476,57 +544,28 @@
             const rect = originEl.getBoundingClientRect(); const clone = originEl.cloneNode(true);
             clone.classList.add('drag-clone'); clone.style.left = rect.left + 'px'; clone.style.top = rect.top + 'px';
             document.body.appendChild(clone); originEl.style.opacity = '0';
-            dragData = { idx: idx, clone: clone, originEl: originEl, offsetX: clientX - rect.left, offsetY: clientY - rect.top };
+            dragData = { idx, clone, originEl, offsetX: clientX - rect.left, offsetY: clientY - rect.top };
         }
-        document.addEventListener('touchmove', e => { if(!dragData) return; e.preventDefault(); updateClonePosition(e.touches[0].clientX, e.touches[0].clientY); }, {passive: false});
-        document.addEventListener('mousemove', e => { if(!dragData) return; e.preventDefault(); updateClonePosition(e.clientX, e.clientY); });
-        function updateClonePosition(x, y) { dragData.clone.style.left = (x - dragData.offsetX) + 'px'; dragData.clone.style.top = (y - dragData.offsetY - 70) + 'px'; } // Offset ngón tay
-        
+        document.addEventListener('touchmove', e => { if(!dragData) return; e.preventDefault(); dragData.clone.style.left = (e.touches[0].clientX - dragData.offsetX) + 'px'; dragData.clone.style.top = (e.touches[0].clientY - dragData.offsetY - 60) + 'px'; }, {passive: false});
+        document.addEventListener('mousemove', e => { if(!dragData) return; dragData.clone.style.left = (e.clientX - dragData.offsetX) + 'px'; dragData.clone.style.top = (e.clientY - dragData.offsetY - 60) + 'px'; });
         document.addEventListener('touchend', handleDragEnd); document.addEventListener('mouseup', handleDragEnd);
         function handleDragEnd() {
             if(!dragData) return;
             const cRect = dragData.clone.getBoundingClientRect(), gRect = document.getElementById('blockGrid').getBoundingClientRect();
-            let c = Math.floor(((cRect.left + 16) - gRect.left) / 35), r = Math.floor(((cRect.top + 16) - gRect.top) / 35);
-            let isPlaced = false;
-            if (r >= 0 && r < 8 && c >= 0 && c < 8) isPlaced = tryPlaceShape(r, c, dragData.idx);
-
-            if(isPlaced) {
-                dragData.originEl.style.display = 'none'; bShapes[dragData.idx].used = true;
-                checkBlockLines(); renderBlockGrid();
-                if (bShapes.every(s => s.used)) setTimeout(spawnShapes, 300); else checkBlockGameOver();
+            let c = Math.floor(((cRect.left + 15) - gRect.left) / 32), r = Math.floor(((cRect.top + 15) - gRect.top) / 32);
+            let s = bShapes[dragData.idx].matrix, canPlace = true;
+            if (r >= 0 && r + s.length <= 8 && c >= 0 && c + s[0].length <= 8) {
+                for (let sr = 0; sr < s.length; sr++) for (let sc = 0; sc < s[0].length; sc++) if (s[sr][sc] && bGrid[r + sr][c + sc]) canPlace = false;
+                if(canPlace) {
+                    for (let sr = 0; sr < s.length; sr++) for (let sc = 0; sc < s[0].length; sc++) if (s[sr][sc]) { bGrid[r + sr][c + sc] = 1; blockScore++; }
+                    dragData.originEl.style.display = 'none'; bShapes[dragData.idx].used = true;
+                    // Xóa hàng cột full
+                    for(let i=0; i<8; i++) { if(bGrid[i].every(v=>v===1)) { for(let j=0;j<8;j++) bGrid[i][j]=0; blockScore+=10; } }
+                    renderBlockGrid(); document.getElementById('blockScore').innerText = blockScore;
+                    if (bShapes.every(s => s.used)) setTimeout(spawnShapes, 300);
+                } else { dragData.originEl.style.opacity = '1'; }
             } else { dragData.originEl.style.opacity = '1'; }
             dragData.clone.remove(); dragData = null;
-        }
-        function tryPlaceShape(r, c, idx) {
-            const s = bShapes[idx].matrix; if (r + s.length > 8 || c + s[0].length > 8) return false;
-            for (let sr = 0; sr < s.length; sr++) for (let sc = 0; sc < s[0].length; sc++) if (s[sr][sc] && bGrid[r + sr][c + sc]) return false; 
-            for (let sr = 0; sr < s.length; sr++) for (let sc = 0; sc < s[0].length; sc++) if (s[sr][sc]) { bGrid[r + sr][c + sc] = 1; blockScore++; }
-            return true;
-        }
-        function checkBlockLines() {
-            let linesR = [], linesC = [];
-            for (let r = 0; r < 8; r++) if (bGrid[r].every(v => v === 1)) linesR.push(r);
-            for (let c = 0; c < 8; c++) { let full = true; for (let r = 0; r < 8; r++) if (bGrid[r][c] === 0) full = false; if (full) linesC.push(c); }
-            if (linesR.length > 0 || linesC.length > 0) {
-                linesR.forEach(r => { for (let c = 0; c < 8; c++) bGrid[r][c] = 0; });
-                linesC.forEach(c => { for (let r = 0; r < 8; r++) bGrid[r][c] = 0; });
-                const combo = linesR.length + linesC.length; blockScore += combo * 10;
-                document.getElementById('blockMessage').innerText = combo > 1 ? `Combo x${combo} 💖` : "Giỏi quá! ✨";
-                setTimeout(() => document.getElementById('blockMessage').innerText="", 1500);
-                document.getElementById('blockScore').innerText = blockScore;
-            }
-        }
-        function checkBlockGameOver() {
-            let canPlace = false;
-            for (let i = 0; i < 3; i++) {
-                if (bShapes[i].used) continue; const s = bShapes[i].matrix;
-                for (let r = 0; r <= 8 - s.length; r++) for (let c = 0; c <= 8 - s[0].length; c++) {
-                    let fit = true;
-                    for (let sr = 0; sr < s.length; sr++) for (let sc = 0; sc < s[0].length; sc++) if (s[sr][sc] && bGrid[r + sr][c + sc]) fit = false;
-                    if (fit) { canPlace = true; break; }
-                } if (canPlace) break;
-            }
-            if (!canPlace && !bShapes.every(s => s.used)) { document.getElementById('blockMessage').innerText = "Hết chỗ đặt rồi 🥺"; document.getElementById('restartBlock').style.display = 'inline-block'; }
         }
     </script>
 </body>
