@@ -23,6 +23,7 @@
             padding: 20px;
             overflow-x: hidden;
             position: relative;
+            touch-action: none; /* Tránh việc vuốt vô tình làm cuộn trang khi chơi game */
         }
 
         @keyframes gradientBG {
@@ -210,47 +211,21 @@
 
         /* MÀN 2: THƯ RƠI */
         .letters-area {
-            width: 100%;
-            height: 250px;
-            background: rgba(255,255,255,0.4);
-            border-radius: 20px;
-            position: relative;
-            overflow: hidden;
-            margin-bottom: 15px;
-            border: 1px solid rgba(255,255,255,0.6);
+            width: 100%; height: 250px; background: rgba(255,255,255,0.4);
+            border-radius: 20px; position: relative; overflow: hidden; margin-bottom: 15px; border: 1px solid rgba(255,255,255,0.6);
         }
         .falling-letter {
-            position: absolute;
-            background: linear-gradient(135deg, #fff, #ffe6eb);
-            border: 2px solid #ff4d6d;
-            border-radius: 12px;
-            padding: 10px 15px;
-            cursor: pointer;
-            font-weight: bold;
-            color: #ff4d6d;
-            font-size: 0.95rem;
-            box-shadow: 0 5px 15px rgba(255,77,109,0.2);
-            animation: fallAnimation linear infinite;
-            transition: transform 0.2s;
+            position: absolute; background: linear-gradient(135deg, #fff, #ffe6eb); border: 2px solid #ff4d6d;
+            border-radius: 12px; padding: 10px 15px; cursor: pointer; font-weight: bold; color: #ff4d6d; font-size: 0.95rem;
+            box-shadow: 0 5px 15px rgba(255,77,109,0.2); animation: fallAnimation linear infinite; transition: transform 0.2s;
         }
         .falling-letter:hover { transform: scale(1.1) rotate(5deg); z-index: 50; }
-
-        @keyframes fallAnimation {
-            0% { top: -50px; opacity: 0; }
-            10% { opacity: 1; }
-            90% { opacity: 1; }
-            100% { top: 260px; opacity: 0; }
-        }
+        @keyframes fallAnimation { 0% { top: -50px; opacity: 0; } 10% { opacity: 1; } 90% { opacity: 1; } 100% { top: 260px; opacity: 0; } }
 
         .read-list { display: flex; flex-wrap: wrap; gap: 8px; justify-content: center; margin-bottom: 15px; }
         .read-badge {
-            background: rgba(255, 255, 255, 0.8);
-            border: 1px solid #ffb3c6;
-            color: #ff4d6d;
-            padding: 5px 12px;
-            border-radius: 20px;
-            font-size: 0.85rem;
-            font-weight: bold;
+            background: rgba(255, 255, 255, 0.8); border: 1px solid #ffb3c6; color: #ff4d6d;
+            padding: 5px 12px; border-radius: 20px; font-size: 0.85rem; font-weight: bold;
         }
 
         /* POPUP THƯ */
@@ -261,17 +236,13 @@
         }
         .letter-modal.active { display: flex; animation: fadeIn 0.3s; }
         .modal-box {
-            background: rgba(255, 255, 255, 0.95); padding: 30px 25px;
-            border-radius: 25px; width: 85%; max-width: 350px; position: relative;
-            border: 3px solid #ff4d6d; box-shadow: 0 15px 35px rgba(255,77,109,0.3);
-            transform: scale(0.8); animation: bounceIn 0.4s forwards;
+            background: rgba(255, 255, 255, 0.95); padding: 30px 25px; border-radius: 25px; width: 85%; max-width: 350px; position: relative;
+            border: 3px solid #ff4d6d; box-shadow: 0 15px 35px rgba(255,77,109,0.3); transform: scale(0.8); animation: bounceIn 0.4s forwards;
         }
         @keyframes bounceIn { to { transform: scale(1); } }
         .close-btn {
-            position: absolute; top: -10px; right: -10px;
-            background: #ff4d6d; color: white; border: 2px solid white;
-            width: 35px; height: 35px; border-radius: 50%; font-weight: bold; cursor: pointer;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.2); transition: 0.3s;
+            position: absolute; top: -10px; right: -10px; background: #ff4d6d; color: white; border: 2px solid white;
+            width: 35px; height: 35px; border-radius: 50%; font-weight: bold; cursor: pointer; box-shadow: 0 4px 10px rgba(0,0,0,0.2); transition: 0.3s;
         }
         .close-btn:hover { transform: scale(1.1) rotate(90deg); }
         .modal-text { font-size: 1.15rem; line-height: 1.6; color: #d6336c; font-weight: bold; }
@@ -297,18 +268,6 @@
         .obstacle { position: absolute; padding: 6px 12px; border-radius: 20px; font-weight: bold; font-size: 1rem; z-index: 5; }
         .obs-yes { background: linear-gradient(45deg, #ff4d6d, #ff8fa3); color: white; border: 2px solid white; box-shadow: 0 5px 15px rgba(255,77,109,0.5); }
         .obs-no { background: linear-gradient(45deg, #2b2d42, #8d99ae); color: white; border: 2px solid white; box-shadow: 0 5px 15px rgba(0,0,0,0.5); }
-
-        /* GAME CARO */
-        .caro-wrapper {
-            width: 100%; height: 320px; background: rgba(255,255,255,0.8);
-            border: 2px solid #ffb3c6; border-radius: 15px; overflow: auto; position: relative;
-        }
-        .caro-board { display: grid; gap: 2px; background: #ff8fa3; padding: 2px; width: fit-content; border-radius: 8px; }
-        .caro-cell {
-            width: 34px; height: 34px; background: white; display: flex; justify-content: center; align-items: center;
-            font-size: 1.4rem; cursor: pointer; border-radius: 4px; transition: 0.2s;
-        }
-        .caro-cell:hover { background: #ffe6eb; transform: scale(0.95); }
 
         /* MÀN HÌNH TƯỜNG ẢNH */
         #screen4 {
@@ -352,14 +311,11 @@
             width: fit-content;
         }
         .block-cell {
-            width: 30px;
-            height: 30px;
+            width: 30px; height: 30px;
             background: rgba(255, 255, 255, 0.8);
             border-radius: 4px;
             transition: all 0.2s;
-            cursor: pointer;
         }
-        .block-cell:hover { background: rgba(255, 255, 255, 1); }
         .block-cell.filled {
             background: linear-gradient(135deg, #ff4d6d, #ff8fa3);
             box-shadow: inset 0 0 5px rgba(0,0,0,0.1), 0 2px 4px rgba(255,77,109,0.3);
@@ -368,80 +324,58 @@
         }
         
         .shape-dock {
-            display: flex;
-            justify-content: center;
-            gap: 15px;
-            margin-top: 10px;
-            height: 90px;
-            align-items: center;
+            display: flex; justify-content: center; gap: 15px; margin-top: 10px; height: 90px; align-items: center;
         }
         .shape-container {
-            display: grid;
-            gap: 2px;
-            cursor: pointer;
-            padding: 8px;
-            border-radius: 8px;
-            border: 2px solid transparent;
-            transition: 0.2s;
-            background: rgba(255,255,255,0.4);
+            display: grid; gap: 2px; cursor: grab; padding: 8px; border-radius: 8px;
+            border: 2px solid transparent; background: rgba(255,255,255,0.4);
+            transition: opacity 0.2s;
         }
-        .shape-container.selected {
-            border-color: #ff2a55;
-            background: rgba(255, 255, 255, 0.8);
-            transform: scale(1.15) translateY(-5px);
-            box-shadow: 0 10px 15px rgba(255,77,109,0.2);
-        }
+        .shape-container:active { cursor: grabbing; }
+        
+        /* Hiệu ứng mờ khối gốc khi đang kéo */
+        .shape-container.dragging { opacity: 0; pointer-events: none; }
         .shape-container.used { opacity: 0; pointer-events: none; transform: scale(0.5); }
+        
+        /* CSS cho bản sao khối đang kéo thả */
+        .drag-clone {
+            position: fixed !important;
+            z-index: 9999;
+            pointer-events: none;
+            transform: scale(1.3); /* Phóng to lên chút cho dễ nhìn */
+            filter: drop-shadow(0 15px 15px rgba(255,77,109,0.5));
+            margin: 0 !important;
+        }
+
         .shape-mini-cell {
-            width: 14px;
-            height: 14px;
+            width: 14px; height: 14px;
             background: linear-gradient(135deg, #ff4d6d, #ff8fa3);
-            border-radius: 3px;
-            border: 1px solid #ff2a55;
+            border-radius: 3px; border: 1px solid #ff2a55;
         }
         .shape-mini-cell.empty { background: transparent; border: none; }
     </style>
 </head>
 <body>
 
-    <!-- BONG BÓNG BACKGROUND -->
     <div class="bg-bubbles" id="bgBubbles"></div>
-
     <audio id="bgMusic" loop><source src="nhac.mp3" type="audio/mpeg"></audio>
     <audio id="photoAudio"></audio>
 
-    <!-- DASHBOARD CHÍNH -->
     <div id="menuScreen" class="screen active">
         <h2 style="margin-top: 0; font-size: 3rem;">Trạm Tình Yêu 💖</h2>
         <p style="font-size: 1rem; color: #555; margin-bottom: 10px; font-weight: bold;">Hôm nay cục cưng muốn chơi gì nào?</p>
         
         <div class="menu-grid">
-            <button class="menu-btn" onclick="openScreen('screen1')">
-                <span>💌</span> Lời nhắn
-            </button>
-            <button class="menu-btn" onclick="openScreen('screen7'); initBlockBlast();">
-                <span>🧩</span> Xếp Hình
-            </button>
-            <button class="menu-btn" onclick="openScreen('screen3'); initGame();">
-                <span>🚗</span> Đua Xe
-            </button>
-            <button class="menu-btn" onclick="openScreen('screen-caro'); initCaro();">
-                <span>⭕</span> Cờ Caro
-            </button>
-            <button class="menu-btn" onclick="openScreen('screen4')">
-                <span>🌌</span> Kỷ Niệm
-            </button>
-            <button class="menu-btn" onclick="openScreen('screen5'); initFlappy();">
-                <span>🐥</span> Flappy
-            </button>
-            <button class="menu-btn" onclick="openScreen('screen6'); initSnake();">
-                <span>🐍</span> Săn Mồi
-            </button>
+            <button class="menu-btn" onclick="openScreen('screen1')"><span>💌</span> Lời nhắn</button>
+            <button class="menu-btn" onclick="openScreen('screen7'); initBlockBlast();"><span>🧩</span> Xếp Hình</button>
+            <button class="menu-btn" onclick="openScreen('screen3'); initGame();"><span>🚗</span> Đua Xe</button>
+            <button class="menu-btn" onclick="openScreen('screen4')"><span>🌌</span> Kỷ Niệm</button>
+            <button class="menu-btn" onclick="openScreen('screen5'); initFlappy();"><span>🐥</span> Flappy</button>
+            <button class="menu-btn" onclick="openScreen('screen6'); initSnake();"><span>🐍</span> Săn Mồi</button>
         </div>
     </div>
 
-    <!-- CÁC MÀN HÌNH KHÁC ĐƯỢC GIỮ NGUYÊN BÊN DƯỚI -->
-
+    <!-- MÀN 1 -->
     <div id="screen1" class="screen">
         <button class="back-btn" onclick="returnToMenu()">🏠 Trở về</button>
         <h2>Ngày hôm nay của bé như thế nào?</h2>
@@ -449,6 +383,7 @@
         <button class="btn" onclick="startJourney()">Gửi cho anh yêu ✨</button>
     </div>
 
+    <!-- MÀN 2 -->
     <div id="screen2" class="screen">
         <button class="back-btn" onclick="returnToMenu()">🏠 Trở về</button>
         <h2>Lời nhắn từ bầu trời ☁️</h2>
@@ -464,32 +399,16 @@
         </div>
     </div>
 
+    <!-- ĐUA XE -->
     <div id="screen3" class="screen">
         <button class="back-btn" onclick="returnToMenu()">🏠 Trở về</button>
         <h2>Lái Xe Tình Yêu 🚗</h2>
         <p style="font-size: 0.9rem; font-weight: bold; color: #ff2a55; margin-bottom: 10px;">Lấy 5 chữ "Cóa" ❤️ | Né chữ "Hổng" | Điểm: <span id="score">0</span>/5</p>
-        <div class="game-container">
-            <div class="game-box" id="gameBox">
-                <div class="car-obj" id="playerCar">🏎️</div>
-            </div>
-        </div>
-        <p style="font-size: 0.8rem; color: #777;">(Trượt trái/phải để né chướng ngại vật)</p>
+        <div class="game-container"><div class="game-box" id="gameBox"><div class="car-obj" id="playerCar">🏎️</div></div></div>
         <button class="btn" id="restartCar" style="display:none;" onclick="initGame()">Chơi lại 🔄</button>
     </div>
 
-    <div id="screen-caro" class="screen">
-        <button class="back-btn" onclick="returnToMenu()">🏠 Trở về</button>
-        <h2>Cờ Caro Yêu Thương ⭕</h2>
-        <p style="font-size: 0.9rem; color: #666; margin-bottom: 10px; font-weight: bold;">Bé là ❤️, Máy là ⭐ (Vuốt để xem bàn cờ)</p>
-        <div class="game-container">
-            <div class="caro-wrapper" id="caroWrapper">
-                <div class="caro-board" id="caroBoard"></div>
-            </div>
-        </div>
-        <p id="caroMessage" style="font-size: 1.1rem; font-weight: bold; color: #ff2a55; height: 25px;"></p>
-        <button class="btn" id="btnRetryCaro" onclick="initCaro()" style="display: none;">Đấu lại nhé ⚔️</button>
-    </div>
-
+    <!-- TƯỜNG ẢNH -->
     <div id="screen4" class="screen">
         <button class="back-btn" onclick="returnToMenu()">🏠 Trở về</button>
         <div class="memory-wall" id="memoryWall"></div>
@@ -499,14 +418,16 @@
         </div>
     </div>
 
+    <!-- FLAPPY -->
     <div id="screen5" class="screen">
         <button class="back-btn" onclick="returnToMenu()">🏠 Trở về</button>
-        <h2>Chim Cút Yêu Thương 🐥</h2>
+        <h2>Chim Cút Đáng Yêu 🐥</h2>
         <p style="font-size: 0.9rem; font-weight: bold; color: #ff2a55;">Chạm để bay | Điểm: <span id="flappyScore">0</span></p>
         <div class="game-container"><canvas id="flappyCanvas" width="280" height="350"></canvas></div>
         <button class="btn" id="restartFlappy" style="display:none;" onclick="initFlappy()">Bay lại nào 🔄</button>
     </div>
 
+    <!-- RẮN SĂN MỒI -->
     <div id="screen6" class="screen">
         <button class="back-btn" onclick="returnToMenu()">🏠 Trở về</button>
         <h2>Rắn Săn Tim ❤️</h2>
@@ -521,11 +442,11 @@
         <button class="btn" id="restartSnake" style="display:none; margin-top: 15px;" onclick="initSnake()">Bắt đầu lại 🔄</button>
     </div>
 
-    <!-- MÀN BLOCK BLAST MỚI -->
+    <!-- BLOCK BLAST -->
     <div id="screen7" class="screen">
         <button class="back-btn" onclick="returnToMenu()">🏠 Trở về</button>
-        <h2>Xếp Hình Tình Yêu 🧩</h2>
-        <p style="font-size: 0.9rem; font-weight: bold; color: #ff2a55; margin-bottom: 5px;">Chọn khối ở dưới ⬇️ rồi chạm vào bàn cờ để đặt</p>
+        <h2>Xếp Hình 🧩</h2>
+        <p style="font-size: 0.9rem; font-weight: bold; color: #ff2a55; margin-bottom: 5px;">Kéo và thả khối vào bàn cờ nhé</p>
         <p style="font-size: 1.1rem; font-weight: bold; color: #d6336c;">Điểm: <span id="blockScore">0</span> 💖</p>
         
         <div class="game-container" style="padding: 15px;">
@@ -538,78 +459,48 @@
     </div>
 
     <script>
-        // TẠO BONG BÓNG NỀN
+        // CÁC SỰ KIỆN GIAO DIỆN CHUNG
         const bgContainer = document.getElementById('bgBubbles');
         for(let i=0; i<15; i++){
-            let b = document.createElement('div');
-            b.className = 'bubble';
-            b.style.width = Math.random()*60 + 20 + 'px';
-            b.style.height = b.style.width;
-            b.style.left = Math.random()*100 + 'vw';
-            b.style.animationDuration = Math.random()*8 + 5 + 's';
-            b.style.animationDelay = Math.random()*5 + 's';
-            bgContainer.appendChild(b);
+            let b = document.createElement('div'); b.className = 'bubble';
+            b.style.width = Math.random()*60 + 20 + 'px'; b.style.height = b.style.width;
+            b.style.left = Math.random()*100 + 'vw'; b.style.animationDuration = Math.random()*8 + 5 + 's';
+            b.style.animationDelay = Math.random()*5 + 's'; bgContainer.appendChild(b);
         }
 
         document.addEventListener('click', function(e) {
-            if(e.target.tagName === 'CANVAS' || e.target.classList.contains('ctrl-btn') || e.target.classList.contains('block-cell')) return;
-            let el = document.createElement('div');
-            el.className = 'click-sparkle';
-            const sparks = ['✨', '💖', '🌸', '💫'];
-            el.innerText = sparks[Math.floor(Math.random() * sparks.length)];
-            el.style.left = e.pageX + 'px'; el.style.top = e.pageY + 'px';
-            document.body.appendChild(el);
+            if(e.target.tagName === 'CANVAS' || e.target.classList.contains('ctrl-btn')) return;
+            let el = document.createElement('div'); el.className = 'click-sparkle';
+            const sparks = ['✨', '💖', '🌸', '💫']; el.innerText = sparks[Math.floor(Math.random() * sparks.length)];
+            el.style.left = e.pageX + 'px'; el.style.top = e.pageY + 'px'; document.body.appendChild(el);
             setTimeout(() => el.remove(), 1000);
         });
 
-        // AUDIO
-        let musicStarted = false;
-        const bgMusic = document.getElementById('bgMusic');
-        const photoAudio = document.getElementById('photoAudio');
+        let musicStarted = false; const bgMusic = document.getElementById('bgMusic'), photoAudio = document.getElementById('photoAudio');
+        function playMusic() { if (!musicStarted) { bgMusic.volume = 0.4; bgMusic.play().catch(()=>{}); musicStarted = true; } }
 
-        function playMusic() {
-            if (!musicStarted) {
-                bgMusic.volume = 0.4;
-                bgMusic.play().catch(() => console.log("Cần click để phát nhạc"));
-                musicStarted = true;
-            }
-        }
-
-        // ĐIỀU HƯỚNG
         function openScreen(screenId) {
-            playMusic();
-            document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+            playMusic(); document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
             document.getElementById(screenId).classList.add('active');
-            if(screenId === 'screen4') initMemoryWall();
-            else photoAudio.pause(); 
+            if(screenId === 'screen4') initMemoryWall(); else photoAudio.pause(); 
         }
 
         function stopAllGames() {
             isPlaying = false; clearInterval(gameInterval); clearInterval(obstacleInterval);
             flappyIsOver = true; if (flappyLoopId) cancelAnimationFrame(flappyLoopId);
-            clearInterval(snakeInterval);
-            photoAudio.pause();
+            clearInterval(snakeInterval); photoAudio.pause();
         }
-
         function returnToMenu() { stopAllGames(); openScreen('menuScreen'); }
 
-        // MÀN 1 & MÀN 2 (GIỮ NGUYÊN)
+        // MÀN 1 & MÀN 2
         function startJourney() {
             if (document.getElementById('answer').value.trim() === '') { alert("Viết cho anh vài dòng đi mà 🥺"); return; }
             openScreen('screen2'); initLetters();
         }
-
-        const lettersData = [
-            "Sau này nắng có tắt<br>Mây kia có bạc màu<br>Xin tay người nắm chặt<br>Đừng để mình lạc nhau. 🌤️",
-            "Anh như là con kiến<br>Trong thủ đô vội vàng<br>1000 năm Văn Hiến<br>1000 năm yêu nàng ❤️",
-            "Gọi em là người tình, nàng xuân<br>Vì anh thấy cả tuần nàng xinh ✨",
-            "Nếu em là lá<br>Tôi sẽ đứng dưới tán em 🍃",
-            "Yên tâm, ông già này luôn tìm cách để mỗi ngày của em đều vui. Yêu em! 🫂"
-        ];
+        const lettersData = ["Sau này nắng có tắt<br>Mây kia có bạc màu<br>Xin tay người nắm chặt<br>Đừng để mình lạc nhau. 🌤️","Anh như là con kiến<br>Trong thủ đô vội vàng<br>1000 năm Văn Hiến<br>1000 năm yêu nàng ❤️","Gọi em là người tình, nàng xuân<br>Vì anh thấy cả tuần nàng xinh ✨","Nếu em là lá<br>Tôi sẽ đứng dưới tán em 🍃","Yên tâm, ông già này luôn tìm cách để mỗi ngày của em đều vui. Yêu em! 🫂"];
         let readCount = 0;
-
         function initLetters() {
-            const area = document.getElementById('lettersArea'); const list = document.getElementById('readList');
+            const area = document.getElementById('lettersArea'), list = document.getElementById('readList');
             area.innerHTML = ''; list.innerHTML = ''; readCount = 0; document.getElementById('nextToGameBtn').disabled = true;
             lettersData.forEach((content, i) => {
                 const el = document.createElement('div'); el.className = 'falling-letter'; el.innerHTML = `💌 Thư ${i + 1}`;
@@ -620,131 +511,47 @@
                     document.getElementById('letterModal').classList.add('active'); el.style.display = 'none';
                     const badge = document.createElement('div'); badge.className = 'read-badge'; badge.innerText = `Thư ${i+1} ✓`;
                     list.appendChild(badge); readCount++; if (readCount >= 5) document.getElementById('nextToGameBtn').disabled = false;
-                };
-                area.appendChild(el);
+                }; area.appendChild(el);
             });
         }
         function closeLetter() { document.getElementById('letterModal').classList.remove('active'); }
 
-        // ĐUA XE (GIỮ NGUYÊN)
+        // ĐUA XE
         let gameInterval, obstacleInterval, gameScore = 0, obstacles = [], isPlaying = false, carX = 50;
         const gameBox = document.getElementById('gameBox'), playerCar = document.getElementById('playerCar'), scoreSpan = document.getElementById('score');
         function initGame() {
-            if (isPlaying) return;
-            document.getElementById('restartCar').style.display = 'none';
-            isPlaying = true; gameScore = 0; scoreSpan.innerText = gameScore; carX = 50; playerCar.style.left = carX + '%';
-            obstacles.forEach(o => o.el.remove()); obstacles = [];
+            if (isPlaying) return; document.getElementById('restartCar').style.display = 'none';
+            isPlaying = true; gameScore = 0; scoreSpan.innerText = gameScore; carX = 50; playerCar.style.left = carX + '%'; obstacles.forEach(o => o.el.remove()); obstacles = [];
             const handleMove = (e) => {
                 e.preventDefault(); let clientX = e.clientX || (e.touches && e.touches[0].clientX);
                 let percent = ((clientX - gameBox.getBoundingClientRect().left) / gameBox.offsetWidth) * 100;
                 carX = Math.max(10, Math.min(90, percent)); playerCar.style.left = carX + '%';
             };
             gameBox.onmousemove = handleMove; gameBox.ontouchmove = handleMove;
-            clearInterval(gameInterval); clearInterval(obstacleInterval);
-            gameInterval = setInterval(updateGame, 20);
+            clearInterval(gameInterval); clearInterval(obstacleInterval); gameInterval = setInterval(updateGame, 20);
             obstacleInterval = setInterval(() => {
                 if (!isPlaying) return;
                 const isYes = Math.random() < 0.5; const el = document.createElement('div');
                 el.className = `obstacle ${isYes ? 'obs-yes' : 'obs-no'}`; el.innerText = isYes ? "Cóa" : "Hổng";
-                const left = Math.floor(Math.random() * 60) + 10; el.style.left = left + '%'; el.style.top = '-40px';
+                el.style.left = Math.floor(Math.random() * 60) + 10 + '%'; el.style.top = '-40px';
                 gameBox.appendChild(el); obstacles.push({ el, top: -40, isYes });
             }, 800);
         }
         function updateGame() {
-            if (!isPlaying) return;
-            const carRect = playerCar.getBoundingClientRect();
+            if (!isPlaying) return; const carRect = playerCar.getBoundingClientRect();
             for (let i = obstacles.length - 1; i >= 0; i--) {
                 let obs = obstacles[i]; obs.top += 5; obs.el.style.top = obs.top + 'px';
                 const obsRect = obs.el.getBoundingClientRect();
                 if (!(carRect.right < obsRect.left || carRect.left > obsRect.right || carRect.bottom < obsRect.top || carRect.top > obsRect.bottom)) {
-                    if (obs.isYes) {
-                        gameScore++; scoreSpan.innerText = gameScore;
-                        if (gameScore >= 5) {
-                            isPlaying = false; setTimeout(() => { alert("Giỏi quá chừng! Thưởng thơm 1 cái 💋"); document.getElementById('restartCar').style.display = 'inline-block'; }, 100);
-                        }
-                    } else {
-                        gameScore = Math.max(0, gameScore - 2); scoreSpan.innerText = gameScore;
-                        playerCar.innerText = '💥'; setTimeout(()=>playerCar.innerText='🏎️', 300);
-                    }
+                    if (obs.isYes) { gameScore++; scoreSpan.innerText = gameScore; if (gameScore >= 5) { isPlaying = false; setTimeout(() => { alert("Giỏi quá chừng! Thưởng thơm 1 cái 💋"); document.getElementById('restartCar').style.display = 'inline-block'; }, 100); } } 
+                    else { gameScore = Math.max(0, gameScore - 2); scoreSpan.innerText = gameScore; playerCar.innerText = '💥'; setTimeout(()=>playerCar.innerText='🏎️', 300); }
                     obs.el.remove(); obstacles.splice(i, 1); continue;
                 }
                 if (obs.top > gameBox.clientHeight) { obs.el.remove(); obstacles.splice(i, 1); }
             }
         }
 
-        // CỜ CARO (GIỮ NGUYÊN)
-        const caroSize = 30; let caroState = [], caroGameOver = false, isBotThinking = false;
-        function initCaro() {
-            const board = document.getElementById('caroBoard'); board.innerHTML = '';
-            board.style.gridTemplateColumns = `repeat(${caroSize}, 34px)`;
-            caroState = Array.from({length: caroSize}, () => Array(caroSize).fill(0));
-            caroGameOver = false; isBotThinking = false;
-            document.getElementById('caroMessage').innerText = "Tới lượt bé yêu đi đó!";
-            document.getElementById('btnRetryCaro').style.display = "none";
-            for (let r = 0; r < caroSize; r++) {
-                for (let c = 0; c < caroSize; c++) {
-                    const cell = document.createElement('div'); cell.className = 'caro-cell'; cell.id = `c-${r}-${c}`;
-                    cell.onclick = () => {
-                        if (caroGameOver || isBotThinking || caroState[r][c] !== 0) return;
-                        caroState[r][c] = 1; cell.innerText = '❤️'; cell.style.background = '#ffe6eb';
-                        if (checkWinCaro(r, c, 1)) { caroGameOver = true; document.getElementById('caroMessage').innerText = "Vợ thắng rồi! Quá dữ 🎉"; document.getElementById('btnRetryCaro').style.display = "inline-block"; return; }
-                        isBotThinking = true; document.getElementById('caroMessage').innerText = "Đợi tí chồng nghĩ coi...";
-                        setTimeout(() => {
-                            if (caroGameOver) return;
-                            let best = [], maxScore = -Infinity;
-                            for (let i = 0; i < caroSize; i++) {
-                                for (let j = 0; j < caroSize; j++) {
-                                    if (caroState[i][j] === 0) {
-                                        let s = evaluate(i, j);
-                                        if (s > maxScore) { maxScore = s; best = [{r: i, c: j}]; } 
-                                        else if (s === maxScore) best.push({r: i, c: j});
-                                    }
-                                }
-                            }
-                            let move = best[Math.floor(Math.random()*best.length)] || {r:15,c:15};
-                            caroState[move.r][move.c] = 2; document.getElementById(`c-${move.r}-${move.c}`).innerText = '⭐';
-                            if (checkWinCaro(move.r, move.c, 2)) { caroGameOver = true; document.getElementById('caroMessage').innerText = "Máy thắng mất ròi bé ơi 😭"; document.getElementById('btnRetryCaro').style.display = "inline-block"; return; }
-                            isBotThinking = false; document.getElementById('caroMessage').innerText = "Tới bé kìa!";
-                        }, 500);
-                    };
-                    board.appendChild(cell);
-                }
-            }
-            setTimeout(() => {
-                const w = document.getElementById('caroWrapper');
-                w.scrollTop = (w.scrollHeight - w.clientHeight)/2; w.scrollLeft = (w.scrollWidth - w.clientWidth)/2;
-            }, 50);
-        }
-        function evaluate(r, c) {
-            let score = 0; const directions = [[1, 0], [0, 1], [1, 1], [1, -1]];
-            for (let [dr, dc] of directions) {
-                let attackScore = evaluateCaroLine(r, c, dr, dc, 2);
-                let defenseScore = evaluateCaroLine(r, c, dr, dc, 1);
-                score += attackScore + defenseScore * 1.5; 
-            }
-            return score + Math.random(); 
-        }
-        function evaluateCaroLine(r, c, dr, dc, player) {
-            let count = 1, open = 2, nr = r + dr, nc = c + dc;
-            while (nr >= 0 && nr < caroSize && nc >= 0 && nc < caroSize && caroState[nr][nc] === player) { count++; nr += dr; nc += dc; }
-            if (nr < 0 || nr >= caroSize || nc < 0 || nc >= caroSize || caroState[nr][nc] !== 0) open--;
-            nr = r - dr; nc = c - dc;
-            while (nr >= 0 && nr < caroSize && nc >= 0 && nc < caroSize && caroState[nr][nc] === player) { count++; nr -= dr; nc -= dc; }
-            if (nr < 0 || nr >= caroSize || nc < 0 || nc >= caroSize || caroState[nr][nc] !== 0) open--;
-            if (count >= 5) return 20000000; if (count === 4) return open === 2 ? 5000000 : (open === 1 ? 1000000 : 0);
-            if (count === 3) return open === 2 ? 500000 : (open === 1 ? 10000 : 0); if (count === 2) return open === 2 ? 5000 : (open === 1 ? 500 : 0);
-            return open === 2 ? 100 : 0;
-        }
-        function checkWinCaro(r,c,p){
-            const dirs = [[1,0],[0,1],[1,1],[1,-1]];
-            for(let [dr,dc] of dirs){
-                let count=1, nr=r+dr,nc=c+dc; while(nr>=0&&nr<caroSize&&nc>=0&&nc<caroSize&&caroState[nr][nc]===p){count++;nr+=dr;nc+=dc;}
-                nr=r-dr;nc=c-dc; while(nr>=0&&nr<caroSize&&nc>=0&&nc<caroSize&&caroState[nr][nc]===p){count++;nr-=dr;nc-=dc;}
-                if(count>=5) return true;
-            } return false;
-        }
-
-        // TƯỜNG ẢNH (GIỮ NGUYÊN)
+        // TƯỜNG ẢNH
         function initMemoryWall() {
             const wall = document.getElementById('memoryWall'); if(wall.innerHTML) return;
             let mList = ['nhac1.mp3','nhac2.mp3','nhac3.mp3','nhac4.mp3','nhac5.mp3'].sort(()=>Math.random()-0.5);
@@ -754,22 +561,18 @@
                 const div = document.createElement('div'); div.className = 'floating-photo';
                 div.style.left = Math.random()*70 + 5 + 'vw'; div.style.animationDuration = Math.random()*6+8+'s'; div.style.animationDelay = Math.random()*4+'s';
                 div.innerHTML = `<img src="${pList[i]}" onerror="this.src='https://images.unsplash.com/photo-1518199266791-5375a83190b7?w=300'"><div class="photo-caption">${caps[i]}</div>`;
-                div.onclick = () => {
-                    bgMusic.pause(); photoAudio.src = mList[i]; photoAudio.volume = 1; photoAudio.play().catch(e=>console.log(e));
-                    div.style.transform = 'scale(1.5) rotate(0deg)'; setTimeout(()=>div.style.transform='', 500);
-                };
+                div.onclick = () => { bgMusic.pause(); photoAudio.src = mList[i]; photoAudio.volume = 1; photoAudio.play().catch(e=>console.log(e)); div.style.transform = 'scale(1.5) rotate(0deg)'; setTimeout(()=>div.style.transform='', 500); };
                 wall.appendChild(div);
             }
         }
 
-        // FLAPPY (GIỮ NGUYÊN)
+        // FLAPPY
         let flappyCtx = document.getElementById('flappyCanvas').getContext('2d'), bird, pipes, flappyScore, flappyIsOver, flappyLoopId;
         function initFlappy() {
             bird = { y: 150, v: 0, g: 0.35, jump: -6 }; pipes = []; flappyScore = 0; flappyIsOver = false;
             document.getElementById('flappyScore').innerText = 0; document.getElementById('restartFlappy').style.display='none';
             if (flappyLoopId) cancelAnimationFrame(flappyLoopId);
-            const cvs = document.getElementById('flappyCanvas');
-            const fly = (e) => { if(e) e.preventDefault(); if(!flappyIsOver) bird.v = bird.jump; };
+            const cvs = document.getElementById('flappyCanvas'); const fly = (e) => { if(e) e.preventDefault(); if(!flappyIsOver) bird.v = bird.jump; };
             cvs.onclick = fly; cvs.ontouchstart = fly;
             function loop() {
                 flappyCtx.clearRect(0,0,280,350); flappyCtx.fillStyle = '#ffb3c6'; flappyCtx.fillRect(0,0,280,350); 
@@ -783,15 +586,11 @@
                     if(p.x < -50) pipes.splice(i,1);
                 }
                 if(!flappyIsOver) flappyLoopId = requestAnimationFrame(loop);
-                else {
-                    flappyCtx.fillStyle = 'rgba(255,255,255,0.7)'; flappyCtx.fillRect(0,0,280,350); flappyCtx.fillStyle = '#ff2a55'; flappyCtx.font = 'bold 24px Quicksand';
-                    flappyCtx.fillText('Rơi mất xíu gòi 💔', 30, 170); document.getElementById('restartFlappy').style.display='inline-block';
-                }
-            }
-            loop();
+                else { flappyCtx.fillStyle = 'rgba(255,255,255,0.7)'; flappyCtx.fillRect(0,0,280,350); flappyCtx.fillStyle = '#ff2a55'; flappyCtx.font = 'bold 24px Quicksand'; flappyCtx.fillText('Rơi mất xíu gòi 💔', 30, 170); document.getElementById('restartFlappy').style.display='inline-block'; }
+            } loop();
         }
 
-        // RẮN SĂN MỒI (GIỮ NGUYÊN)
+        // RẮN SĂN MỒI
         let snakeCtx = document.getElementById('snakeCanvas').getContext('2d'), snake, food, dx, dy, snakeScore, snakeInterval;
         function initSnake() {
             snake = [{x:60,y:60}, {x:45,y:60}, {x:30,y:60}]; dx=15; dy=0; snakeScore=0;
@@ -807,27 +606,26 @@
             }, 120);
         }
         function changeSnakeDir(dir) {
-            if(dir==='UP'&&dy===0){dx=0;dy=-15;} else if(dir==='DOWN'&&dy===0){dx=0;dy=15;}
-            else if(dir==='LEFT'&&dx===0){dx=-15;dy=0;} else if(dir==='RIGHT'&&dx===0){dx=15;dy=0;}
+            if(dir==='UP'&&dy===0){dx=0;dy=-15;} else if(dir==='DOWN'&&dy===0){dx=0;dy=15;} else if(dir==='LEFT'&&dx===0){dx=-15;dy=0;} else if(dir==='RIGHT'&&dx===0){dx=15;dy=0;}
         }
 
-        // ================= GAME BLOCK BLAST (MỚI THÊM) =================
-        let bGrid = [], bShapes = [], selectedShape = -1, blockScore = 0;
+        // ================= GAME BLOCK BLAST (CƠ CHẾ KÉO THẢ MƯỢT MÀ) =================
+        let bGrid = [], bShapes = [], blockScore = 0;
+        let dragData = null; // Quản lý thông tin khi đang kéo khối
         
-        // Cấu hình các khối (Tetrominoes và nhiều biến thể)
         const SHAPE_TEMPLATES = [
-            [[1]], [[1,1]], [[1],[1]], // 1x1, 1x2, 2x1
-            [[1,1,1]], [[1],[1],[1]],  // 1x3, 3x1
-            [[1,1,1,1]], [[1],[1],[1],[1]], // 1x4, 4x1
-            [[1,1],[1,1]], // Vuông 2x2
-            [[1,1,1],[1,1,1],[1,1,1]], // Vuông 3x3
-            [[1,0],[1,1]], [[0,1],[1,1]], [[1,1],[1,0]], [[1,1],[0,1]], // Chữ L nhỏ
-            [[1,0,0],[1,0,0],[1,1,1]], [[0,0,1],[0,0,1],[1,1,1]] // Chữ L to
+            [[1]], [[1,1]], [[1],[1]], 
+            [[1,1,1]], [[1],[1],[1]],  
+            [[1,1,1,1]], [[1],[1],[1],[1]], 
+            [[1,1],[1,1]], 
+            [[1,1,1],[1,1,1],[1,1,1]], 
+            [[1,0],[1,1]], [[0,1],[1,1]], [[1,1],[1,0]], [[1,1],[0,1]], 
+            [[1,0,0],[1,0,0],[1,1,1]], [[0,0,1],[0,0,1],[1,1,1]] 
         ];
 
         function initBlockBlast() {
             bGrid = Array.from({length: 8}, () => Array(8).fill(0));
-            blockScore = 0; selectedShape = -1;
+            blockScore = 0;
             document.getElementById('blockScore').innerText = blockScore;
             document.getElementById('restartBlock').style.display = 'none';
             document.getElementById('blockMessage').innerText = "";
@@ -842,7 +640,6 @@
                 for (let c = 0; c < 8; c++) {
                     const cell = document.createElement('div');
                     cell.className = 'block-cell' + (bGrid[r][c] ? ' filled' : '');
-                    cell.onclick = () => placeShape(r, c);
                     gridEl.appendChild(cell);
                 }
             }
@@ -858,10 +655,8 @@
                 
                 const shapeEl = document.createElement('div');
                 shapeEl.className = 'shape-container';
-                shapeEl.id = `bShape-${i}`;
-                shapeEl.onclick = () => selectShape(i);
-                
                 shapeEl.style.gridTemplateColumns = `repeat(${shapeMat[0].length}, 14px)`;
+                
                 for (let r = 0; r < shapeMat.length; r++) {
                     for (let c = 0; c < shapeMat[0].length; c++) {
                         const mini = document.createElement('div');
@@ -869,37 +664,135 @@
                         shapeEl.appendChild(mini);
                     }
                 }
+                
+                // Thêm sự kiện để bắt đầu kéo
+                shapeEl.addEventListener('touchstart', (e) => handleDragStart(e, i, shapeEl), {passive: false});
+                shapeEl.addEventListener('mousedown', (e) => handleDragStart(e, i, shapeEl));
+                
                 dock.appendChild(shapeEl);
             }
             checkBlockGameOver();
         }
 
-        function selectShape(idx) {
-            if (bShapes[idx].used) return;
-            selectedShape = idx;
-            for (let i = 0; i < 3; i++) {
-                const el = document.getElementById(`bShape-${i}`);
-                if (el) el.classList.toggle('selected', i === idx);
-            }
+        // --- CÁC HÀM XỬ LÝ KÉO THẢ ---
+        function handleDragStart(e, idx, originEl) {
+            if(bShapes[idx].used) return;
+            // e.preventDefault(); // Ngừng cuộn trang (Quan trọng cho mobile)
+            
+            let clientX = e.touches ? e.touches[0].clientX : e.clientX;
+            let clientY = e.touches ? e.touches[0].clientY : e.clientY;
+
+            const rect = originEl.getBoundingClientRect();
+            
+            // Tạo bản sao để di chuyển theo ngón tay
+            const clone = originEl.cloneNode(true);
+            clone.classList.add('drag-clone');
+            
+            // Căn chỉnh clone xuất hiện đúng tại ngón tay
+            clone.style.left = rect.left + 'px';
+            clone.style.top = rect.top + 'px';
+            document.body.appendChild(clone);
+
+            // Mờ khối gốc ở khay
+            originEl.classList.add('dragging');
+
+            dragData = {
+                idx: idx,
+                clone: clone,
+                originEl: originEl,
+                offsetX: clientX - rect.left,
+                offsetY: clientY - rect.top,
+            };
         }
 
-        function placeShape(r, c) {
-            if (selectedShape === -1) return;
-            const shape = bShapes[selectedShape].matrix;
+        // Bắt sự kiện di chuyển ngón tay trên toàn màn hình
+        document.addEventListener('touchmove', function(e) {
+            if(!dragData) return;
+            e.preventDefault(); // Chặn vuốt màn hình khi đang kéo
+            let clientX = e.touches[0].clientX;
+            let clientY = e.touches[0].clientY;
+            updateClonePosition(clientX, clientY);
+        }, {passive: false});
+
+        document.addEventListener('mousemove', function(e) {
+            if(!dragData) return;
+            e.preventDefault();
+            updateClonePosition(e.clientX, e.clientY);
+        });
+
+        function updateClonePosition(x, y) {
+            // Đẩy khối xê lên 60px so với ngón tay để không bị che khuất
+            let newX = x - dragData.offsetX;
+            let newY = y - dragData.offsetY - 60; 
+            dragData.clone.style.left = newX + 'px';
+            dragData.clone.style.top = newY + 'px';
+        }
+
+        // Bắt sự kiện thả ngón tay
+        document.addEventListener('touchend', handleDragEnd);
+        document.addEventListener('mouseup', handleDragEnd);
+
+        function handleDragEnd(e) {
+            if(!dragData) return;
             
-            // Kiểm tra xem khối có bị chệch ra ngoài hoặc đè lên khối khác không
-            if (r + shape.length > 8 || c + shape[0].length > 8) {
-                flashBlockMessage("Hong vừa rồi bé ơi! 🥺"); return;
+            // Lấy tọa độ của khối đang kéo (clone)
+            const cloneRect = dragData.clone.getBoundingClientRect();
+            const gridRect = document.getElementById('blockGrid').getBoundingClientRect();
+            
+            // Kích thước 1 ô: 30px + 2px gap = 32px
+            const cellSize = 32; 
+
+            // Xác định ngón tay đang thả vào dòng r, cột c nào 
+            // Dùng tâm của ô vuông đầu tiên góc trái trên của khối đang kéo
+            let relX = (cloneRect.left + 15) - gridRect.left;
+            let relY = (cloneRect.top + 15) - gridRect.top;
+
+            let c = Math.floor(relX / cellSize);
+            let r = Math.floor(relY / cellSize);
+
+            let isPlaced = false;
+            // Kiểm tra xem vị trí thả có nằm trong bàn cờ không
+            if (r >= 0 && r < 8 && c >= 0 && c < 8) {
+                isPlaced = tryPlaceShape(r, c, dragData.idx);
             }
+
+            if(isPlaced) {
+                // Đặt thành công -> Ẩn khối gốc
+                dragData.originEl.classList.remove('dragging');
+                dragData.originEl.classList.add('used');
+                bShapes[dragData.idx].used = true;
+                
+                checkBlockLines();
+                renderBlockGrid();
+                
+                if (bShapes.every(s => s.used)) {
+                    setTimeout(spawnShapes, 300);
+                } else {
+                    checkBlockGameOver();
+                }
+            } else {
+                // Đặt lỗi hoặc trượt ra ngoài -> Trả khối về khay
+                dragData.originEl.classList.remove('dragging');
+                // Nếu muốn báo lỗi nhẹ nhàng: flashBlockMessage("Hong thả được vào đây 🥺");
+            }
+
+            // Xóa bản sao
+            dragData.clone.remove();
+            dragData = null;
+        }
+
+        function tryPlaceShape(r, c, idx) {
+            const shape = bShapes[idx].matrix;
+            
+            if (r + shape.length > 8 || c + shape[0].length > 8) return false;
+            
             for (let sr = 0; sr < shape.length; sr++) {
                 for (let sc = 0; sc < shape[0].length; sc++) {
-                    if (shape[sr][sc] && bGrid[r + sr][c + sc]) {
-                        flashBlockMessage("Bị cấn mất rồi! 💥"); return;
-                    }
+                    if (shape[sr][sc] && bGrid[r + sr][c + sc]) return false; // Cấn khối khác
                 }
             }
             
-            // Đặt khối thành công
+            // Lấp khối
             for (let sr = 0; sr < shape.length; sr++) {
                 for (let sc = 0; sc < shape[0].length; sc++) {
                     if (shape[sr][sc]) {
@@ -908,46 +801,25 @@
                     }
                 }
             }
-            
-            // Đánh dấu khối đã dùng
-            bShapes[selectedShape].used = true;
-            document.getElementById(`bShape-${selectedShape}`).classList.add('used');
-            selectedShape = -1;
-            
-            checkBlockLines();
-            renderBlockGrid();
-            
-            // Kiểm tra xem dùng hết 3 khối chưa
-            if (bShapes.every(s => s.used)) {
-                setTimeout(spawnShapes, 300);
-            } else {
-                checkBlockGameOver();
-            }
+            return true;
         }
 
         function checkBlockLines() {
             let linesR = [], linesC = [];
-            // Check hàng ngang
-            for (let r = 0; r < 8; r++) {
-                if (bGrid[r].every(val => val === 1)) linesR.push(r);
-            }
-            // Check hàng dọc
+            for (let r = 0; r < 8; r++) { if (bGrid[r].every(val => val === 1)) linesR.push(r); }
             for (let c = 0; c < 8; c++) {
                 let full = true;
-                for (let r = 0; r < 8; r++) {
-                    if (bGrid[r][c] === 0) { full = false; break; }
-                }
+                for (let r = 0; r < 8; r++) { if (bGrid[r][c] === 0) { full = false; break; } }
                 if (full) linesC.push(c);
             }
             
-            // Xoá hàng/cột và cộng điểm
             if (linesR.length > 0 || linesC.length > 0) {
                 linesR.forEach(r => { for (let c = 0; c < 8; c++) bGrid[r][c] = 0; });
                 linesC.forEach(c => { for (let r = 0; r < 8; r++) bGrid[r][c] = 0; });
                 
                 const combo = linesR.length + linesC.length;
                 blockScore += combo * 10;
-                flashBlockMessage(combo > 1 ? `Đỉnh quá!! Combo ${combo} 💖` : "Giỏi lắm vợ ơi! ✨");
+                flashBlockMessage(combo > 1 ? `Đỉnh quá!! Combo ${combo} 💖` : "Giỏi lắm bé ơi! ✨");
                 document.getElementById('blockScore').innerText = blockScore;
             }
         }
@@ -983,8 +855,7 @@
         }
         
         function flashBlockMessage(msg) {
-            const el = document.getElementById('blockMessage');
-            el.innerText = msg;
+            const el = document.getElementById('blockMessage'); el.innerText = msg;
             setTimeout(() => { if(el.innerText === msg) el.innerText = ""; }, 2000);
         }
     </script>
