@@ -69,7 +69,7 @@
             100% { transform: translate(-50%, -120px) scale(1); opacity: 0; }
         }
 
-        /* KHUNG GIAO DIỆN GLASSMORPHISM (KÍNH MỜ XỊN XÒ) */
+        /* KHUNG GIAO DIỆN GLASSMORPHISM */
         .screen {
             display: none;
             text-align: center;
@@ -109,7 +109,7 @@
             text-shadow: 2px 2px 4px rgba(255, 255, 255, 0.6);
         }
 
-        /* GIAO DIỆN MENU LƯỚI CARD CUTE */
+        /* GIAO DIỆN MENU LƯỚI CARD */
         .menu-grid {
             display: grid;
             grid-template-columns: repeat(2, 1fr);
@@ -122,7 +122,7 @@
             background: rgba(255, 255, 255, 0.7);
             border: 2px solid rgba(255, 255, 255, 0.9);
             border-radius: 20px;
-            padding: 20px 10px;
+            padding: 15px 10px;
             font-size: 1.05rem;
             font-weight: 700;
             color: #ff4d6d;
@@ -132,7 +132,7 @@
             display: flex;
             flex-direction: column;
             align-items: center;
-            gap: 10px;
+            gap: 5px;
             position: relative;
             overflow: hidden;
         }
@@ -143,13 +143,13 @@
             transform: skewX(-25deg); transition: 0.5s;
         }
 
-        .menu-btn span { font-size: 2.5rem; filter: drop-shadow(0 4px 6px rgba(0,0,0,0.1)); }
+        .menu-btn span { font-size: 2.2rem; filter: drop-shadow(0 4px 6px rgba(0,0,0,0.1)); }
         
         .menu-btn:hover {
             background: #ff4d6d;
             color: #fff;
             border-color: #ff4d6d;
-            transform: translateY(-8px) scale(1.05);
+            transform: translateY(-5px) scale(1.05);
             box-shadow: 0 15px 25px rgba(255, 77, 109, 0.4);
         }
         .menu-btn:hover::before { left: 150%; }
@@ -219,7 +219,6 @@
             margin-bottom: 15px;
             border: 1px solid rgba(255,255,255,0.6);
         }
-
         .falling-letter {
             position: absolute;
             background: linear-gradient(135deg, #fff, #ffe6eb);
@@ -252,97 +251,48 @@
             border-radius: 20px;
             font-size: 0.85rem;
             font-weight: bold;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
         }
 
-        /* POPUP THƯ GLASSMORPHISM */
+        /* POPUP THƯ */
         .letter-modal {
-            position: fixed;
-            top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(0,0,0,0.4);
-            backdrop-filter: blur(5px);
-            display: none;
-            justify-content: center;
-            align-items: center;
-            z-index: 999;
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0,0,0,0.4); backdrop-filter: blur(5px);
+            display: none; justify-content: center; align-items: center; z-index: 999;
         }
         .letter-modal.active { display: flex; animation: fadeIn 0.3s; }
-
         .modal-box {
-            background: rgba(255, 255, 255, 0.95);
-            padding: 30px 25px;
-            border-radius: 25px;
-            width: 85%;
-            max-width: 350px;
-            position: relative;
-            border: 3px solid #ff4d6d;
-            box-shadow: 0 15px 35px rgba(255,77,109,0.3);
-            transform: scale(0.8);
-            animation: bounceIn 0.4s forwards;
+            background: rgba(255, 255, 255, 0.95); padding: 30px 25px;
+            border-radius: 25px; width: 85%; max-width: 350px; position: relative;
+            border: 3px solid #ff4d6d; box-shadow: 0 15px 35px rgba(255,77,109,0.3);
+            transform: scale(0.8); animation: bounceIn 0.4s forwards;
         }
-
-        @keyframes bounceIn {
-            to { transform: scale(1); }
-        }
-
+        @keyframes bounceIn { to { transform: scale(1); } }
         .close-btn {
-            position: absolute;
-            top: -10px; right: -10px;
-            background: #ff4d6d;
-            color: white;
-            border: 2px solid white;
-            width: 35px; height: 35px;
-            border-radius: 50%;
-            font-weight: bold;
-            cursor: pointer;
-            font-size: 1.2rem;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.2);
-            transition: 0.3s;
+            position: absolute; top: -10px; right: -10px;
+            background: #ff4d6d; color: white; border: 2px solid white;
+            width: 35px; height: 35px; border-radius: 50%; font-weight: bold; cursor: pointer;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.2); transition: 0.3s;
         }
         .close-btn:hover { transform: scale(1.1) rotate(90deg); }
-
-        .modal-text {
-            font-size: 1.15rem;
-            line-height: 1.6;
-            color: #d6336c;
-            font-weight: bold;
-            font-family: 'Quicksand', sans-serif;
-        }
+        .modal-text { font-size: 1.15rem; line-height: 1.6; color: #d6336c; font-weight: bold; }
 
         /* KHUNG GAMES CHUNG */
         .game-container {
-            background: rgba(255,255,255,0.7);
-            border-radius: 20px;
-            padding: 10px;
-            box-shadow: inset 0 0 10px rgba(0,0,0,0.05);
-            margin-bottom: 15px;
-        }
-
-        canvas {
-            border-radius: 15px;
-            box-shadow: 0 8px 25px rgba(0,0,0,0.15);
-            margin: 5px 0;
-            background: #70c5ce;
+            background: rgba(255,255,255,0.7); border-radius: 20px; padding: 10px;
+            box-shadow: inset 0 0 10px rgba(0,0,0,0.05); margin-bottom: 15px; width: 100%;
         }
 
         /* GAME ĐUA XE */
         .game-box {
-            width: 100%;
-            height: 320px;
-            background: url('https://www.transparenttextures.com/patterns/asfalt-light.png'), #4a4e69;
-            border: 3px solid #fff;
-            border-radius: 15px;
-            position: relative;
-            overflow: hidden;
-            box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+            width: 100%; height: 320px; background: url('https://www.transparenttextures.com/patterns/asfalt-light.png'), #4a4e69;
+            border: 3px solid #fff; border-radius: 15px; position: relative; overflow: hidden; box-shadow: 0 10px 20px rgba(0,0,0,0.2);
         }
-        .game-box::after { /* Vạch kẻ đường */
+        .game-box::after {
             content: ''; position: absolute; left: 50%; top: -100%; width: 6px; height: 300%;
             background: repeating-linear-gradient(to bottom, #fff 0, #fff 40px, transparent 40px, transparent 80px);
             transform: translateX(-50%); animation: moveRoad 1s linear infinite; opacity: 0.5;
         }
         @keyframes moveRoad { from { top: -100%; } to { top: 0; } }
-
         .car-obj { position: absolute; bottom: 15px; transform: translateX(-50%); font-size: 3rem; z-index: 10; filter: drop-shadow(0 10px 5px rgba(0,0,0,0.4)); }
         .obstacle { position: absolute; padding: 6px 12px; border-radius: 20px; font-weight: bold; font-size: 1rem; z-index: 5; }
         .obs-yes { background: linear-gradient(45deg, #ff4d6d, #ff8fa3); color: white; border: 2px solid white; box-shadow: 0 5px 15px rgba(255,77,109,0.5); }
@@ -360,16 +310,12 @@
         }
         .caro-cell:hover { background: #ffe6eb; transform: scale(0.95); }
 
-        /* MÀN HÌNH TƯỜNG ẢNH VÔ CỰC */
+        /* MÀN HÌNH TƯỜNG ẢNH */
         #screen4 {
-            background: rgba(20, 20, 20, 0.85); /* Đen mờ để nhìn thấy nền động */
-            color: white; max-width: 100vw; width: 100vw; height: 100vh;
-            position: fixed; top: 0; left: 0; border-radius: 0; border: none; box-shadow: none; z-index: 50; padding: 0;
-            backdrop-filter: blur(10px);
+            background: rgba(20, 20, 20, 0.85); color: white; max-width: 100vw; width: 100vw; height: 100vh;
+            position: fixed; top: 0; left: 0; border-radius: 0; border: none; box-shadow: none; z-index: 50; padding: 0; backdrop-filter: blur(10px);
         }
         #screen4 .back-btn { background: rgba(255,255,255,0.2); border-color: transparent; color: #fff; }
-        #screen4 .back-btn:hover { background: #ff4d6d; }
-
         .memory-wall { position: absolute; top: 0; left: 0; width: 100%; height: 100%; overflow: hidden; pointer-events: none; }
         .floating-photo {
             position: absolute; background: #fff; padding: 10px 10px 25px 10px; border-radius: 6px;
@@ -378,26 +324,82 @@
         }
         .floating-photo:hover { transform: scale(1.3) rotate(0deg) !important; box-shadow: 0 0 35px rgba(255, 77, 109, 1); z-index: 99; opacity: 1; }
         .floating-photo img { width: 100%; height: 100px; object-fit: cover; border-radius: 4px; }
-        
-        .photo-caption { color: #ff2a55; font-size: 0.8rem; text-align: center; margin-top: 8px; font-weight: bold; font-family: 'Dancing Script', cursive; font-size: 1.2rem; }
-
-        @keyframes floatPhoto {
-            0% { transform: translateY(110vh) rotate(-10deg); }
-            100% { transform: translateY(-120vh) rotate(15deg); }
-        }
-
+        .photo-caption { color: #ff2a55; font-size: 1.2rem; text-align: center; margin-top: 8px; font-weight: bold; font-family: 'Dancing Script', cursive; }
+        @keyframes floatPhoto { 0% { transform: translateY(110vh) rotate(-10deg); } 100% { transform: translateY(-120vh) rotate(15deg); } }
         .wall-content {
-            position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
-            z-index: 10; background: rgba(0, 0, 0, 0.6); padding: 30px; border-radius: 25px;
-            border: 1px solid rgba(255, 255, 255, 0.2); backdrop-filter: blur(10px);
+            position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); z-index: 10;
+            background: rgba(0, 0, 0, 0.6); padding: 30px; border-radius: 25px; border: 1px solid rgba(255, 255, 255, 0.2); backdrop-filter: blur(10px);
             max-width: 90%; width: 350px; text-align: center; box-shadow: 0 20px 50px rgba(0,0,0,0.5);
         }
         .wall-content p { color: #ddd; font-size: 0.95rem; margin-top: 10px; line-height: 1.5; }
 
-        /* NÚT ĐIỀU KHIỂN RẮN */
+        /* CANVASES (FLAPPY & SNAKE) */
+        canvas { border-radius: 15px; box-shadow: 0 8px 25px rgba(0,0,0,0.15); margin: 5px 0; background: #70c5ce; }
         .snake-controls { display: grid; grid-template-columns: repeat(3, 50px); gap: 8px; justify-content: center; margin-top: 15px; }
-        .ctrl-btn { background: rgba(255, 77, 109, 0.8); border: 2px solid white; color: white; border-radius: 12px; font-size: 1.2rem; padding: 12px; cursor: pointer; transition: 0.2s; box-shadow: 0 5px 10px rgba(0,0,0,0.1); }
+        .ctrl-btn { background: rgba(255, 77, 109, 0.8); border: 2px solid white; color: white; border-radius: 12px; font-size: 1.2rem; padding: 12px; cursor: pointer; transition: 0.2s; }
         .ctrl-btn:active { background: #ff2a55; transform: scale(0.9); }
+
+        /* ================= GAME BLOCK BLAST ================= */
+        .block-grid {
+            display: grid;
+            grid-template-columns: repeat(8, 30px);
+            grid-template-rows: repeat(8, 30px);
+            gap: 2px;
+            background: rgba(255, 179, 198, 0.3);
+            padding: 5px;
+            border-radius: 10px;
+            margin: 0 auto;
+            width: fit-content;
+        }
+        .block-cell {
+            width: 30px;
+            height: 30px;
+            background: rgba(255, 255, 255, 0.8);
+            border-radius: 4px;
+            transition: all 0.2s;
+            cursor: pointer;
+        }
+        .block-cell:hover { background: rgba(255, 255, 255, 1); }
+        .block-cell.filled {
+            background: linear-gradient(135deg, #ff4d6d, #ff8fa3);
+            box-shadow: inset 0 0 5px rgba(0,0,0,0.1), 0 2px 4px rgba(255,77,109,0.3);
+            border: 1px solid #ff2a55;
+            transform: scale(0.95);
+        }
+        
+        .shape-dock {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-top: 10px;
+            height: 90px;
+            align-items: center;
+        }
+        .shape-container {
+            display: grid;
+            gap: 2px;
+            cursor: pointer;
+            padding: 8px;
+            border-radius: 8px;
+            border: 2px solid transparent;
+            transition: 0.2s;
+            background: rgba(255,255,255,0.4);
+        }
+        .shape-container.selected {
+            border-color: #ff2a55;
+            background: rgba(255, 255, 255, 0.8);
+            transform: scale(1.15) translateY(-5px);
+            box-shadow: 0 10px 15px rgba(255,77,109,0.2);
+        }
+        .shape-container.used { opacity: 0; pointer-events: none; transform: scale(0.5); }
+        .shape-mini-cell {
+            width: 14px;
+            height: 14px;
+            background: linear-gradient(135deg, #ff4d6d, #ff8fa3);
+            border-radius: 3px;
+            border: 1px solid #ff2a55;
+        }
+        .shape-mini-cell.empty { background: transparent; border: none; }
     </style>
 </head>
 <body>
@@ -417,6 +419,9 @@
             <button class="menu-btn" onclick="openScreen('screen1')">
                 <span>💌</span> Lời nhắn
             </button>
+            <button class="menu-btn" onclick="openScreen('screen7'); initBlockBlast();">
+                <span>🧩</span> Xếp Hình
+            </button>
             <button class="menu-btn" onclick="openScreen('screen3'); initGame();">
                 <span>🚗</span> Đua Xe
             </button>
@@ -430,12 +435,13 @@
                 <span>🐥</span> Flappy
             </button>
             <button class="menu-btn" onclick="openScreen('screen6'); initSnake();">
-                <span>🐍</span> Rắn Săn Mồi
+                <span>🐍</span> Săn Mồi
             </button>
         </div>
     </div>
 
-    <!-- MÀN 1 -->
+    <!-- CÁC MÀN HÌNH KHÁC ĐƯỢC GIỮ NGUYÊN BÊN DƯỚI -->
+
     <div id="screen1" class="screen">
         <button class="back-btn" onclick="returnToMenu()">🏠 Trở về</button>
         <h2>Ngày hôm nay của bé như thế nào?</h2>
@@ -443,16 +449,13 @@
         <button class="btn" onclick="startJourney()">Gửi cho anh yêu ✨</button>
     </div>
 
-    <!-- MÀN 2 -->
     <div id="screen2" class="screen">
         <button class="back-btn" onclick="returnToMenu()">🏠 Trở về</button>
         <h2>Lời nhắn từ bầu trời ☁️</h2>
         <p style="font-size: 0.9rem; color: #666; margin-bottom: 10px; font-weight: bold;">Chạm vào những lá thư đang rơi nhé!</p>
-        
         <div class="letters-area" id="lettersArea"></div>
         <div class="read-list" id="readList"></div>
         <button class="btn" id="nextToGameBtn" disabled onclick="returnToMenu()">Về trang chủ 🏠</button>
-
         <div class="letter-modal" id="letterModal">
             <div class="modal-box">
                 <button class="close-btn" onclick="closeLetter()">✖</button>
@@ -461,12 +464,10 @@
         </div>
     </div>
 
-    <!-- MÀN 3 -->
     <div id="screen3" class="screen">
         <button class="back-btn" onclick="returnToMenu()">🏠 Trở về</button>
         <h2>Lái Xe Tình Yêu 🚗</h2>
         <p style="font-size: 0.9rem; font-weight: bold; color: #ff2a55; margin-bottom: 10px;">Lấy 5 chữ "Cóa" ❤️ | Né chữ "Hổng" | Điểm: <span id="score">0</span>/5</p>
-        
         <div class="game-container">
             <div class="game-box" id="gameBox">
                 <div class="car-obj" id="playerCar">🏎️</div>
@@ -476,12 +477,10 @@
         <button class="btn" id="restartCar" style="display:none;" onclick="initGame()">Chơi lại 🔄</button>
     </div>
 
-    <!-- MÀN CARO -->
     <div id="screen-caro" class="screen">
         <button class="back-btn" onclick="returnToMenu()">🏠 Trở về</button>
         <h2>Cờ Caro Yêu Thương ⭕</h2>
         <p style="font-size: 0.9rem; color: #666; margin-bottom: 10px; font-weight: bold;">Bé là ❤️, Máy là ⭐ (Vuốt để xem bàn cờ)</p>
-        
         <div class="game-container">
             <div class="caro-wrapper" id="caroWrapper">
                 <div class="caro-board" id="caroBoard"></div>
@@ -491,7 +490,6 @@
         <button class="btn" id="btnRetryCaro" onclick="initCaro()" style="display: none;">Đấu lại nhé ⚔️</button>
     </div>
 
-    <!-- MÀN 4 (ẢNH) -->
     <div id="screen4" class="screen">
         <button class="back-btn" onclick="returnToMenu()">🏠 Trở về</button>
         <div class="memory-wall" id="memoryWall"></div>
@@ -501,7 +499,6 @@
         </div>
     </div>
 
-    <!-- MÀN FLAPPY -->
     <div id="screen5" class="screen">
         <button class="back-btn" onclick="returnToMenu()">🏠 Trở về</button>
         <h2>Chim Cút Yêu Thương 🐥</h2>
@@ -510,13 +507,11 @@
         <button class="btn" id="restartFlappy" style="display:none;" onclick="initFlappy()">Bay lại nào 🔄</button>
     </div>
 
-    <!-- MÀN RẮN -->
     <div id="screen6" class="screen">
         <button class="back-btn" onclick="returnToMenu()">🏠 Trở về</button>
         <h2>Rắn Săn Tim ❤️</h2>
         <p style="font-size: 0.9rem; font-weight: bold; color: #ff2a55;">Gom thật nhiều tim | Điểm: <span id="snakeScore">0</span> ❤️</p>
         <div class="game-container"><canvas id="snakeCanvas" width="280" height="280" style="background: #2b2d42; border: 2px solid #ffb3c6;"></canvas></div>
-        
         <div class="snake-controls">
             <div></div><button class="ctrl-btn" onclick="changeSnakeDir('UP')">⬆️</button><div></div>
             <button class="ctrl-btn" onclick="changeSnakeDir('LEFT')">⬅️</button>
@@ -524,6 +519,22 @@
             <button class="ctrl-btn" onclick="changeSnakeDir('RIGHT')">➡️</button>
         </div>
         <button class="btn" id="restartSnake" style="display:none; margin-top: 15px;" onclick="initSnake()">Bắt đầu lại 🔄</button>
+    </div>
+
+    <!-- MÀN BLOCK BLAST MỚI -->
+    <div id="screen7" class="screen">
+        <button class="back-btn" onclick="returnToMenu()">🏠 Trở về</button>
+        <h2>Xếp Hình Tình Yêu 🧩</h2>
+        <p style="font-size: 0.9rem; font-weight: bold; color: #ff2a55; margin-bottom: 5px;">Chọn khối ở dưới ⬇️ rồi chạm vào bàn cờ để đặt</p>
+        <p style="font-size: 1.1rem; font-weight: bold; color: #d6336c;">Điểm: <span id="blockScore">0</span> 💖</p>
+        
+        <div class="game-container" style="padding: 15px;">
+            <div class="block-grid" id="blockGrid"></div>
+        </div>
+        
+        <div class="shape-dock" id="shapeDock"></div>
+        <p id="blockMessage" style="font-size: 1rem; color: #ff2a55; font-weight: bold; height: 25px; margin-top: 5px;"></p>
+        <button class="btn" id="restartBlock" style="display:none; margin-top: 5px;" onclick="initBlockBlast()">Chơi lại 🔄</button>
     </div>
 
     <script>
@@ -540,17 +551,13 @@
             bgContainer.appendChild(b);
         }
 
-        // HIỆU ỨNG CLICK LẤP LÁNH (Blink Blink)
         document.addEventListener('click', function(e) {
-            // Không tạo sao nếu click vào nút back hoặc canvas để tránh lag game
-            if(e.target.tagName === 'CANVAS' || e.target.classList.contains('ctrl-btn')) return;
-
+            if(e.target.tagName === 'CANVAS' || e.target.classList.contains('ctrl-btn') || e.target.classList.contains('block-cell')) return;
             let el = document.createElement('div');
             el.className = 'click-sparkle';
             const sparks = ['✨', '💖', '🌸', '💫'];
             el.innerText = sparks[Math.floor(Math.random() * sparks.length)];
-            el.style.left = e.pageX + 'px';
-            el.style.top = e.pageY + 'px';
+            el.style.left = e.pageX + 'px'; el.style.top = e.pageY + 'px';
             document.body.appendChild(el);
             setTimeout(() => el.remove(), 1000);
         });
@@ -573,7 +580,6 @@
             playMusic();
             document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
             document.getElementById(screenId).classList.add('active');
-            
             if(screenId === 'screen4') initMemoryWall();
             else photoAudio.pause(); 
         }
@@ -587,15 +593,12 @@
 
         function returnToMenu() { stopAllGames(); openScreen('menuScreen'); }
 
-        // MÀN 1
+        // MÀN 1 & MÀN 2 (GIỮ NGUYÊN)
         function startJourney() {
-            if (document.getElementById('answer').value.trim() === '') {
-                alert("Viết cho anh vài dòng đi mà 🥺"); return;
-            }
+            if (document.getElementById('answer').value.trim() === '') { alert("Viết cho anh vài dòng đi mà 🥺"); return; }
             openScreen('screen2'); initLetters();
         }
 
-        // MÀN 2
         const lettersData = [
             "Sau này nắng có tắt<br>Mây kia có bạc màu<br>Xin tay người nắm chặt<br>Đừng để mình lạc nhau. 🌤️",
             "Anh như là con kiến<br>Trong thủ đô vội vàng<br>1000 năm Văn Hiến<br>1000 năm yêu nàng ❤️",
@@ -606,84 +609,58 @@
         let readCount = 0;
 
         function initLetters() {
-            const area = document.getElementById('lettersArea');
-            const list = document.getElementById('readList');
-            area.innerHTML = ''; list.innerHTML = ''; readCount = 0;
-            document.getElementById('nextToGameBtn').disabled = true;
-
+            const area = document.getElementById('lettersArea'); const list = document.getElementById('readList');
+            area.innerHTML = ''; list.innerHTML = ''; readCount = 0; document.getElementById('nextToGameBtn').disabled = true;
             lettersData.forEach((content, i) => {
-                const el = document.createElement('div');
-                el.className = 'falling-letter';
-                el.innerHTML = `💌 Thư ${i + 1}`;
-                el.style.left = Math.floor(Math.random() * 60) + 10 + '%';
-                el.style.animationDuration = (Math.random() * 2 + 2.5).toFixed(1) + 's';
+                const el = document.createElement('div'); el.className = 'falling-letter'; el.innerHTML = `💌 Thư ${i + 1}`;
+                el.style.left = Math.floor(Math.random() * 60) + 10 + '%'; el.style.animationDuration = (Math.random() * 2 + 2.5).toFixed(1) + 's';
                 el.onclick = () => {
                     if (el.classList.contains('read')) return;
-                    el.classList.add('read');
-                    document.getElementById('modalText').innerHTML = content;
-                    document.getElementById('letterModal').classList.add('active');
-                    el.style.display = 'none';
-                    
-                    const badge = document.createElement('div');
-                    badge.className = 'read-badge'; badge.innerText = `Thư ${i+1} ✓`;
-                    list.appendChild(badge);
-                    readCount++;
-                    if (readCount >= 5) document.getElementById('nextToGameBtn').disabled = false;
+                    el.classList.add('read'); document.getElementById('modalText').innerHTML = content;
+                    document.getElementById('letterModal').classList.add('active'); el.style.display = 'none';
+                    const badge = document.createElement('div'); badge.className = 'read-badge'; badge.innerText = `Thư ${i+1} ✓`;
+                    list.appendChild(badge); readCount++; if (readCount >= 5) document.getElementById('nextToGameBtn').disabled = false;
                 };
                 area.appendChild(el);
             });
         }
         function closeLetter() { document.getElementById('letterModal').classList.remove('active'); }
 
-        // ĐUA XE
+        // ĐUA XE (GIỮ NGUYÊN)
         let gameInterval, obstacleInterval, gameScore = 0, obstacles = [], isPlaying = false, carX = 50;
         const gameBox = document.getElementById('gameBox'), playerCar = document.getElementById('playerCar'), scoreSpan = document.getElementById('score');
-
         function initGame() {
             if (isPlaying) return;
             document.getElementById('restartCar').style.display = 'none';
-            isPlaying = true; gameScore = 0; scoreSpan.innerText = gameScore;
-            carX = 50; playerCar.style.left = carX + '%';
+            isPlaying = true; gameScore = 0; scoreSpan.innerText = gameScore; carX = 50; playerCar.style.left = carX + '%';
             obstacles.forEach(o => o.el.remove()); obstacles = [];
-            
             const handleMove = (e) => {
-                e.preventDefault();
-                let clientX = e.clientX || (e.touches && e.touches[0].clientX);
+                e.preventDefault(); let clientX = e.clientX || (e.touches && e.touches[0].clientX);
                 let percent = ((clientX - gameBox.getBoundingClientRect().left) / gameBox.offsetWidth) * 100;
-                carX = Math.max(10, Math.min(90, percent));
-                playerCar.style.left = carX + '%';
+                carX = Math.max(10, Math.min(90, percent)); playerCar.style.left = carX + '%';
             };
             gameBox.onmousemove = handleMove; gameBox.ontouchmove = handleMove;
-            
             clearInterval(gameInterval); clearInterval(obstacleInterval);
             gameInterval = setInterval(updateGame, 20);
             obstacleInterval = setInterval(() => {
                 if (!isPlaying) return;
-                const isYes = Math.random() < 0.5;
-                const el = document.createElement('div');
-                el.className = `obstacle ${isYes ? 'obs-yes' : 'obs-no'}`;
-                el.innerText = isYes ? "Cóa" : "Hổng";
-                const left = Math.floor(Math.random() * 60) + 10;
-                el.style.left = left + '%'; el.style.top = '-40px';
-                gameBox.appendChild(el);
-                obstacles.push({ el, top: -40, isYes });
+                const isYes = Math.random() < 0.5; const el = document.createElement('div');
+                el.className = `obstacle ${isYes ? 'obs-yes' : 'obs-no'}`; el.innerText = isYes ? "Cóa" : "Hổng";
+                const left = Math.floor(Math.random() * 60) + 10; el.style.left = left + '%'; el.style.top = '-40px';
+                gameBox.appendChild(el); obstacles.push({ el, top: -40, isYes });
             }, 800);
         }
-
         function updateGame() {
             if (!isPlaying) return;
             const carRect = playerCar.getBoundingClientRect();
             for (let i = obstacles.length - 1; i >= 0; i--) {
-                let obs = obstacles[i];
-                obs.top += 5; obs.el.style.top = obs.top + 'px';
+                let obs = obstacles[i]; obs.top += 5; obs.el.style.top = obs.top + 'px';
                 const obsRect = obs.el.getBoundingClientRect();
-
                 if (!(carRect.right < obsRect.left || carRect.left > obsRect.right || carRect.bottom < obsRect.top || carRect.top > obsRect.bottom)) {
                     if (obs.isYes) {
                         gameScore++; scoreSpan.innerText = gameScore;
                         if (gameScore >= 5) {
-                            isPlaying = false;
-                            setTimeout(() => { alert("Giỏi quá chừng! Thưởng thơm 1 cái 💋"); document.getElementById('restartCar').style.display = 'inline-block'; }, 100);
+                            isPlaying = false; setTimeout(() => { alert("Giỏi quá chừng! Thưởng thơm 1 cái 💋"); document.getElementById('restartCar').style.display = 'inline-block'; }, 100);
                         }
                     } else {
                         gameScore = Math.max(0, gameScore - 2); scoreSpan.innerText = gameScore;
@@ -695,7 +672,7 @@
             }
         }
 
-        // CARO
+        // CỜ CARO (GIỮ NGUYÊN)
         const caroSize = 30; let caroState = [], caroGameOver = false, isBotThinking = false;
         function initCaro() {
             const board = document.getElementById('caroBoard'); board.innerHTML = '';
@@ -704,11 +681,9 @@
             caroGameOver = false; isBotThinking = false;
             document.getElementById('caroMessage').innerText = "Tới lượt bé yêu đi đó!";
             document.getElementById('btnRetryCaro').style.display = "none";
-
             for (let r = 0; r < caroSize; r++) {
                 for (let c = 0; c < caroSize; c++) {
-                    const cell = document.createElement('div');
-                    cell.className = 'caro-cell'; cell.id = `c-${r}-${c}`;
+                    const cell = document.createElement('div'); cell.className = 'caro-cell'; cell.id = `c-${r}-${c}`;
                     cell.onclick = () => {
                         if (caroGameOver || isBotThinking || caroState[r][c] !== 0) return;
                         caroState[r][c] = 1; cell.innerText = '❤️'; cell.style.background = '#ffe6eb';
@@ -717,8 +692,6 @@
                         setTimeout(() => {
                             if (caroGameOver) return;
                             let best = [], maxScore = -Infinity;
-                            
-                            // BOT QUYẾT TÂM ĐÁNH CHẶN (GOD MODE)
                             for (let i = 0; i < caroSize; i++) {
                                 for (let j = 0; j < caroSize; j++) {
                                     if (caroState[i][j] === 0) {
@@ -742,54 +715,36 @@
                 w.scrollTop = (w.scrollHeight - w.clientHeight)/2; w.scrollLeft = (w.scrollWidth - w.clientWidth)/2;
             }, 50);
         }
-
-        // THUẬT TOÁN ĐÁNH GIÁ (GOD MODE - SIÊU KHÓ)
         function evaluate(r, c) {
-            let score = 0;
-            const directions = [[1, 0], [0, 1], [1, 1], [1, -1]];
+            let score = 0; const directions = [[1, 0], [0, 1], [1, 1], [1, -1]];
             for (let [dr, dc] of directions) {
                 let attackScore = evaluateCaroLine(r, c, dr, dc, 2);
                 let defenseScore = evaluateCaroLine(r, c, dr, dc, 1);
-                
                 score += attackScore + defenseScore * 1.5; 
             }
             return score + Math.random(); 
         }
-
         function evaluateCaroLine(r, c, dr, dc, player) {
-            let count = 1;
-            let open = 2;
-
-            let nr = r + dr, nc = c + dc;
-            while (nr >= 0 && nr < caroSize && nc >= 0 && nc < caroSize && caroState[nr][nc] === player) {
-                count++; nr += dr; nc += dc;
-            }
+            let count = 1, open = 2, nr = r + dr, nc = c + dc;
+            while (nr >= 0 && nr < caroSize && nc >= 0 && nc < caroSize && caroState[nr][nc] === player) { count++; nr += dr; nc += dc; }
             if (nr < 0 || nr >= caroSize || nc < 0 || nc >= caroSize || caroState[nr][nc] !== 0) open--;
-
             nr = r - dr; nc = c - dc;
-            while (nr >= 0 && nr < caroSize && nc >= 0 && nc < caroSize && caroState[nr][nc] === player) {
-                count++; nr -= dr; nc -= dc;
-            }
+            while (nr >= 0 && nr < caroSize && nc >= 0 && nc < caroSize && caroState[nr][nc] === player) { count++; nr -= dr; nc -= dc; }
             if (nr < 0 || nr >= caroSize || nc < 0 || nc >= caroSize || caroState[nr][nc] !== 0) open--;
-
-            if (count >= 5) return 20000000;
-            if (count === 4) return open === 2 ? 5000000 : (open === 1 ? 1000000 : 0);
-            if (count === 3) return open === 2 ? 500000 : (open === 1 ? 10000 : 0);
-            if (count === 2) return open === 2 ? 5000 : (open === 1 ? 500 : 0);
+            if (count >= 5) return 20000000; if (count === 4) return open === 2 ? 5000000 : (open === 1 ? 1000000 : 0);
+            if (count === 3) return open === 2 ? 500000 : (open === 1 ? 10000 : 0); if (count === 2) return open === 2 ? 5000 : (open === 1 ? 500 : 0);
             return open === 2 ? 100 : 0;
         }
-
         function checkWinCaro(r,c,p){
             const dirs = [[1,0],[0,1],[1,1],[1,-1]];
             for(let [dr,dc] of dirs){
-                let count=1;
-                let nr=r+dr,nc=c+dc; while(nr>=0&&nr<caroSize&&nc>=0&&nc<caroSize&&caroState[nr][nc]===p){count++;nr+=dr;nc+=dc;}
+                let count=1, nr=r+dr,nc=c+dc; while(nr>=0&&nr<caroSize&&nc>=0&&nc<caroSize&&caroState[nr][nc]===p){count++;nr+=dr;nc+=dc;}
                 nr=r-dr;nc=c-dc; while(nr>=0&&nr<caroSize&&nc>=0&&nc<caroSize&&caroState[nr][nc]===p){count++;nr-=dr;nc-=dc;}
                 if(count>=5) return true;
             } return false;
         }
 
-        // TƯỜNG ẢNH
+        // TƯỜNG ẢNH (GIỮ NGUYÊN)
         function initMemoryWall() {
             const wall = document.getElementById('memoryWall'); if(wall.innerHTML) return;
             let mList = ['nhac1.mp3','nhac2.mp3','nhac3.mp3','nhac4.mp3','nhac5.mp3'].sort(()=>Math.random()-0.5);
@@ -797,8 +752,7 @@
             let caps = ['Vô giá ❤️','My Everything ✨','Xinh xỉu 🥰','Nhớ em 🥰','Công chúa 🌸'];
             for(let i=0; i<5; i++){
                 const div = document.createElement('div'); div.className = 'floating-photo';
-                div.style.left = Math.random()*70 + 5 + 'vw';
-                div.style.animationDuration = Math.random()*6+8+'s'; div.style.animationDelay = Math.random()*4+'s';
+                div.style.left = Math.random()*70 + 5 + 'vw'; div.style.animationDuration = Math.random()*6+8+'s'; div.style.animationDelay = Math.random()*4+'s';
                 div.innerHTML = `<img src="${pList[i]}" onerror="this.src='https://images.unsplash.com/photo-1518199266791-5375a83190b7?w=300'"><div class="photo-caption">${caps[i]}</div>`;
                 div.onclick = () => {
                     bgMusic.pause(); photoAudio.src = mList[i]; photoAudio.volume = 1; photoAudio.play().catch(e=>console.log(e));
@@ -808,7 +762,7 @@
             }
         }
 
-        // FLAPPY
+        // FLAPPY (GIỮ NGUYÊN)
         let flappyCtx = document.getElementById('flappyCanvas').getContext('2d'), bird, pipes, flappyScore, flappyIsOver, flappyLoopId;
         function initFlappy() {
             bird = { y: 150, v: 0, g: 0.35, jump: -6 }; pipes = []; flappyScore = 0; flappyIsOver = false;
@@ -817,37 +771,27 @@
             const cvs = document.getElementById('flappyCanvas');
             const fly = (e) => { if(e) e.preventDefault(); if(!flappyIsOver) bird.v = bird.jump; };
             cvs.onclick = fly; cvs.ontouchstart = fly;
-            
             function loop() {
-                flappyCtx.clearRect(0,0,280,350);
-                flappyCtx.fillStyle = '#ffb3c6'; flappyCtx.fillRect(0,0,280,350); // bg cvs
-                bird.v += bird.g; bird.y += bird.v;
-                flappyCtx.font = '28px sans-serif'; flappyCtx.fillText('🐥', 50, bird.y);
-                
+                flappyCtx.clearRect(0,0,280,350); flappyCtx.fillStyle = '#ffb3c6'; flappyCtx.fillRect(0,0,280,350); 
+                bird.v += bird.g; bird.y += bird.v; flappyCtx.font = '28px sans-serif'; flappyCtx.fillText('🐥', 50, bird.y);
                 if(bird.y > 330 || bird.y < 0) flappyIsOver = true;
-                if(Math.random() < 0.02) {
-                    let top = Math.random()*150 + 40; pipes.push({x:280, w:45, t:top, b:350-top-120, pass:false});
-                }
-                
+                if(Math.random() < 0.02) { let top = Math.random()*150 + 40; pipes.push({x:280, w:45, t:top, b:350-top-120, pass:false}); }
                 for(let i=pipes.length-1; i>=0; i--) {
-                    let p = pipes[i]; p.x -= 2;
-                    flappyCtx.fillStyle = '#ff4d6d'; flappyCtx.fillRect(p.x, 0, p.w, p.t); flappyCtx.fillRect(p.x, 350-p.b, p.w, p.b);
+                    let p = pipes[i]; p.x -= 2; flappyCtx.fillStyle = '#ff4d6d'; flappyCtx.fillRect(p.x, 0, p.w, p.t); flappyCtx.fillRect(p.x, 350-p.b, p.w, p.b);
                     if(50+20 > p.x && 50 < p.x+p.w && (bird.y-20 < p.t || bird.y+10 > 350-p.b)) flappyIsOver = true;
                     if(!p.pass && p.x+p.w < 50) { flappyScore++; document.getElementById('flappyScore').innerText = flappyScore; p.pass = true; }
                     if(p.x < -50) pipes.splice(i,1);
                 }
                 if(!flappyIsOver) flappyLoopId = requestAnimationFrame(loop);
                 else {
-                    flappyCtx.fillStyle = 'rgba(255,255,255,0.7)'; flappyCtx.fillRect(0,0,280,350);
-                    flappyCtx.fillStyle = '#ff2a55'; flappyCtx.font = 'bold 24px Quicksand';
-                    flappyCtx.fillText('Rơi mất xíu gòi 💔', 30, 170);
-                    document.getElementById('restartFlappy').style.display='inline-block';
+                    flappyCtx.fillStyle = 'rgba(255,255,255,0.7)'; flappyCtx.fillRect(0,0,280,350); flappyCtx.fillStyle = '#ff2a55'; flappyCtx.font = 'bold 24px Quicksand';
+                    flappyCtx.fillText('Rơi mất xíu gòi 💔', 30, 170); document.getElementById('restartFlappy').style.display='inline-block';
                 }
             }
             loop();
         }
 
-        // RẮN SĂN MỒI
+        // RẮN SĂN MỒI (GIỮ NGUYÊN)
         let snakeCtx = document.getElementById('snakeCanvas').getContext('2d'), snake, food, dx, dy, snakeScore, snakeInterval;
         function initSnake() {
             snake = [{x:60,y:60}, {x:45,y:60}, {x:30,y:60}]; dx=15; dy=0; snakeScore=0;
@@ -855,20 +799,193 @@
             food = {x:Math.floor(Math.random()*18)*15, y:Math.floor(Math.random()*18)*15};
             clearInterval(snakeInterval); snakeInterval = setInterval(() => {
                 let h = {x:snake[0].x+dx, y:snake[0].y+dy};
-                if(h.x<0||h.x>=280||h.y<0||h.y>=280||snake.some(p=>p.x===h.x&&p.y===h.y)) {
-                    clearInterval(snakeInterval); document.getElementById('restartSnake').style.display='inline-block'; return;
-                }
+                if(h.x<0||h.x>=280||h.y<0||h.y>=280||snake.some(p=>p.x===h.x&&p.y===h.y)) { clearInterval(snakeInterval); document.getElementById('restartSnake').style.display='inline-block'; return; }
                 snake.unshift(h);
                 if(h.x===food.x && h.y===food.y) { snakeScore++; document.getElementById('snakeScore').innerText=snakeScore; food={x:Math.floor(Math.random()*18)*15, y:Math.floor(Math.random()*18)*15}; } else snake.pop();
-                
-                snakeCtx.clearRect(0,0,280,280);
-                snakeCtx.font='16px sans-serif'; snakeCtx.fillText('❤️', food.x, food.y+13);
+                snakeCtx.clearRect(0,0,280,280); snakeCtx.font='16px sans-serif'; snakeCtx.fillText('❤️', food.x, food.y+13);
                 snake.forEach((p,i) => { snakeCtx.fillStyle = i===0?'#ff2a55':'#ffb3c6'; snakeCtx.beginPath(); snakeCtx.arc(p.x+7.5, p.y+7.5, 7.5, 0, Math.PI*2); snakeCtx.fill(); });
             }, 120);
         }
         function changeSnakeDir(dir) {
             if(dir==='UP'&&dy===0){dx=0;dy=-15;} else if(dir==='DOWN'&&dy===0){dx=0;dy=15;}
             else if(dir==='LEFT'&&dx===0){dx=-15;dy=0;} else if(dir==='RIGHT'&&dx===0){dx=15;dy=0;}
+        }
+
+        // ================= GAME BLOCK BLAST (MỚI THÊM) =================
+        let bGrid = [], bShapes = [], selectedShape = -1, blockScore = 0;
+        
+        // Cấu hình các khối (Tetrominoes và nhiều biến thể)
+        const SHAPE_TEMPLATES = [
+            [[1]], [[1,1]], [[1],[1]], // 1x1, 1x2, 2x1
+            [[1,1,1]], [[1],[1],[1]],  // 1x3, 3x1
+            [[1,1,1,1]], [[1],[1],[1],[1]], // 1x4, 4x1
+            [[1,1],[1,1]], // Vuông 2x2
+            [[1,1,1],[1,1,1],[1,1,1]], // Vuông 3x3
+            [[1,0],[1,1]], [[0,1],[1,1]], [[1,1],[1,0]], [[1,1],[0,1]], // Chữ L nhỏ
+            [[1,0,0],[1,0,0],[1,1,1]], [[0,0,1],[0,0,1],[1,1,1]] // Chữ L to
+        ];
+
+        function initBlockBlast() {
+            bGrid = Array.from({length: 8}, () => Array(8).fill(0));
+            blockScore = 0; selectedShape = -1;
+            document.getElementById('blockScore').innerText = blockScore;
+            document.getElementById('restartBlock').style.display = 'none';
+            document.getElementById('blockMessage').innerText = "";
+            renderBlockGrid();
+            spawnShapes();
+        }
+
+        function renderBlockGrid() {
+            const gridEl = document.getElementById('blockGrid');
+            gridEl.innerHTML = '';
+            for (let r = 0; r < 8; r++) {
+                for (let c = 0; c < 8; c++) {
+                    const cell = document.createElement('div');
+                    cell.className = 'block-cell' + (bGrid[r][c] ? ' filled' : '');
+                    cell.onclick = () => placeShape(r, c);
+                    gridEl.appendChild(cell);
+                }
+            }
+        }
+
+        function spawnShapes() {
+            bShapes = [];
+            const dock = document.getElementById('shapeDock');
+            dock.innerHTML = '';
+            for (let i = 0; i < 3; i++) {
+                const shapeMat = SHAPE_TEMPLATES[Math.floor(Math.random() * SHAPE_TEMPLATES.length)];
+                bShapes.push({ matrix: shapeMat, used: false });
+                
+                const shapeEl = document.createElement('div');
+                shapeEl.className = 'shape-container';
+                shapeEl.id = `bShape-${i}`;
+                shapeEl.onclick = () => selectShape(i);
+                
+                shapeEl.style.gridTemplateColumns = `repeat(${shapeMat[0].length}, 14px)`;
+                for (let r = 0; r < shapeMat.length; r++) {
+                    for (let c = 0; c < shapeMat[0].length; c++) {
+                        const mini = document.createElement('div');
+                        mini.className = 'shape-mini-cell' + (shapeMat[r][c] ? '' : ' empty');
+                        shapeEl.appendChild(mini);
+                    }
+                }
+                dock.appendChild(shapeEl);
+            }
+            checkBlockGameOver();
+        }
+
+        function selectShape(idx) {
+            if (bShapes[idx].used) return;
+            selectedShape = idx;
+            for (let i = 0; i < 3; i++) {
+                const el = document.getElementById(`bShape-${i}`);
+                if (el) el.classList.toggle('selected', i === idx);
+            }
+        }
+
+        function placeShape(r, c) {
+            if (selectedShape === -1) return;
+            const shape = bShapes[selectedShape].matrix;
+            
+            // Kiểm tra xem khối có bị chệch ra ngoài hoặc đè lên khối khác không
+            if (r + shape.length > 8 || c + shape[0].length > 8) {
+                flashBlockMessage("Hong vừa rồi bé ơi! 🥺"); return;
+            }
+            for (let sr = 0; sr < shape.length; sr++) {
+                for (let sc = 0; sc < shape[0].length; sc++) {
+                    if (shape[sr][sc] && bGrid[r + sr][c + sc]) {
+                        flashBlockMessage("Bị cấn mất rồi! 💥"); return;
+                    }
+                }
+            }
+            
+            // Đặt khối thành công
+            for (let sr = 0; sr < shape.length; sr++) {
+                for (let sc = 0; sc < shape[0].length; sc++) {
+                    if (shape[sr][sc]) {
+                        bGrid[r + sr][c + sc] = 1;
+                        blockScore += 1;
+                    }
+                }
+            }
+            
+            // Đánh dấu khối đã dùng
+            bShapes[selectedShape].used = true;
+            document.getElementById(`bShape-${selectedShape}`).classList.add('used');
+            selectedShape = -1;
+            
+            checkBlockLines();
+            renderBlockGrid();
+            
+            // Kiểm tra xem dùng hết 3 khối chưa
+            if (bShapes.every(s => s.used)) {
+                setTimeout(spawnShapes, 300);
+            } else {
+                checkBlockGameOver();
+            }
+        }
+
+        function checkBlockLines() {
+            let linesR = [], linesC = [];
+            // Check hàng ngang
+            for (let r = 0; r < 8; r++) {
+                if (bGrid[r].every(val => val === 1)) linesR.push(r);
+            }
+            // Check hàng dọc
+            for (let c = 0; c < 8; c++) {
+                let full = true;
+                for (let r = 0; r < 8; r++) {
+                    if (bGrid[r][c] === 0) { full = false; break; }
+                }
+                if (full) linesC.push(c);
+            }
+            
+            // Xoá hàng/cột và cộng điểm
+            if (linesR.length > 0 || linesC.length > 0) {
+                linesR.forEach(r => { for (let c = 0; c < 8; c++) bGrid[r][c] = 0; });
+                linesC.forEach(c => { for (let r = 0; r < 8; r++) bGrid[r][c] = 0; });
+                
+                const combo = linesR.length + linesC.length;
+                blockScore += combo * 10;
+                flashBlockMessage(combo > 1 ? `Đỉnh quá!! Combo ${combo} 💖` : "Giỏi lắm vợ ơi! ✨");
+                document.getElementById('blockScore').innerText = blockScore;
+            }
+        }
+
+        function checkBlockGameOver() {
+            let canPlaceAny = false;
+            for (let i = 0; i < 3; i++) {
+                if (bShapes[i].used) continue;
+                const shape = bShapes[i].matrix;
+                
+                for (let r = 0; r <= 8 - shape.length; r++) {
+                    for (let c = 0; c <= 8 - shape[0].length; c++) {
+                        let canPlace = true;
+                        for (let sr = 0; sr < shape.length; sr++) {
+                            for (let sc = 0; sc < shape[0].length; sc++) {
+                                if (shape[sr][sc] && bGrid[r + sr][c + sc]) {
+                                    canPlace = false; break;
+                                }
+                            }
+                            if (!canPlace) break;
+                        }
+                        if (canPlace) { canPlaceAny = true; break; }
+                    }
+                    if (canPlaceAny) break;
+                }
+                if (canPlaceAny) break;
+            }
+            
+            if (!canPlaceAny && !bShapes.every(s => s.used)) {
+                document.getElementById('blockMessage').innerText = "Hết chỗ đặt rồi bé ơi 🥺";
+                document.getElementById('restartBlock').style.display = 'inline-block';
+            }
+        }
+        
+        function flashBlockMessage(msg) {
+            const el = document.getElementById('blockMessage');
+            el.innerText = msg;
+            setTimeout(() => { if(el.innerText === msg) el.innerText = ""; }, 2000);
         }
     </script>
 </body>
